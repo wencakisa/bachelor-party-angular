@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Activity } from '../activity';
+import { ActivityService } from '../activity.service';
 
 @Component({
   selector: 'app-activities',
@@ -8,19 +10,16 @@ import { Activity } from '../activity';
 })
 export class ActivitiesComponent implements OnInit {
 
-  activity: Activity = {
-    id: 1,
-    title: 'Karting',
-    subtitle: 'Kart race in the centre of Sofia',
-    details: 'Lorem ipsum',
-    transfer_provided: true,
-    guide_provided: false,
-    image_url: null
-  };
+  activities: Activity[];
 
-  constructor() { }
+  constructor(private activityService: ActivityService) { }
 
   ngOnInit() {
+    this.getActivities();
   }
 
+  getActivities(): void {
+    this.activityService.getActivities()
+      .subscribe(activities => this.activities = activities);
+  }
 }
