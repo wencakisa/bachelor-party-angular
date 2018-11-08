@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Activity } from './activity';
+import { AppSettings } from './app.settings'
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,8 +16,7 @@ const httpOptions = {
 })
 export class ActivityService {
 
-  private host = 'http://localhost:3000'
-  private activitiesUrl = `${this.host}/activities`;
+  private activitiesUrl = `${AppSettings.API_BASE}/activities`;
 
   constructor(private http: HttpClient) {
   }
