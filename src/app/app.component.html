@@ -1,5 +1,5 @@
-<h1>Welcome to {{ title }}</h1>
-<nav>
-  <a routerLink="/activities">Activities</a>
-</nav>
-<router-outlet></router-outlet>
+<app-navigation [title]="title"></app-navigation>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
