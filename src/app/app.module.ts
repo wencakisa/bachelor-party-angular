@@ -5,16 +5,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularTokenModule } from 'angular-token';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppSettings } from './app.settings';
+import { DashboardComponent } from './dashboard/dashboard.component'
+import { NavigationComponent } from './navigation/navigation.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
-import { AppRoutingModule } from './app-routing.module';
-import { AppSettings } from './app.settings'
 
 @NgModule({
   declarations: [
     AppComponent,
+    DashboardComponent,
+    NavigationComponent,
     ActivitiesComponent,
-    ActivityDetailComponent
+    ActivityDetailComponent,
   ],
   imports: [
     BrowserModule,
