@@ -7,30 +7,31 @@ import { AngularTokenModule } from 'angular-token';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppSettings } from './app.settings';
+
+import { ActivitiesModule } from './activities/activities.module';
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { NavigationComponent } from './navigation/navigation.component';
-import { ActivitiesComponent } from './activities/activities.component';
-import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
-import { IfInRoleDirective } from './if-in-role.directive';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { IfInRoleDirective } from './shared/if-in-role.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     NavigationComponent,
-    ActivitiesComponent,
-    ActivityDetailComponent,
-    IfInRoleDirective
+    ShoppingCartComponent,
+    IfInRoleDirective,
   ],
   imports: [
     BrowserModule,
+    ActivitiesModule,
     AppRoutingModule,
     HttpClientModule,
     AngularTokenModule.forRoot({
       apiBase: AppSettings.API_BASE
-    })
+    }),
   ],
   providers: [ AngularTokenModule ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
