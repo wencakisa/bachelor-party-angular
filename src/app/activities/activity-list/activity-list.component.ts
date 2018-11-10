@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Activity } from '../activity';
-import { ActivityService } from '../activity.service';
+import { Activity } from '../shared/activity.model';
+import { ActivityService } from '../shared/activity.service';
 
 @Component({
-  selector: 'app-activities',
-  templateUrl: './activities.component.html',
-  styleUrls: ['./activities.component.css']
+  selector: 'app-activity-list',
+  templateUrl: './activity-list.component.html',
+  styleUrls: ['./activity-list.component.css']
 })
-export class ActivitiesComponent implements OnInit {
+export class ActivityListComponent implements OnInit {
 
   activities: Activity[];
 

@@ -2,8 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Activity } from '../activity';
-import { ActivityService } from '../activity.service';
+import { Activity } from '../shared/activity.model';
+import { ActivityService } from '../shared/activity.service';
 
 @Component({
   selector: 'app-activity-detail',

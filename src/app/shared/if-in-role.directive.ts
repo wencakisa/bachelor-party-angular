@@ -12,8 +12,6 @@ export class IfInRoleDirective implements OnInit {
   }
 
   ngOnInit() {
-    console.log(localStorage.getItem('role'));
-    console.log(this.role)
     if (this.role === localStorage.getItem('role')) {
       this.viewContainerRef.createEmbeddedView(this.templateRef);
     } else {
