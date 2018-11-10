@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component'
 import { NavigationComponent } from './navigation/navigation.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
+import { IfInRoleDirective } from './if-in-role.directive';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ActivityDetailComponent } from './activity-detail/activity-detail.compo
     NavigationComponent,
     ActivitiesComponent,
     ActivityDetailComponent,
+    IfInRoleDirective
   ],
   imports: [
     BrowserModule,
