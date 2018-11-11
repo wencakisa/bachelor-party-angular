@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 
 import { Activity } from '../shared/activity.model';
 import { ActivityService } from '../shared/activity.service';
+import { ShoppingCartService } from 'src/app/shopping-cart/shared/shopping-cart.service';
 
 @Component({
   selector: 'app-activity-detail',
@@ -17,7 +17,7 @@ export class ActivityDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private activityService: ActivityService,
-    private location: Location
+    private cartService: ShoppingCartService
   ) { }
 
   ngOnInit() {
@@ -31,7 +31,7 @@ export class ActivityDetailComponent implements OnInit {
       .subscribe(activity => this.activity = activity);
   }
 
-  goBack(): void {
-    this.location.back();
+  addToCart(): void {
+    this.cartService.addToCart(this.activity);
   }
 }
