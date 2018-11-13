@@ -2,5 +2,5 @@
   <h2>{{activity.title}}</h2>
   <h4>{{activity.subtitle}}</h4>
 
-  <button (click)="addToCart()" class="btn btn-success">Add to cart</button>
+  <app-add-to-cart-button [activity]="activity"></app-add-to-cart-button>
 </div>

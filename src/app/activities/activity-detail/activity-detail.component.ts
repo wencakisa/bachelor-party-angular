@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Activity } from '../shared/activity.model';
 import { ActivityService } from '../shared/activity.service';
-import { ShoppingCartService } from 'src/app/shopping-cart/shared/shopping-cart.service';
 
 @Component({
   selector: 'app-activity-detail',
@@ -16,8 +15,7 @@ export class ActivityDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private activityService: ActivityService,
-    private cartService: ShoppingCartService
+    private activityService: ActivityService
   ) { }
 
   ngOnInit() {
@@ -29,9 +27,5 @@ export class ActivityDetailComponent implements OnInit {
 
     this.activityService.getActivity(id)
       .subscribe(activity => this.activity = activity);
-  }
-
-  addToCart(): void {
-    this.cartService.addToCart(this.activity);
   }
 }
