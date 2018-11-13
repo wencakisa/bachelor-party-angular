@@ -1,16 +1,18 @@
-<h1>Available activities: </h1>
+<div class="text-center">
+  <h2>All available activities: </h2>
 
-<div class="row">
-  <div *ngFor="let activity of activities" class="col-md-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">
-          <a routerLink="/activities/{{activity.id}}">{{activity.title}}</a>
-        </h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{activity.subtitle}}</h6>
-        <p *ngIf="activity.details" class="card-text">
-          {{ (activity.details.length > 150) ? (activity.details | slice:0:150) + '...' : (activity.details) }}
-        </p>
+  <div class="row">
+    <div *ngFor="let activity of activities" class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            <a routerLink="/activities/{{activity.id}}">{{activity.title}}</a>
+          </h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{activity.subtitle}}</h6>
+          <p *ngIf="activity.details" class="card-text">
+            {{ (activity.details.length > 150) ? (activity.details | slice:0:150) + '...' : (activity.details) }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
