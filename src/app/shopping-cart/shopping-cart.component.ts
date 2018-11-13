@@ -20,4 +20,12 @@ export class ShoppingCartComponent implements OnInit {
     this.shoppingCartActivities$ = this.cartService.getActivities();
     this.shoppingCartActivities$.subscribe(activities => this.shoppingCartActivities = activities)
   }
+
+  getCartSize(): number {
+    return this.cartService.getCartSize();
+  }
+
+  modifyCart(activity: Activity): void {
+    this.cartService.modifyCart(activity);
+  }
 }

@@ -18,16 +18,24 @@ export class ShoppingCartService {
       .subscribe(activities => this.activitiesInCart = activities);
   }
 
-  addToCart(activity: Activity): void {
-    if (this.canAddActivity(activity)) {
-      this.activitiesInCart.push(activity);
-      this.activitiesInCartSubject.next(this.activitiesInCart);
-
-      this.updateLocalStorageActivities();
+  modifyCart(activity: Activity): void {
+    if (this.activityIsInCart(activity)) {
+      this.activitiesInCart.splice(this.activitiesInCart.indexOf(activity), 1);
     } else {
-      console.log(`Activity '${activity.title}' is already in your cart!`);
+      this.activitiesInCart.push(activity);
     }
+
+    this.activitiesInCartSubject.next(this.activitiesInCart);
+    this.updateLocalStorageActivities();
   }
+
+  // addToCart(activity: Activity): void {
+  //   this.modifyCart(activity);
+  // }
+
+  // removeFromCart(activity: Activity): void {
+  //   this.modifyCart(activity);
+  // }
 
   getActivities(): Observable<Activity[]> {
     return this.activitiesInCartSubject;
@@ -37,9 +45,8 @@ export class ShoppingCartService {
     return this.activitiesInCart.length;
   }
 
-  canAddActivity(activity: Activity) {
-    return !this.activitiesInCart
-      .find(activityInCart => activityInCart.id === activity.id)
+  activityIsInCart(activity: Activity): boolean {
+    return this.activitiesInCart.includes(activity);
   }
 
   private getActivitiesFromLocalStorage(): Activity[] {
