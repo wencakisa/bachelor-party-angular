@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+import { ShoppingCartService } from '../shopping-cart/shared/shopping-cart.service';
+
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -9,9 +11,12 @@ export class NavigationComponent implements OnInit {
 
   @Input() title: string;
 
-  constructor() { }
+  constructor(private cartService: ShoppingCartService) { }
 
   ngOnInit() {
   }
 
+  getCartSize(): number {
+    return this.cartService.getCartSize();
+  }
 }
