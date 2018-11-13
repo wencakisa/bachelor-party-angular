@@ -33,7 +33,11 @@ export class ShoppingCartService {
     return this.activitiesInCartSubject;
   }
 
-  private canAddActivity(activity: Activity) {
+  getCartSize(): number {
+    return this.activitiesInCart.length;
+  }
+
+  canAddActivity(activity: Activity) {
     return !this.activitiesInCart
       .find(activityInCart => activityInCart.id === activity.id)
   }
