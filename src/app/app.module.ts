@@ -9,9 +9,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppSettings } from './app.settings';
 
 import { ActivitiesModule } from './activities/activities.module';
+import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { NavigationComponent } from './navigation/navigation.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { IfInRoleDirective } from './shared/if-in-role.directive';
 
 @NgModule({
@@ -19,12 +19,12 @@ import { IfInRoleDirective } from './shared/if-in-role.directive';
     AppComponent,
     DashboardComponent,
     NavigationComponent,
-    ShoppingCartComponent,
     IfInRoleDirective,
   ],
   imports: [
     BrowserModule,
     ActivitiesModule,
+    ShoppingCartModule,
     AppRoutingModule,
     HttpClientModule,
     AngularTokenModule.forRoot({
