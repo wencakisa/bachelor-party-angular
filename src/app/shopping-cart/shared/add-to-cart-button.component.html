@@ -1,7 +1,0 @@
-<div *ngIf="canAddActivity(); else disabledBlock">
-  <button (click)="addToCart()" class="btn btn-success">Add to cart</button>
-</div>
-
-<ng-template #disabledBlock>
-  <button class="btn btn-default disabled" aria-disabled="true">Activity added.</button>
-</ng-template>
