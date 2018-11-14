@@ -5,6 +5,7 @@ import { ActivityListComponent } from './activity-list/activity-list.component';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
 
 import { ActivitiesRoutingModule } from './activities-routing.module';
+import { ShoppingCartModule } from '../shopping-cart/shopping-cart.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { ActivitiesRoutingModule } from './activities-routing.module';
   ],
   imports: [
     CommonModule,
+    ShoppingCartModule,
     ActivitiesRoutingModule
   ]
 })

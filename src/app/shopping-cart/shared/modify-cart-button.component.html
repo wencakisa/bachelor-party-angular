@@ -1,0 +1,7 @@
+<div *ngIf="activityIsInCart(); else addActivityBlock">
+  <button (click)="modifyCart()" class="btn btn-danger">Remove from cart</button>
+</div>
+
+<ng-template #addActivityBlock>
+    <button (click)="modifyCart()" class="btn btn-success">Add to cart</button>
+</ng-template>
