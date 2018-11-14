@@ -9,6 +9,18 @@
       <li class="nav-item">
         <a routerLink="/activities" class="nav-link">Activities</a>
       </li>
+
+      <li class="nav-item" *ngIf="!(authService.userSignedIn$ | async)"> <!-- !(authService.userSignedIn$ | async) -->
+        <a routerLink="/login" class="nav-link">Login</a>
+      </li>
+
+      <li class="nav-item" *ngIf="(authService.userSignedIn$ | async)"> <!-- (authService.userSignedIn$ | async) -->
+        <a routerLink="/admin" class="nav-link">Admin</a>
+      </li>
+
+      <li class="nav-item" *ngIf="(authService.userSignedIn$ | async)"> <!-- (authService.userSignedIn$ | async) -->
+          <a href (click)="logOut()" class="nav-link">Logout</a>
+      </li>
     </ul>
     <ul class="navbar-nav my-2 my-lg-1">
       <li class="nav-item">
