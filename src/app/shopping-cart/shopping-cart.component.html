@@ -6,6 +6,9 @@
 
   <ng-template #shoppingCartList>
     <h2>Activities in your shopping cart: </h2>
+    <h6 class="text-muted">(For a group of {{getGroupSize()}} people)</h6>
+
+    <button type="button" class="btn btn-warning" (click)="emptyCart()">Empty shopping cart</button>
 
     <div class="row">
       <div *ngFor="let activity of shoppingCartActivities" class="col-sm-4">

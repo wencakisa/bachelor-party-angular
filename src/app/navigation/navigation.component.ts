@@ -19,4 +19,8 @@ export class NavigationComponent implements OnInit {
   getCartSize(): number {
     return this.cartService.getCartSize();
   }
+
+  getGroupSize(): number {
+    return this.cartService.getGroupSize();
+  }
 }

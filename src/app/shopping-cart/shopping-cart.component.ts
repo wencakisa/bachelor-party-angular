@@ -21,8 +21,18 @@ export class ShoppingCartComponent implements OnInit {
     this.shoppingCartActivities$.subscribe(activities => this.shoppingCartActivities = activities)
   }
 
+  emptyCart(): void {
+    if(confirm('All activities in your cart will be discarded, are you sure?')) {
+      this.cartService.emptyCart();
+    }
+  }
+
   getCartSize(): number {
     return this.cartService.getCartSize();
+  }
+
+  getGroupSize(): number {
+    return this.cartService.getGroupSize();
   }
 
   modifyCart(activity: Activity): void {

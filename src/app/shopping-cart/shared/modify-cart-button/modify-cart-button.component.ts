@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Activity } from 'src/app/activities/shared/activity.model';
-import { ShoppingCartService } from './shopping-cart.service';
+import { ShoppingCartService } from '../shopping-cart.service';
 
 @Component({
   selector: 'app-modify-cart-button',
