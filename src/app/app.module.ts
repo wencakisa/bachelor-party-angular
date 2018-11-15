@@ -6,11 +6,14 @@ import { AngularTokenModule } from 'angular-token';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
 import { AppSettings } from './app.settings';
+import { AppRoutingModule } from './app-routing.module';
 
 import { ActivitiesModule } from './activities/activities.module';
+import { AuthenticationModule } from './authentication/authentication.module';
+import { AdminModule } from './admin/admin.module';
 import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
+
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { NavigationComponent } from './navigation/navigation.component';
 import { IfInRoleDirective } from './shared/if-in-role.directive';
@@ -20,11 +23,13 @@ import { IfInRoleDirective } from './shared/if-in-role.directive';
     AppComponent,
     DashboardComponent,
     NavigationComponent,
-    IfInRoleDirective,
+    IfInRoleDirective
   ],
   imports: [
     BrowserModule,
     ActivitiesModule,
+    AuthenticationModule,
+    AdminModule,
     ShoppingCartModule,
     AppRoutingModule,
     HttpClientModule,
@@ -33,7 +38,7 @@ import { IfInRoleDirective } from './shared/if-in-role.directive';
     }),
     NgbModule
   ],
-  providers: [ AngularTokenModule ],
+  providers: [  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
