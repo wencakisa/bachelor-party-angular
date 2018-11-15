@@ -33,7 +33,7 @@ export class ShoppingCartService {
   }
 
   emptyCart(): void {
-    this.activitiesInCart.splice(0, this.getCartSize());
+    this.activitiesInCart.forEach(activity => this.removeActivity(activity));
   }
 
   getActivities(): Observable<Activity[]> {
