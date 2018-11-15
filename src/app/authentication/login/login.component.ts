@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { AuthenticationService } from "../shared/authentication.service";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -20,15 +21,14 @@ export class LoginComponent implements OnInit {
 
   onSignInSubmit() {
     this.authService.logInUser(this.signInUser).subscribe(
-        res => {
-          if (res.status == 200) {
-            this.router.navigate(['/admin']);
-          }
-        },
-
-        error => {
-          alert(error); //TODO fix alert
+      res => {
+        if (res.ok) {
+          this.router.navigate(['/admin']);
         }
+      },
+      err => {
+        console.log(err);
+      }
     )
   }
 }

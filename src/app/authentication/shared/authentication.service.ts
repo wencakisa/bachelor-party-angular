@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { AngularTokenService } from "angular-token";
+import { Response } from "@angular/http";
+
 import { Subject, Observable } from "rxjs";
 import { map } from 'rxjs/operators';
-import { Response } from "@angular/http";
+
+import { AngularTokenService } from "angular-token";
 
 @Injectable()
 export class AuthenticationService {
