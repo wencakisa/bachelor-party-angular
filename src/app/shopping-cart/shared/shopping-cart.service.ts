@@ -69,6 +69,7 @@ export class ShoppingCartService {
 
     // Remove groupSize from localStorage when the cart gets empty
     if (this.getCartSize() === 0) {
+      localStorage.removeItem(AppSettings.ACTIVITIES_IN_CART_LS_KEY);
       localStorage.removeItem(AppSettings.GROUP_SIZE_LS_KEY);
     }
   }
