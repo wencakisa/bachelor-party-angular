@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AngularTokenModule } from 'angular-token';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -30,6 +31,7 @@ import { IfInRoleDirective } from './shared/if-in-role.directive';
     AngularTokenModule.forRoot({
       apiBase: AppSettings.API_BASE
     }),
+    NgbModule
   ],
   providers: [ AngularTokenModule ],
   bootstrap: [ AppComponent ]
