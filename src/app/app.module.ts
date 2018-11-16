@@ -17,6 +17,7 @@ import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { NavigationComponent } from './navigation/navigation.component';
 import { IfInRoleDirective } from './shared/if-in-role.directive';
+import { QuotationsModule } from './quotations/quotations.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { IfInRoleDirective } from './shared/if-in-role.directive';
     AuthenticationModule,
     AdminModule,
     ShoppingCartModule,
+    QuotationsModule,
     AppRoutingModule,
     HttpClientModule,
     AngularTokenModule.forRoot({

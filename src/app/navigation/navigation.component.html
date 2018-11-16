@@ -11,9 +11,15 @@
       </li>
 
       <div *ngIf="(authService.userSignedIn$ | async); else anonymousUserNav">
-        <li class="nav-item">
-          <a routerLink="/admin" class="nav-link">Admin</a>
-        </li>
+        <div *ifInRole="admin">
+          <li class="nav-item">
+            <a routerLink="/admin" class="nav-link">Admin</a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="/quotations" class="nav-link">Quotations</a>
+          </li>
+        </div>
 
         <li class="nav-item">
             <a href (click)="logOut()" class="nav-link">Logout</a>
