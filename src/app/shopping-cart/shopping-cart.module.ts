@@ -8,6 +8,8 @@ import { ShoppingCartComponent } from './shopping-cart.component';
 import { GroupSizeModalComponent } from './group-size/modal/group-size-modal.component';
 import { GroupSizeFormComponent } from './group-size/form/group-size-form.component';
 import { ModifyCartButtonComponent } from './shared/modify-cart-button/modify-cart-button.component';
+import { RequestQuotationComponent } from '../quotations/request-quotation/request-quotation.component';
+import { QuotationsModule } from '../quotations/quotations.module';
 
 @NgModule({
   declarations: [
@@ -19,14 +21,16 @@ import { ModifyCartButtonComponent } from './shared/modify-cart-button/modify-ca
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    ShoppingCartRoutingModule
+    ShoppingCartRoutingModule,
+    QuotationsModule
   ],
   exports: [
     ShoppingCartComponent,
     ModifyCartButtonComponent
   ],
   entryComponents: [
-    GroupSizeModalComponent
+    GroupSizeModalComponent,
+    RequestQuotationComponent
   ]
 })
 export class ShoppingCartModule { }

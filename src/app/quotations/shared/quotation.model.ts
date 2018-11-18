@@ -1,7 +1,10 @@
-import { Activity } from '../../activities/shared/activity.model';
-
 export class Quotation {
-  groupSize: number;
+  group_size: number;
   user_email: string;
-  activities: Activity[];
+  activity_ids: number[];
+
+  deserialize(params: any): Quotation {
+    Object.assign(this, params);
+    return this;
+  }
 }

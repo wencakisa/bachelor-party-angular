@@ -16,14 +16,13 @@ export class QuotationService {
 
   private quotationsUrl = `${AppSettings.API_BASE}/quotations`;
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
 
   getQuotations(): Observable<Quotation[]> {
     return this.http.get<Quotation[]>(this.quotationsUrl)
       .pipe(
         // TODO: Error handling, using catchError() method from rxjs
-        tap(_ => this.log('Fetched activities'))
+        tap(_ => this.log('Fetched quotations'))
       )
   }
 
@@ -34,6 +33,13 @@ export class QuotationService {
       .pipe(
         tap(_ => this.log(`Fetched Quotation id=${id}`))
       );
+  }
+
+  requestQuotation(quotation: Quotation) {
+    let requestBody = JSON.stringify({ 'quotation': quotation });
+
+    return this.http.post<Quotation>(this.quotationsUrl, requestBody, AppSettings.DEFAULT_HTTP_OPTIONS)
+      .subscribe();
   }
 
   private log(message: string) {

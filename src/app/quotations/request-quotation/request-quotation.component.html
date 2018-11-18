@@ -1,0 +1,11 @@
+<form [formGroup]="requestQuotationForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <div class="input-group">
+      <input type="email" class="form-control" placeholder="User email" formControlName="userEmail" />
+
+      <span class="input-group-btn">
+        <button type="submit" class="btn btn-outline-success" [disabled]="!requestQuotationForm.valid">Save</button>
+      </span>
+    </div>
+  </div>
+</form>

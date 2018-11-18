@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Activity } from '../activities/shared/activity.model';
+
 import { ShoppingCartService } from './shared/shopping-cart.service';
 
 @Component({
@@ -14,6 +15,8 @@ export class ShoppingCartComponent implements OnInit {
   shoppingCartActivities$: Observable<Activity[]>;
   shoppingCartActivities: Activity[];
 
+  quotationFormVisible: boolean = false;
+
   constructor(private cartService: ShoppingCartService) { }
 
   ngOnInit() {
@@ -25,6 +28,10 @@ export class ShoppingCartComponent implements OnInit {
     if(confirm('All activities in your cart will be discarded, are you sure?')) {
       this.cartService.emptyCart();
     }
+  }
+
+  toggleQuotationForm(): void {
+    this.quotationFormVisible = !this.quotationFormVisible;
   }
 
   getCartSize(): number {
