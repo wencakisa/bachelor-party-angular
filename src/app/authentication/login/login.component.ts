@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     this.authService.logInUser(this.signInUser).subscribe(
       res => {
         if (res.ok) {
-          this.router.navigate(['/admin']);
+          this.authService.getCurrentUserRole().redirectToRoute(this.router);
         }
       },
       err => {

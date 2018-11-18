@@ -4,24 +4,25 @@ import { Response } from "@angular/http";
 import { Subject, Observable } from "rxjs";
 import { map } from 'rxjs/operators';
 
+import { AppSettings } from '../../app.settings';
+import { Role } from './role';
+
 import { AngularTokenService } from "angular-token";
 
 @Injectable()
 export class AuthenticationService {
 
+  private currentUserRole: Role;
   userSignedIn$: Subject<boolean> = new Subject();
 
-  constructor(public authTokenService: AngularTokenService) { // TODO do not execute if a token is not presented
-    console.log("Is a user signed in? - " + this.authTokenService.currentUserData);
-    if (this.authTokenService.userSignedIn()) {
-      this.authTokenService.validateToken().subscribe(
-        res => res.status == 200 ? this.userSignedIn$.next(res.json().success) : this.userSignedIn$.next(false)
-      )
-    }
+  constructor(public authTokenService: AngularTokenService) { // TODO do not execute, if a token is not presented
+    this.authTokenService.validateToken().subscribe(
+      res => res.ok ? this.userSignedIn$.next(res.json().success) : this.userSignedIn$.next(false)
+    )
   }
 
-  userSignedIn() {
-    return this.authTokenService.userSignedIn();
+  public getCurrentUserRole() {
+    return this.currentUserRole;
   }
 
   logOutUser(): Observable<Response> {
@@ -39,8 +40,11 @@ export class AuthenticationService {
     return this.authTokenService.signIn(signInData).pipe(
       map(
         res => {
+          if (AppSettings.USER_ROLES.get(this.authTokenService.currentUserData['role'])) {
+            this.currentUserRole = AppSettings.USER_ROLES.get(this.authTokenService.currentUserData['role']);
+          }
           this.userSignedIn$.next(true);
-          return res
+          return res;
         }
       )
     );

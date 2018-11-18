@@ -1,22 +1,23 @@
-import { Directive, Input, ViewContainerRef, TemplateRef, OnInit } from '@angular/core';
+import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
+
+import { AuthenticationService } from "../authentication/shared/authentication.service";
 
 @Directive({
-  selector: '[ifInRole]'
+    selector: '[ifInRole]'
 })
 export class IfInRoleDirective implements OnInit {
+    @Input('ifInRole') role: string;
 
-  @Input('ifInRole') role: string;
-
-  constructor(private viewContainerRef: ViewContainerRef,
-              private templateRef: TemplateRef<any>) {
-  }
-
-  ngOnInit() {
-    if (this.role === localStorage.getItem('role')) {
-      this.viewContainerRef.createEmbeddedView(this.templateRef);
-    } else {
-        this.viewContainerRef.clear();
+    constructor(private viewContainer: ViewContainerRef,
+                private templateRef: TemplateRef<any>,
+                private authService: AuthenticationService) {
     }
-  }
 
+    ngOnInit(): void {
+        if (this.role === this.authService.getCurrentUserRole().getName()) {
+            this.viewContainer.createEmbeddedView(this.templateRef);
+        } else {
+            this.viewContainer.clear();
+        }
+    }
 }

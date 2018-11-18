@@ -11,7 +11,7 @@
       </li>
 
       <div *ngIf="(authService.userSignedIn$ | async); else anonymousUserNav">
-        <div *ifInRole="admin">
+        <div *ifInRole="'admin'">
           <li class="nav-item">
             <a routerLink="/admin" class="nav-link">Admin</a>
           </li>
