@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { AppSettings } from 'src/app/app.settings';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
+import { AppSettings } from '../../../app.settings';
 
 @Component({
   selector: 'app-group-size-form',
@@ -23,8 +24,8 @@ export class GroupSizeFormComponent {
 
   constructor() { }
 
-  onSubmit() {
+  onSubmit(): void {
     this.activeModal.close();
-    localStorage.setItem(AppSettings.GROUP_SIZE_LS_KEY, this.groupSizeForm.value.groupSize);
+    AppSettings.setGroupSizeInLocalStorage(this.groupSizeForm.value.groupSize);
   }
 }
