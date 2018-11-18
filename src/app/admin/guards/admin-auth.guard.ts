@@ -1,28 +1,27 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AngularTokenService } from "angular-token";
+
+import { AppSettings } from '../../app.settings';
+import { AuthenticationService } from "../../authentication/shared/authentication.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminAuthGuard implements CanActivate {
 
-  constructor(private authTokenService: AngularTokenService, private router: Router) {}
+  constructor(private authService: AuthenticationService, private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-    if (this.authTokenService.userSignedIn()) {
-      let currentUserString = JSON.stringify(this.authTokenService.currentUserData);
-      let currentUserJSON = JSON.parse(currentUserString);
-      
-    	return currentUserJSON.role === "admin";
+    if (AppSettings.ROLE_ADMIN === this.authService.getCurrentUserRole().getName()) {
+    	return true;
     } else {
-    	this.router.navigate(['/']);
+      alert("You shall not pass!");
+    	this.router.navigate([AppSettings.HOME_PAGE_ROUTE]);
     	return false;
     }
-
   }
 }
