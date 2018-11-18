@@ -1,48 +1,45 @@
 import { Injectable } from '@angular/core';
 import { Response } from "@angular/http";
 
-import { Subject, Observable } from "rxjs";
-import { map } from 'rxjs/operators';
+import { Subject, Observable, Subscription } from "rxjs";
+import { map, finalize } from 'rxjs/operators';
 
 import { AppSettings } from '../../app.settings';
-import { Role } from './role';
 
 import { AngularTokenService } from "angular-token";
 
 @Injectable()
 export class AuthenticationService {
 
-  private currentUserRole: Role;
   userSignedIn$: Subject<boolean> = new Subject();
 
-  constructor(public authTokenService: AngularTokenService) { // TODO do not execute, if a token is not presented
-    this.authTokenService.validateToken().subscribe(
-      res => res.ok ? this.userSignedIn$.next(res.json().success) : this.userSignedIn$.next(false)
-    )
+  constructor(public authTokenService: AngularTokenService) {
+    if (this.authTokenService.userSignedIn()) {
+      this.authTokenService.validateToken().subscribe(res => this.userSignedIn$.next(res));
+    }
   }
 
   public getCurrentUserRole() {
-    return this.currentUserRole;
+    return AppSettings.getUserRoleFromLocalStorage();
   }
 
   logOutUser(): Observable<Response> {
-    return this.authTokenService.signOut().pipe(
-      map(
-        res => {
-          this.userSignedIn$.next(false);
-          return res;
-        }
-      )
-    );
+    // localStorage.clear();
+    // this.userSignedIn$.next(false);
+
+    return this.authTokenService.signOut();
   }
 
   logInUser(signInData: { login: string, password: string }): Observable<Response> {
     return this.authTokenService.signIn(signInData).pipe(
       map(
         res => {
-          if (AppSettings.USER_ROLES.get(this.authTokenService.currentUserData['role'])) {
-            this.currentUserRole = AppSettings.USER_ROLES.get(this.authTokenService.currentUserData['role']);
+          let role = AppSettings.USER_ROLES.get(this.authTokenService.currentUserData['role']);
+
+          if (role) {
+            AppSettings.setUserRoleInLocalStorage(role.getName());
           }
+
           this.userSignedIn$.next(true);
           return res;
         }

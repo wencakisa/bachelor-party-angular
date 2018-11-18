@@ -16,7 +16,7 @@ export class AdminAuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-    if (AppSettings.ROLE_ADMIN === this.authService.getCurrentUserRole().getName()) {
+    if (AppSettings.ROLE_ADMIN === this.authService.getCurrentUserRole()) {
     	return true;
     } else {
       alert("You shall not pass!");

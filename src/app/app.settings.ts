@@ -19,11 +19,20 @@ export class AppSettings {
   									.set(AppSettings.ROLE_GUIDE, new Role(AppSettings.ROLE_GUIDE, AppSettings.HOME_PAGE_ROUTE))
   									.set(AppSettings.ROLE_CUSTOMER, new Role(AppSettings.ROLE_CUSTOMER, AppSettings.HOME_PAGE_ROUTE));
 
+  public static USER_ROLE_LS_KEY = 'userRole';
   public static ACTIVITIES_IN_CART_LS_KEY = 'activitiesInCart';
   public static GROUP_SIZE_LS_KEY = 'groupSize';
 
   public static DEFAULT_HTTP_OPTIONS = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  }
+
+  public static getUserRoleFromLocalStorage(): string {
+    return localStorage.getItem(AppSettings.USER_ROLE_LS_KEY);
+  }
+
+  public static setUserRoleInLocalStorage(role: string): void {
+    localStorage.setItem(AppSettings.USER_ROLE_LS_KEY, role);
   }
 
   public static getActivitiesFromLocalStorage(): Activity[] {

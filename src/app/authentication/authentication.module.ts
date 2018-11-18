@@ -23,9 +23,6 @@ import { AuthenticationService } from "./shared/authentication.service";
       apiBase: AppSettings.API_BASE
     })
   ],
-  providers: [
-  	AngularTokenModule,
-  	AuthenticationService
-  ]
+  providers: [ AuthenticationService ]
 })
 export class AuthenticationModule { }

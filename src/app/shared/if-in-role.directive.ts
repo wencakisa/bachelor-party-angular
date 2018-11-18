@@ -14,7 +14,7 @@ export class IfInRoleDirective implements OnInit {
     }
 
     ngOnInit(): void {
-        if (this.role === this.authService.getCurrentUserRole().getName()) {
+        if (this.role === this.authService.getCurrentUserRole()) {
             this.viewContainer.createEmbeddedView(this.templateRef);
         } else {
             this.viewContainer.clear();
