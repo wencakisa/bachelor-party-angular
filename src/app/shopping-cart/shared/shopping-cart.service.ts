@@ -13,7 +13,9 @@ import { GroupSizeModalComponent } from '../group-size/modal/group-size-modal.co
 })
 export class ShoppingCartService {
 
-  private activitiesInCartSubject: BehaviorSubject<Activity[]> = new BehaviorSubject(this.getActivitiesFromLocalStorage());
+  private activitiesInCartSubject: BehaviorSubject<Activity[]> = new BehaviorSubject(
+    AppSettings.getActivitiesFromLocalStorage()
+  );
   private activitiesInCart: Activity[] = [];
 
   constructor(private modalService: NgbModal) {
@@ -45,7 +47,7 @@ export class ShoppingCartService {
   }
 
   getGroupSize(): number {
-    return +localStorage.getItem(AppSettings.GROUP_SIZE_LS_KEY);
+    return AppSettings.getGroupSizeFromLocalStorage();
   }
 
   activityIsInCart(activity: Activity): boolean {
@@ -74,12 +76,8 @@ export class ShoppingCartService {
     }
   }
 
-  private getActivitiesFromLocalStorage(): Activity[] {
-    return JSON.parse(localStorage.getItem(AppSettings.ACTIVITIES_IN_CART_LS_KEY)) || [];
-  }
-
   private updateLocalStorageActivities(): void {
-    localStorage.setItem(AppSettings.ACTIVITIES_IN_CART_LS_KEY, JSON.stringify(this.activitiesInCart));
+    AppSettings.setActivitiesInLocalStorage(this.activitiesInCart);
   }
 
 }
