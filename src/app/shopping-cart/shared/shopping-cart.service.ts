@@ -60,10 +60,12 @@ export class ShoppingCartService {
     if (this.getCartSize() === 0) {
       this.modalService.open(GroupSizeModalComponent).result.then(_ => {
         this.activitiesInCart.push(activity);
+        this.updateLocalStorageActivities();
       })
     } else {
       this.activitiesInCart.push(activity);
     }
+
   }
 
   private removeActivity(activity: Activity): void {
