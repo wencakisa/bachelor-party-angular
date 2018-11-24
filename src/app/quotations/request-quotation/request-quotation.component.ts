@@ -29,6 +29,7 @@ export class RequestQuotationComponent implements OnInit {
     const quotation = this.prepareSave();
 
     this.quotationService.requestQuotation(quotation);
+    this.requestQuotationForm.disable();
   }
 
   private prepareSave(): Quotation {
