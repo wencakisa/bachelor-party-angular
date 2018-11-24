@@ -22,6 +22,7 @@ export class AppSettings {
   public static USER_ROLE_LS_KEY = 'userRole';
   public static ACTIVITIES_IN_CART_LS_KEY = 'activitiesInCart';
   public static GROUP_SIZE_LS_KEY = 'groupSize';
+  public static QUOTATION_SENT_FROM_EMAIL_LS_KEY = 'quotationSentFromEmail';
 
   public static DEFAULT_HTTP_OPTIONS = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -51,4 +52,11 @@ export class AppSettings {
     localStorage.setItem(AppSettings.GROUP_SIZE_LS_KEY, groupSize.toString());
   }
 
+  public static getQuotationSentFromEmailFromLocalStorage(): string {
+    return localStorage.getItem(AppSettings.QUOTATION_SENT_FROM_EMAIL_LS_KEY);
+  }
+
+  public static setQuotationSentFromEmailInLocalStorage(email: string): void {
+    localStorage.setItem(AppSettings.QUOTATION_SENT_FROM_EMAIL_LS_KEY, email);
+  }
 }
