@@ -38,8 +38,15 @@ export class QuotationService {
   requestQuotation(quotation: Quotation) {
     let requestBody = JSON.stringify({ 'quotation': quotation });
 
-    return this.http.post<Quotation>(this.quotationsUrl, requestBody, AppSettings.DEFAULT_HTTP_OPTIONS)
-      .subscribe();
+    return this.http
+      .post<Quotation>(this.quotationsUrl, requestBody, AppSettings.DEFAULT_HTTP_OPTIONS)
+      .subscribe(res => {
+        AppSettings.setQuotationSentFromEmailInLocalStorage(quotation.user_email);
+      });
+  }
+
+  canRequestQuotation(): boolean {
+    return !AppSettings.getQuotationSentFromEmailFromLocalStorage();
   }
 
   private log(message: string) {

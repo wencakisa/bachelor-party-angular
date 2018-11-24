@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Activity } from '../activities/shared/activity.model';
 
 import { ShoppingCartService } from './shared/shopping-cart.service';
+import { QuotationService } from '../quotations/shared/quotation.service';
+import { AppSettings } from '../app.settings';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -17,7 +19,9 @@ export class ShoppingCartComponent implements OnInit {
 
   quotationFormVisible: boolean = false;
 
-  constructor(private cartService: ShoppingCartService) { }
+  constructor(
+    private cartService: ShoppingCartService,
+    private quotationService: QuotationService) { }
 
   ngOnInit() {
     this.shoppingCartActivities$ = this.cartService.getActivities();
@@ -28,6 +32,10 @@ export class ShoppingCartComponent implements OnInit {
     if(confirm('All activities in your cart will be discarded, are you sure?')) {
       this.cartService.emptyCart();
     }
+  }
+
+  canRequestQuotation(): boolean {
+    return this.quotationService.canRequestQuotation();
   }
 
   toggleQuotationForm(): void {
@@ -44,5 +52,9 @@ export class ShoppingCartComponent implements OnInit {
 
   modifyCart(activity: Activity): void {
     this.cartService.modifyCart(activity);
+  }
+
+  getQuotationSentFromEmail(): string {
+    return AppSettings.getQuotationSentFromEmailFromLocalStorage();
   }
 }

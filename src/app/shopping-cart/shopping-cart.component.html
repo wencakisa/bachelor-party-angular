@@ -8,14 +8,20 @@
     <h2>Activities in your shopping cart: </h2>
     <h6 class="text-muted">(For a group of {{getGroupSize()}} people)</h6>
 
-    <button type="button" class="btn btn-md btn-info" (click)="toggleQuotationForm()">Request a quotation</button>
-    <button type="button" class="btn btn-md btn-warning text-white" (click)="emptyCart()">Empty shopping cart</button>
-
-    <div *ngIf="quotationFormVisible" class="row">
-      <div class="col-md-6 offset-md-3">
-        <app-request-quotation></app-request-quotation>
-      </div>
+    <div *ngIf="!canRequestQuotation(); else quotationNotSent">
+      <h4 class="text-muted">Quotation request sent to <pre>{{getQuotationSentFromEmail()}}</pre></h4>
     </div>
+
+    <ng-template #quotationNotSent>
+      <button type="button" class="btn btn-md btn-info" (click)="toggleQuotationForm()" [disabled]="!canRequestQuotation()">Request a quotation</button>
+      <button type="button" class="btn btn-md btn-warning text-white" (click)="emptyCart()">Empty shopping cart</button>
+
+      <div *ngIf="quotationFormVisible" class="row">
+        <div class="col-md-6 offset-md-3">
+          <app-request-quotation></app-request-quotation>
+        </div>
+      </div>
+    </ng-template>
 
     <div class="row">
       <div *ngFor="let activity of shoppingCartActivities" class="col-sm-4">
@@ -26,7 +32,9 @@
             </h5>
             <h6 class="card-subtitle mb-2 text-muted">{{activity.subtitle}}</h6>
 
-            <button (click)="modifyCart(activity)" class="btn btn-danger btn-sm">Remove from cart</button>
+            <div *ngIf="canRequestQuotation()">
+              <button (click)="modifyCart(activity)" class="btn btn-danger btn-sm">Remove from cart</button>
+            </div>
           </div>
         </div>
       </div>
