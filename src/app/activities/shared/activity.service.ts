@@ -20,6 +20,11 @@ export class ActivityService {
   getActivities(): Observable<Activity[]> {
     return this.http.get<Activity[]>(this.activitiesUrl)
       .pipe(
+        map(response => {
+          return response.map((activity: Activity) => {
+            return new Activity().deserialize(activity)
+          })
+        }),
         // TODO: Error handling, using catchError() method from rxjs
         tap(_ => this.log('Fetched activities'))
       )
