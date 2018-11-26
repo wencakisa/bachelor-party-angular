@@ -16,15 +16,14 @@ import { ShoppingCartModule } from './shopping-cart/shopping-cart.module';
 
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { NavigationComponent } from './navigation/navigation.component';
-import { IfInRoleDirective } from './shared/if-in-role.directive';
 import { QuotationsModule } from './quotations/quotations.module';
+import { IfInRoleModule } from './shared/if-in-role.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    NavigationComponent,
-    IfInRoleDirective
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +37,8 @@ import { QuotationsModule } from './quotations/quotations.module';
     AngularTokenModule.forRoot({
       apiBase: AppSettings.API_BASE
     }),
-    NgbModule
+    NgbModule,
+    IfInRoleModule
   ],
   providers: [  ],
   bootstrap: [ AppComponent ]
