@@ -2,11 +2,9 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AngularTokenModule } from 'angular-token';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
-import { AppSettings } from './app.settings';
 import { AppRoutingModule } from './app-routing.module';
 
 import { ActivitiesModule } from './activities/activities.module';
@@ -35,9 +33,6 @@ import { QuotationsModule } from './quotations/quotations.module';
     QuotationsModule,
     AppRoutingModule,
     HttpClientModule,
-    AngularTokenModule.forRoot({
-      apiBase: AppSettings.API_BASE
-    }),
     NgbModule
   ],
   providers: [  ],

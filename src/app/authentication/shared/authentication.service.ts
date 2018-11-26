@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Response } from "@angular/http";
+import { Response } from '@angular/http';
 
-import { Subject, Observable, Subscription } from "rxjs";
-import { map, finalize } from 'rxjs/operators';
+import { Subject, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { AngularTokenService } from 'angular-token';
 
 import { AppSettings } from '../../app.settings';
-
-import { AngularTokenService } from "angular-token";
 
 @Injectable()
 export class AuthenticationService {
@@ -24,10 +24,13 @@ export class AuthenticationService {
   }
 
   logOutUser(): Observable<Response> {
-    // localStorage.clear();
-    // this.userSignedIn$.next(false);
-
-    return this.authTokenService.signOut();
+    return this.authTokenService.signOut().pipe(
+      map(res => {
+        localStorage.clearItem(AppSettings.USER_ROLE_LS_KEY);
+        this.userSignedIn$.next(false);
+        return res;
+      })
+    );
   }
 
   logInUser(signInData: { login: string, password: string }): Observable<Response> {

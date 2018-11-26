@@ -20,7 +20,8 @@ import { AuthenticationService } from "./shared/authentication.service";
     FormsModule,
     AuthenticationRoutingModule,
     AngularTokenModule.forRoot({
-      apiBase: AppSettings.API_BASE
+      apiBase: AppSettings.API_BASE,
+      signOutFailedValidate: true
     })
   ],
   providers: [ AuthenticationService ]
