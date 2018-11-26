@@ -26,7 +26,7 @@ export class AuthenticationService {
   logOutUser(): Observable<Response> {
     return this.authTokenService.signOut().pipe(
       map(res => {
-        localStorage.clearItem(AppSettings.USER_ROLE_LS_KEY);
+        localStorage.removeItem(AppSettings.USER_ROLE_LS_KEY);
         this.userSignedIn$.next(false);
         return res;
       })
