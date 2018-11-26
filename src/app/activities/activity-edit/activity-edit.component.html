@@ -1,0 +1,55 @@
+<div class="col-md-6">
+  <h2 class="text-center">Create Activity</h2>
+  <form [formGroup]="editActivityForm" (ngSubmit)="onSubmit()" novalidate class="form">
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" formControlName="title" placeholder="Title" name="title" class="form-control" id="title">
+      <div class="alert  alert-danger" *ngIf="editActivityForm.get('title').hasError('required') && editActivityForm.get('title').touched">  
+        Activity Title is required.
+      </div>
+    </div>  
+
+    <div class="form-group">
+      <label for="subtitle">Subtitle:</label>
+      <input type="text" formControlName="subtitle" placeholder="Subtitle" name="subtitle" class="form-control" id="subtitle">
+      <div class="alert  alert-danger" *ngIf="editActivityForm.get('subtitle').hasError('required') && editActivityForm.get('subtitle').touched">  
+        Activity Subtitle is required.
+      </div>
+      <div class="alert  alert-danger" *ngIf="editActivityForm.get('subtitle').hasError('minlength') && editActivityForm.get('subtitle').touched">  
+        Activity Subtitle should be between 5 and 250 characters.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="details">Details:</label>
+      <textarea formControlName="details" placeholder="Details" name="details" class="form-control" id="details"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="duration">Duration:</label>
+      <input type="number" formControlName="duration" placeholder="Duration" name="duration" class="form-control" id="duration">
+      <div class="alert  alert-danger" *ngIf="editActivityForm.get('duration').hasError('required') && editActivityForm.get('duration').touched">  
+        Activity Duration is required.
+      </div>
+      <div class="alert  alert-danger" *ngIf="editActivityForm.get('duration').hasError('min') && editActivityForm.get('duration').touched">
+        Activity Duration must be a positive number.
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="transfer_included">Transfer:</label>
+      <input type="checkbox" formControlName="transfer_included" name="transfer_included" class="form-control" id="transfer_included">
+    </div>
+
+    <div class="form-group">
+      <label for="guide_included">Guide:</label>
+      <input type="checkbox" formControlName="guide_included" name="guide_included" class="form-control" id="guide_included">
+    </div>
+
+    <button class="btn btn-success" [disabled]='editActivityForm.invalid'>Update</button>
+  </form>
+
+  <div>
+      <a routerLink="/activities/{{id}}">Back</a>
+  </div>
+</div>
