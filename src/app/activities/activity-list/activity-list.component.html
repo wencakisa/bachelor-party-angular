@@ -1,3 +1,7 @@
+<div *ifInRole="'admin'">
+  <a routerLink="/activity/new">Create activity</a>
+</div>
+
 <div class="text-center">
   <h2>All available activities: </h2>
 
@@ -17,6 +21,10 @@
             <p>from {{activity.getLowestPriceAmount()}}$</p>
           </div>
 
+          <div *ifInRole="'admin'">
+            <button class="btn btn-success" (click)="editActivity(activity)" style="margin-right: 10px;">Edit</button>
+            <button class="btn btn-danger" (click)="deleteActivity(activity)">Delete</button>
+          </div>
           <!-- TODO: Implement view when one price is provided -->
           <!-- <ng-template #singlePrice>
             <p>Price: {{activity.prices[0].amount}} ({{activity.prices[0].options}})</p>

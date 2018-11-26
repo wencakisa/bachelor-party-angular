@@ -39,6 +39,31 @@ export class ActivityService {
       );
   }
 
+  createActivity(activity: Activity) {
+    return this.http.post<Activity>(this.activitiesUrl, activity)
+      .pipe(
+        tap(_ => this.log(`Created activity ${activity}`))
+      );
+  }
+
+  updateActivity(activity: Activity) {
+    const url = `${this.activitiesUrl}/${activity.id}`;
+
+    return this.http.put<Activity>(url, activity)
+      .pipe(
+        tap(_ => this.log(`Updated activity ${activity}`))
+      );
+  }
+
+  deleteActivity(id: number) {
+    const url = `${this.activitiesUrl}/${id}`;
+
+    return this.http.delete<Activity[]>(url)
+      .pipe(
+        tap(_ => this.log(`Deleted activity id=${id}`))
+      );
+  }
+
   private log(message: string) {
     console.log(`ActivityService: ${message}`);
   }

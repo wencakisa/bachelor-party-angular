@@ -6,6 +6,7 @@ export class Activity implements Deserializable {
   title: string;
   subtitle: string;
   details: string;
+  duration: number;
   transfer_provided: boolean;
   guide_provided: boolean;
   image_url: string;
