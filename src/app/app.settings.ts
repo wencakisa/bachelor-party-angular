@@ -24,6 +24,8 @@ export class AppSettings {
   public static GROUP_SIZE_LS_KEY = 'groupSize';
   public static QUOTATION_SENT_FROM_EMAIL_LS_KEY = 'quotationSentFromEmail';
 
+  public static DEFAULT_CURRENCY = '$';
+
   public static DEFAULT_HTTP_OPTIONS = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
