@@ -1,7 +1,7 @@
 <h1>Available quotations:</h1>
 
 <div class="row">
-  <div *ngFor="let quotation of quotations">
-    <li>{{quotation.groupSize}}</li>
-  </div>
+  <ul *ngFor="let quotation of quotations" class="col-md-4">
+    <li>{{quotation.user_email}}</li>
+  </ul>
 </div>
