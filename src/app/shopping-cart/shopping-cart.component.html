@@ -6,10 +6,10 @@
 
   <ng-template #shoppingCartList>
     <h2>Activities in your shopping cart: </h2>
-    <h6 class="text-muted">(For a group of {{getGroupSize()}} people)</h6>
+    <h6 class="text-muted">(For a group of {{ getGroupSize() }} people)</h6>
 
     <div *ngIf="!canRequestQuotation(); else quotationNotSent">
-      <h4 class="text-muted">Quotation request sent to <pre>{{getQuotationSentFromEmail()}}</pre></h4>
+      <h4 class="text-muted">Quotation request sent to <pre>{{ getQuotationSentFromEmail() }}</pre></h4>
     </div>
 
     <ng-template #quotationNotSent>
@@ -28,9 +28,9 @@
         <div class="card text-center">
           <div class="card-body">
             <h5 class="card-title">
-              <a routerLink="/activities/{{activity.id}}">{{activity.title}}</a>
+              <a routerLink="/activities/{{ activity.id }}">{{ activity.title }}</a>
             </h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{activity.subtitle}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">{{ activity.subtitle }}</h6>
 
             <div *ngIf="canRequestQuotation()">
               <button (click)="modifyCart(activity)" class="btn btn-danger btn-sm">Remove from cart</button>

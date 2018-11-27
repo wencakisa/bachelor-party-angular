@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Activity } from '../shared/activity.model';
 import { ActivityService } from '../shared/activity.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-activity-list',

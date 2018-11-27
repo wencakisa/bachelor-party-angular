@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Activity } from '../shared/activity.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+import { Activity } from '../shared/activity.model';
 import { ActivityService } from '../shared/activity.service';
 
 @Component({
@@ -38,14 +39,14 @@ export class ActivityEditComponent implements OnInit {
         this.editActivityForm.patchValue(activity);
     });
   }
-  
+
   onSubmit() {
     this.activityService.updateActivity(this.editActivityForm.value)
       .subscribe(activity => {
         this.router.navigate([`/activities/${activity['id']}`]);
       },
-      error => {  
-        alert(error);  
+      error => {
+        alert(error);
       });
   }
 

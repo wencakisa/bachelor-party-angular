@@ -1,4 +1,4 @@
-import { Deserializable } from "src/app/shared/deserializable.model";
+import { Deserializable } from '../../shared/deserializable.model';
 
 export class Quotation implements Deserializable {
   group_size: number;

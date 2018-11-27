@@ -1,6 +1,6 @@
 import { Price } from './price.model';
-import { Deserializable } from 'src/app/shared/deserializable.model';
-import { AppSettings } from 'src/app/app.settings';
+import { Deserializable } from '../../shared/deserializable.model';
+import { AppSettings } from '../../app.settings';
 
 export class Activity implements Deserializable {
   id: number;

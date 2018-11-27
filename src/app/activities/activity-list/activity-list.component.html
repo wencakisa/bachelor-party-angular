@@ -10,9 +10,9 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">
-            <a routerLink="/activities/{{activity.id}}">{{activity.title}}</a>
+            <a routerLink="/activities/{{ activity.id }}">{{ activity.title }}</a>
           </h5>
-          <h6 class="card-subtitle mb-2 text-muted">{{activity.subtitle}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">{{ activity.subtitle }}</h6>
           <p *ngIf="activity.details" class="card-text">
             {{ (activity.details.length > 150) ? (activity.details | slice:0:150) + '...' : (activity.details) }}
           </p>
@@ -22,11 +22,11 @@
               Coming soon
             </div>
             <div *ngIf="activity.prices.length === 1">
-              {{activity.prices[0].amount}}{{activity.getDefaultCurrency()}}
-              <span *ngIf="activity.prices[0].options">({{activity.prices[0].options}})</span>
+              {{ activity.prices[0].amount }}{{ activity.getDefaultCurrency() }}
+              <span *ngIf="activity.prices[0].options">({{ activity.prices[0].options }})</span>
             </div>
             <div *ngIf="activity.prices.length > 1">
-              from {{activity.getLowestPriceAmount()}}{{activity.getDefaultCurrency()}}
+              from {{ activity.getLowestPriceAmount() }}{{ activity.getDefaultCurrency() }}
             </div>
           </div>
 

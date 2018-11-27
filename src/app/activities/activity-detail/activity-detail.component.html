@@ -1,11 +1,11 @@
 <div *ngIf="activity" class="card">
   <div class="card-body">
     <div class="text-center">
-      <h2 class="card-title">{{activity.title}}</h2>
-      <h6 class="card-subtitle mb-2 text-muted">{{activity.subtitle}}</h6>
+      <h2 class="card-title">{{ activity.title }}</h2>
+      <h6 class="card-subtitle mb-2 text-muted">{{ activity.subtitle }}</h6>
     </div>
 
-    <p *ngIf="activity.details" class="card-text">{{activity.details}}</p>
+    <p *ngIf="activity.details" class="card-text">{{ activity.details }}</p>
 
     <app-modify-cart-button [activity]="activity"></app-modify-cart-button>
   </div>

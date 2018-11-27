@@ -1,8 +1,8 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthenticationService } from "../shared/authentication.service";
-import { AppSettings } from 'src/app/app.settings';
+import { AppSettings } from '../../app.settings';
+import { AuthenticationService } from '../shared/authentication.service';
 
 @Component({
   selector: 'app-login',

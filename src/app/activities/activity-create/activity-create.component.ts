@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { ActivityService } from '../shared/activity.service';
 
@@ -27,14 +27,14 @@ export class ActivityCreateComponent implements OnInit {
       guide_included: [false]
     });
   }
-  
+
   onSubmit() {
     this.activityService.createActivity(this.createActivityForm.value)
       .subscribe(data => {
         this.router.navigate(['activities']);
       },
       error => {
-        alert(error);  
+        alert(error);
       });
   }
 }

@@ -1,6 +1,6 @@
 import { Directive, Input, OnInit, TemplateRef, ViewContainerRef } from '@angular/core';
 
-import { AuthenticationService } from "../authentication/shared/authentication.service";
+import { AuthenticationService } from '../authentication/shared/authentication.service';
 
 @Directive({
     selector: '[ifInRole]'

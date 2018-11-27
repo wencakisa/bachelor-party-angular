@@ -2,10 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminComponent } from './admin.component';
-
 import { AdminRoutingModule } from './admin-routing.module';
-
-import { AdminAuthGuard } from "./guards/admin-auth.guard";
+import { AdminAuthGuard } from './guards/admin-auth.guard';
 
 @NgModule({
   declarations: [
