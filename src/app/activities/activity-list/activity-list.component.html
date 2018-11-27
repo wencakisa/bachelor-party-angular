@@ -17,18 +17,23 @@
             {{ (activity.details.length > 150) ? (activity.details | slice:0:150) + '...' : (activity.details) }}
           </p>
 
-          <div *ngIf="activity.prices.length >= 1; else singlePrice">
-            <p>from {{activity.getLowestPriceAmount()}}$</p>
+          <div>
+            <div *ngIf="activity.prices.length === 0">
+              Coming soon
+            </div>
+            <div *ngIf="activity.prices.length === 1">
+              {{activity.prices[0].amount}}{{activity.getDefaultCurrency()}}
+              <span *ngIf="activity.prices[0].options">({{activity.prices[0].options}})</span>
+            </div>
+            <div *ngIf="activity.prices.length > 1">
+              from {{activity.getLowestPriceAmount()}}{{activity.getDefaultCurrency()}}
+            </div>
           </div>
 
           <div *ifInRole="'admin'">
             <button class="btn btn-success" (click)="editActivity(activity)" style="margin-right: 10px;">Edit</button>
             <button class="btn btn-danger" (click)="deleteActivity(activity)">Delete</button>
           </div>
-          <!-- TODO: Implement view when one price is provided -->
-          <!-- <ng-template #singlePrice>
-            <p>Price: {{activity.prices[0].amount}} ({{activity.prices[0].options}})</p>
-          </ng-template> -->
         </div>
       </div>
     </div>
