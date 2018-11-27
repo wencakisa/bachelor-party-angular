@@ -34,9 +34,6 @@ import { IfInRoleModule } from './shared/if-in-role.module';
     QuotationsModule,
     AppRoutingModule,
     HttpClientModule,
-    AngularTokenModule.forRoot({
-      apiBase: AppSettings.API_BASE
-    }),
     NgbModule,
     IfInRoleModule
   ],
