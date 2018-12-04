@@ -1,7 +1,3 @@
-<div *ifInRole="'admin'">
-  <a routerLink="/activity/new">Create activity</a>
-</div>
-
 <div class="text-center">
   <h2>All available activities: </h2>
 
@@ -42,4 +38,8 @@
       </div>
     </div>
   </div>
+</div>
+
+<div *ifInRole="'admin'">
+  <a routerLink="/activity/new" class="btn btn-info">Create activity</a>
 </div>
