@@ -30,6 +30,8 @@
             </div>
           </div>
 
+          <p>By {{activity.by}}</p>
+
           <div *ifInRole="'admin'">
             <button class="btn btn-success" (click)="editActivity(activity)" style="margin-right: 10px;">Edit</button>
             <button class="btn btn-danger" (click)="deleteActivity(activity)">Delete</button>

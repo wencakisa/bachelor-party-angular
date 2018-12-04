@@ -1,10 +1,10 @@
 <div class="col-md-6">
-  <h2 class="text-center">Create Activity</h2>
-  <form [formGroup]="editActivityForm" (ngSubmit)="onSubmit()" novalidate class="form">
+  <h2 class="text-center">{{activityFormLabel}}</h2>
+  <form [formGroup]="activityForm" class="form">
     <div class="form-group">
       <label for="title">Title:</label>
       <input type="text" formControlName="title" placeholder="Title" name="title" class="form-control" id="title">
-      <div class="alert  alert-danger" *ngIf="editActivityForm.get('title').hasError('required') && editActivityForm.get('title').touched">
+      <div class="alert  alert-danger" *ngIf="activityForm.get('title').hasError('required') && activityForm.get('title').touched">  
         Activity Title is required.
       </div>
     </div>
@@ -12,10 +12,10 @@
     <div class="form-group">
       <label for="subtitle">Subtitle:</label>
       <input type="text" formControlName="subtitle" placeholder="Subtitle" name="subtitle" class="form-control" id="subtitle">
-      <div class="alert  alert-danger" *ngIf="editActivityForm.get('subtitle').hasError('required') && editActivityForm.get('subtitle').touched">
+      <div class="alert  alert-danger" *ngIf="activityForm.get('subtitle').hasError('required') && activityForm.get('subtitle').touched">  
         Activity Subtitle is required.
       </div>
-      <div class="alert  alert-danger" *ngIf="editActivityForm.get('subtitle').hasError('minlength') && editActivityForm.get('subtitle').touched">
+      <div class="alert  alert-danger" *ngIf="activityForm.get('subtitle').hasError('minlength') && activityForm.get('subtitle').touched">  
         Activity Subtitle should be between 5 and 250 characters.
       </div>
     </div>
@@ -28,12 +28,20 @@
     <div class="form-group">
       <label for="duration">Duration:</label>
       <input type="number" formControlName="duration" placeholder="Duration" name="duration" class="form-control" id="duration">
-      <div class="alert  alert-danger" *ngIf="editActivityForm.get('duration').hasError('required') && editActivityForm.get('duration').touched">
+      <div class="alert  alert-danger" *ngIf="activityForm.get('duration').hasError('required') && activityForm.get('duration').touched">  
         Activity Duration is required.
       </div>
-      <div class="alert  alert-danger" *ngIf="editActivityForm.get('duration').hasError('min') && editActivityForm.get('duration').touched">
+      <div class="alert  alert-danger" *ngIf="activityForm.get('duration').hasError('min') && activityForm.get('duration').touched">
         Activity Duration must be a positive number.
       </div>
+    </div>
+
+    <div class="form-group">
+      <label for="by">Type</label>
+      <select class="form-control" id="by" formControlName="by">
+        <option value="day">By Day</option>
+        <option value="night">By Night</option>
+      </select>
     </div>
 
     <div class="form-group">
@@ -46,10 +54,9 @@
       <input type="checkbox" formControlName="guide_included" name="guide_included" class="form-control" id="guide_included">
     </div>
 
-    <button class="btn btn-success" [disabled]='editActivityForm.invalid'>Update</button>
-  </form>
+    <button class="btn btn-success" [disabled]='activityForm.invalid' *ngIf="isCreate" (click)="onSubmit()">Create</button>  
+    <button class="btn btn-success" [disabled]='activityForm.invalid' *ngIf="!isCreate" (click)="onUpdate()">Update</button>
 
-  <div>
-      <a routerLink="/activities/{{ id }}">Back</a>
-  </div>
+    <!--<p>{{activityForm.value | json}}</p>-->
+  </form>
 </div>
