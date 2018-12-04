@@ -10,8 +10,8 @@
         <a routerLink="/activities" class="nav-link">Activities</a>
       </li>
 
-      <div *ngIf="(authService.userSignedIn$ | async); else anonymousUserNav">
-        <div *ifInRole="'admin'">
+      <ul class="nav navbar-nav" *ngIf="(authService.userSignedIn$ | async)">
+        <ul class="nav navbar-nav" *ifInRole="'admin'">
           <li class="nav-item">
             <a routerLink="/admin" class="nav-link">Admin</a>
           </li>
@@ -19,24 +19,26 @@
           <li class="nav-item">
             <a routerLink="/quotations" class="nav-link">Quotations</a>
           </li>
-        </div>
+        </ul>
 
+      </ul>
+    </ul>
+    <ul class="navbar-nav my-2 my-lg-1">
+      <li class="nav-item">
+        <a routerLink="/cart" class="nav-link">Shopping cart: {{ getCartSize() }} ({{ getGroupSize() }} people)</a>
+      </li>
+
+      <ul class="nav navbar-nav" *ngIf="(authService.userSignedIn$ | async); else anonymousUserNav">
         <li class="nav-item">
           <a routerLink="/" (click)="logOut()" class="nav-link">Logout</a>
         </li>
-      </div>
+      </ul>
 
       <ng-template #anonymousUserNav>
         <li class="nav-item">
           <a routerLink="/login" class="nav-link">Login</a>
         </li>
       </ng-template>
-
-    </ul>
-    <ul class="navbar-nav my-2 my-lg-1">
-      <li class="nav-item">
-        <a routerLink="/cart" class="nav-link">Shopping cart: {{ getCartSize() }} ({{ getGroupSize() }} people)</a>
-      </li>
     </ul>
   </div>
 </nav>
