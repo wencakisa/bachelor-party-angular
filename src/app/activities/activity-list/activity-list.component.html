@@ -18,11 +18,11 @@
               Coming soon
             </div>
             <div *ngIf="activity.prices.length === 1">
-              {{ activity.prices[0].amount }}{{ getDefaultCurrency() }}
+              {{ activity.prices[0].amount | currency }}
               <span *ngIf="activity.prices[0].options">({{ activity.prices[0].options }})</span>
             </div>
             <div *ngIf="activity.prices.length > 1">
-              from {{ activity.getLowestPriceAmount() }}{{ getDefaultCurrency() }}
+              from {{ activity.getLowestPriceAmount() | currency }}
             </div>
           </div>
 

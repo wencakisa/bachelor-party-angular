@@ -20,14 +20,14 @@
         Coming soon
       </div>
       <div *ngIf="activity.prices.length === 1">
-        Price: {{ activity.prices[0].amount }}{{ getDefaultCurrency() }}
+        Price: {{ activity.prices[0].amount | currency }}
         <span *ngIf="activity.prices[0].options">({{ activity.prices[0].options }})</span>
       </div>
       <div *ngIf="activity.prices.length > 1">
         <p>Available prices:</p>
         <ul *ngFor="let price of activity.prices">
           <li>
-            {{ price.amount }}{{ getDefaultCurrency() }}
+            {{ price.amount | currency }}
             <span *ngIf="price.options">({{ price.options }})</span>
           </li>
         </ul>

@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AppSettings } from 'src/app/app.settings';
-
 import { Activity } from '../shared/activity.model';
 import { ActivityService } from '../shared/activity.service';
 
@@ -35,9 +33,5 @@ export class ActivityListComponent implements OnInit {
       this.activityService.deleteActivity(activity.id)
         .subscribe(activities => this.activities = this.activities.filter(a => a !== activity));
     }
-  }
-
-  getDefaultCurrency(): string {
-    return AppSettings.DEFAULT_CURRENCY;
   }
 }
