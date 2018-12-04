@@ -7,6 +7,21 @@
 
     <p *ngIf="activity.details" class="card-text">{{ activity.details }}</p>
 
+    <div>
+      <div *ngIf="activity.prices.length === 0; else manyPrices">
+        Coming soon
+      </div>
+      <ng-template #manyPrices>
+        <p>Available prices:</p>
+        <ul *ngFor="let price of activity.prices">
+          <li>
+            {{ price.amount }}{{ getDefaultCurrency() }}
+            <span *ngIf="price.options">({{ price.options }})</span>
+          </li>
+        </ul>
+      </ng-template>
+    </div>
+
     <app-modify-cart-button [activity]="activity"></app-modify-cart-button>
   </div>
 

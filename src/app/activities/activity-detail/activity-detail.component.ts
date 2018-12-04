@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Activity } from '../shared/activity.model';
 import { ActivityService } from '../shared/activity.service';
+import { AppSettings } from 'src/app/app.settings';
 
 @Component({
   selector: 'app-activity-detail',
@@ -27,5 +28,9 @@ export class ActivityDetailComponent implements OnInit {
 
     this.activityService.getActivity(id)
       .subscribe(activity => this.activity = activity);
+  }
+
+  getDefaultCurrency(): string {
+    return AppSettings.DEFAULT_CURRENCY;
   }
 }
