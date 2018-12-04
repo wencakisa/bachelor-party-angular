@@ -1,4 +1,5 @@
 <div *ngIf="activity" class="card">
+  <div class="card-header text-muted">By {{ activity.by }}</div>
   <div class="card-body">
     <div class="text-center">
       <h2 class="card-title">{{ activity.title }}</h2>
@@ -7,11 +8,22 @@
 
     <p *ngIf="activity.details" class="card-text">{{ activity.details }}</p>
 
+    <p>Duration: {{ activity.duration }}h</p>
+
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" *ngIf="activity.transfer_provided">Transfer is provided</li>
+      <li class="list-group-item" *ngIf="activity.guide_provided">Guide is provided</li>
+    </ul>
+
     <div>
-      <div *ngIf="activity.prices.length === 0; else manyPrices">
+      <div *ngIf="activity.prices.length === 0">
         Coming soon
       </div>
-      <ng-template #manyPrices>
+      <div *ngIf="activity.prices.length === 1">
+        Price: {{ activity.prices[0].amount }}{{ getDefaultCurrency() }}
+        <span *ngIf="activity.prices[0].options">({{ activity.prices[0].options }})</span>
+      </div>
+      <div *ngIf="activity.prices.length > 1">
         <p>Available prices:</p>
         <ul *ngFor="let price of activity.prices">
           <li>
@@ -19,7 +31,7 @@
             <span *ngIf="price.options">({{ price.options }})</span>
           </li>
         </ul>
-      </ng-template>
+      </div>
     </div>
 
     <app-modify-cart-button [activity]="activity"></app-modify-cart-button>
