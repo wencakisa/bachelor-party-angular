@@ -1,6 +1,5 @@
 import { Price } from './price.model';
 import { Deserializable } from '../../shared/deserializable.model';
-import { AppSettings } from '../../app.settings';
 
 export class Activity implements Deserializable {
   id: number;
@@ -21,9 +20,5 @@ export class Activity implements Deserializable {
 
   getLowestPriceAmount(): number {
     return this.prices.map(price => price.amount).reduce((a, b) => Math.min(a, b))
-  }
-
-  getDefaultCurrency(): string {
-    return AppSettings.DEFAULT_CURRENCY;
   }
 }
