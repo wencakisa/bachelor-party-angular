@@ -35,7 +35,9 @@ export class ShoppingCartService {
   }
 
   emptyCart(): void {
-    this.activitiesInCart.forEach(activity => this.removeActivity(activity));
+    for (let i = this.activitiesInCart.length - 1; i >=0; --i) {
+      this.removeActivity(this.activitiesInCart[i]);
+    }
   }
 
   getActivities(): Observable<Activity[]> {
