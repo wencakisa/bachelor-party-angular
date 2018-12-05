@@ -50,6 +50,14 @@ export class ShoppingCartComponent implements OnInit {
     return this.cartService.getGroupSize();
   }
 
+  getTotalDuration(): number {
+    return this.cartService.getTotalDuration();
+  }
+
+  getTotalPrice(): number {
+    return this.cartService.getTotalPrice();
+  }
+
   modifyCart(activity: Activity): void {
     this.cartService.modifyCart(activity);
   }

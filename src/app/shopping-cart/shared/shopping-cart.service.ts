@@ -52,6 +52,15 @@ export class ShoppingCartService {
     return AppSettings.getGroupSizeFromLocalStorage();
   }
 
+  getTotalDuration(): number {
+    return this.reduceToSum(this.activitiesInCart.map(a => a.duration));
+  }
+
+  getTotalPrice(): number {
+    // return this.reduceToSum(this.activitiesInCart.map(a => a.prices))
+    return 0;
+  }
+
   activityIsInCart(activity: Activity): boolean {
     return this.activitiesInCart
       .find(activityInCart => activityInCart.id === activity.id) != null;
@@ -84,4 +93,7 @@ export class ShoppingCartService {
     AppSettings.setActivitiesInLocalStorage(this.activitiesInCart);
   }
 
+  private reduceToSum(arr: number[]): number {
+    return arr.reduce((a, b) => a + b, 0)
+  }
 }

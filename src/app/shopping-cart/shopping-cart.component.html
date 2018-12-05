@@ -12,8 +12,12 @@
     </div>
 
     <ng-template #quotationNotSent>
-      <button type="button" class="btn btn-md btn-info" (click)="toggleQuotationForm()" [disabled]="!canRequestQuotation()">Request a quotation</button>
-      <button type="button" class="btn btn-md btn-warning text-white" (click)="emptyCart()">Empty shopping cart</button>
+      <button type="button" class="btn btn-md btn-info" (click)="toggleQuotationForm()" [disabled]="!canRequestQuotation()">
+        Request a quotation
+      </button>
+      <button type="button" class="btn btn-md btn-warning text-white" (click)="emptyCart()">
+        Empty shopping cart
+      </button>
 
       <div *ngIf="quotationFormVisible" class="row">
         <div class="col-md-6 offset-md-3">
@@ -33,8 +37,8 @@
             <th scope="col" *ngIf="canRequestQuotation()"></th>
           </tr>
         </thead>
-        <tbody *ngFor="let activity of shoppingCartActivities">
-          <tr>
+        <tbody>
+          <tr *ngFor="let activity of shoppingCartActivities">
             <th scope="row"><a routerLink="/activities/{{ activity.id }}">{{ activity.title }}</a></th>
             <td>{{ activity.duration }}</td>
             <td *ngIf="activity.prices.length === 0">
@@ -50,6 +54,13 @@
             <td>
               <button (click)="modifyCart(activity)" class="btn btn-danger btn-sm">Remove from cart</button>
             </td>
+          </tr>
+
+          <tr class="bg-info">
+            <th scope="row">Total</th>
+            <th>{{ getTotalDuration() }}</th>
+            <th>{{ getTotalPrice() }}</th>
+            <th></th>
           </tr>
         </tbody>
       </table>
