@@ -24,13 +24,14 @@
         <span *ngIf="activity.prices[0].options">({{ activity.prices[0].options }})</span>
       </div>
       <div *ngIf="activity.prices.length > 1">
-        <p>Available prices:</p>
-        <ul *ngFor="let price of activity.prices">
-          <li>
+        <p>Available prices (please select one):</p>
+        <div *ngFor="let price of activity.prices" class="form-check">
+          <input class="form-check-input" type="radio" name="priceRadio" id="{{ price.id }}" value="{{ price.id }}" checked>
+          <label class="form-check-label" for="{{ price.id }}">
             {{ price.amount | currency }}
             <span *ngIf="price.options">({{ price.options }})</span>
-          </li>
-        </ul>
+          </label>
+        </div>
       </div>
     </div>
 
