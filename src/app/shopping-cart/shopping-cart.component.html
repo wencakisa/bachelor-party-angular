@@ -6,7 +6,6 @@
 
   <ng-template #shoppingCartList>
     <h2>Activities in your shopping cart: </h2>
-    <h6 class="text-muted">(For a group of {{ getGroupSize() }} people)</h6>
 
     <div *ngIf="!canRequestQuotation(); else quotationNotSent">
       <h4 class="text-muted">Quotation request sent to <pre>{{ getQuotationSentFromEmail() }}</pre></h4>
@@ -24,20 +23,28 @@
     </ng-template>
 
     <div class="row">
-      <div *ngFor="let activity of shoppingCartActivities" class="col-sm-4">
-        <div class="card text-center">
-          <div class="card-body">
-            <h5 class="card-title">
-              <a routerLink="/activities/{{ activity.id }}">{{ activity.title }}</a>
-            </h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{ activity.subtitle }}</h6>
-
-            <div *ngIf="canRequestQuotation()">
+      <table class="table">
+        <caption>For a group of {{ getGroupSize() }} people</caption>
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Activity</th>
+            <th scope="col">Duration (in hours)</th>
+            <th scope="col">Price</th>
+            <th scope="col" *ngIf="canRequestQuotation()"></th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let activity of shoppingCartActivities">
+          <tr>
+            <th scope="row"><a routerLink="/activities/{{ activity.id }}">{{ activity.title }}</a></th>
+            <td>{{ activity.duration }}</td>
+            <td>$$$</td>
+            <!-- <td>{{ activity.prices[0].amount | currency }}</td> -->
+            <td *ngIf="canRequestQuotation()">
               <button (click)="modifyCart(activity)" class="btn btn-danger btn-sm">Remove from cart</button>
-            </div>
-          </div>
-        </div>
-      </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </ng-template>
 </div>
