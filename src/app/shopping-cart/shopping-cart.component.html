@@ -37,9 +37,17 @@
           <tr>
             <th scope="row"><a routerLink="/activities/{{ activity.id }}">{{ activity.title }}</a></th>
             <td>{{ activity.duration }}</td>
-            <td>$$$</td>
-            <!-- <td>{{ activity.prices[0].amount | currency }}</td> -->
-            <td *ngIf="canRequestQuotation()">
+            <td *ngIf="activity.prices.length === 0">
+              Coming soon
+            </td>
+            <td *ngIf="activity.prices.length === 1">
+              {{ activity.prices[0].amount | currency }}
+              <span *ngIf="activity.prices[0].options">({{ activity.prices[0].options }})</span>
+            </td>
+            <td *ngIf="activity.prices.length > 1">
+              $$$
+            </td>
+            <td>
               <button (click)="modifyCart(activity)" class="btn btn-danger btn-sm">Remove from cart</button>
             </td>
           </tr>
