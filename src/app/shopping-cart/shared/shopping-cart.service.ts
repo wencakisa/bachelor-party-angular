@@ -35,7 +35,7 @@ export class ShoppingCartService {
   }
 
   emptyCart(): void {
-    for (let i = this.activitiesInCart.length - 1; i >=0; --i) {
+    for (let i = this.activitiesInCart.length - 1; i >= 0; --i) {
       this.removeActivity(this.activitiesInCart[i]);
     }
   }
