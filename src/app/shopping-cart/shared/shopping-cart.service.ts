@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppSettings } from '../../app.settings';
 
 import { ActivityInCart } from '../../activities/shared/activityInCart.model';
+import { Activity } from '../../activities/shared/activity.model';
 import { GroupSizeModalComponent } from '../group-size/modal/group-size-modal.component';
 
 @Injectable({
@@ -44,6 +45,11 @@ export class ShoppingCartService {
     return this.activitiesInCartSubject;
   }
 
+  getActivityById(id: number): ActivityInCart {
+    return this.activitiesInCart
+      .find(activityInCart => activityInCart.id === id);
+  }
+
   getCartSize(): number {
     return this.activitiesInCart.length;
   }
@@ -60,9 +66,8 @@ export class ShoppingCartService {
     return this.reduceToSum(this.activitiesInCart.map(a => a.price.amount));
   }
 
-  activityIsInCart(activity: ActivityInCart): boolean {
-    return this.activitiesInCart
-      .find(activityInCart => activityInCart.id === activity.id) != null;
+  activityIsInCart(activity: Activity): boolean {
+    return this.getActivityById(activity.id) != null;
   }
 
   private addActivity(activity: ActivityInCart): void {
