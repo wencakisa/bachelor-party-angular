@@ -5,9 +5,9 @@ export class ActivityInCart extends Activity {
   price: Price;
 
   constructor(activity: Activity) {
-    super()
+    super();
 
-    Object.assign(this, activity);
+    this.deserialize(activity);
 
     if (this.prices.length === 1) {
       this.price = this.prices[0];
