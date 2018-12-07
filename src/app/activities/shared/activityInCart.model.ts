@@ -1,26 +1,16 @@
 import { Activity } from './activity.model';
 import { Price } from './price.model';
 
-export class ActivityInCart {
-  id: number;
-  title: string;
-  duration: number;
+export class ActivityInCart extends Activity {
   price: Price;
 
-  private activity: Activity;
-
   constructor(activity: Activity) {
-    this.id = activity.id;
-    this.title = activity.title;
-    this.duration = activity.duration;
-    this.activity = activity;
-  }
+    super()
 
-  setPrice(price: Price): void {
-    if (this.activity.prices.length === 1) {
-      this.price = this.activity.prices[0];
-    } else {
-      this.price = price;
+    Object.assign(this, activity);
+
+    if (this.prices.length === 1) {
+      this.price = this.prices[0];
     }
   }
 }

@@ -23,7 +23,7 @@ export class ModifyCartButtonComponent implements OnInit {
   }
 
   modifyCart(): void {
-    this.activityInCart.setPrice(this.selectedPrice);
+    this.activityInCart.price = this.selectedPrice;
     this.cartService.modifyCart(this.activityInCart);
   }
 
