@@ -5,7 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppSettings } from '../../app.settings';
 
-import { Activity } from '../../activities/shared/activity.model';
+import { ActivityInCart } from '../../activities/shared/activityInCart.model';
 import { GroupSizeModalComponent } from '../group-size/modal/group-size-modal.component';
 
 @Injectable({
@@ -13,17 +13,17 @@ import { GroupSizeModalComponent } from '../group-size/modal/group-size-modal.co
 })
 export class ShoppingCartService {
 
-  private activitiesInCartSubject: BehaviorSubject<Activity[]> = new BehaviorSubject(
+  private activitiesInCartSubject: BehaviorSubject<ActivityInCart[]> = new BehaviorSubject(
     AppSettings.getActivitiesFromLocalStorage()
   );
-  private activitiesInCart: Activity[] = [];
+  private activitiesInCart: ActivityInCart[] = [];
 
   constructor(private modalService: NgbModal) {
     this.activitiesInCartSubject
       .subscribe(activities => this.activitiesInCart = activities);
   }
 
-  modifyCart(activity: Activity): void {
+  modifyCart(activity: ActivityInCart): void {
     if (this.activityIsInCart(activity)) {
       this.removeActivity(activity);
     } else {
@@ -40,7 +40,7 @@ export class ShoppingCartService {
     }
   }
 
-  getActivities(): Observable<Activity[]> {
+  getActivities(): Observable<ActivityInCart[]> {
     return this.activitiesInCartSubject;
   }
 
@@ -57,16 +57,15 @@ export class ShoppingCartService {
   }
 
   getTotalPrice(): number {
-    // return this.reduceToSum(this.activitiesInCart.map(a => a.prices))
-    return 0;
+    return this.reduceToSum(this.activitiesInCart.map(a => a.price.amount));
   }
 
-  activityIsInCart(activity: Activity): boolean {
+  activityIsInCart(activity: ActivityInCart): boolean {
     return this.activitiesInCart
       .find(activityInCart => activityInCart.id === activity.id) != null;
   }
 
-  private addActivity(activity: Activity): void {
+  private addActivity(activity: ActivityInCart): void {
     // First product to be added, open modal for entering group size
     if (this.getCartSize() === 0) {
       this.modalService.open(GroupSizeModalComponent).result.then(_ => {
@@ -79,7 +78,7 @@ export class ShoppingCartService {
 
   }
 
-  private removeActivity(activity: Activity): void {
+  private removeActivity(activity: ActivityInCart): void {
     this.activitiesInCart.splice(this.activitiesInCart.indexOf(activity), 1);
 
     // Remove groupSize from localStorage when the cart gets empty

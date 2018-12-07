@@ -1,6 +1,6 @@
 import { HttpHeaders } from '@angular/common/http';
 
-import { Activity } from './activities/shared/activity.model';
+import { ActivityInCart } from './activities/shared/activityInCart.model';
 import { Role } from './authentication/shared/role';
 
 export class AppSettings {
@@ -36,11 +36,11 @@ export class AppSettings {
     localStorage.setItem(AppSettings.USER_ROLE_LS_KEY, role);
   }
 
-  public static getActivitiesFromLocalStorage(): Activity[] {
+  public static getActivitiesFromLocalStorage(): ActivityInCart[] {
     return JSON.parse(localStorage.getItem(AppSettings.ACTIVITIES_IN_CART_LS_KEY)) || [];
   }
 
-  public static setActivitiesInLocalStorage(activities: Activity[]): void {
+  public static setActivitiesInLocalStorage(activities: ActivityInCart[]): void {
     localStorage.setItem(AppSettings.ACTIVITIES_IN_CART_LS_KEY, JSON.stringify(activities));
   }
 

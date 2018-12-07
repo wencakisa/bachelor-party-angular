@@ -41,16 +41,7 @@
           <tr *ngFor="let activity of shoppingCartActivities">
             <th scope="row"><a routerLink="/activities/{{ activity.id }}">{{ activity.title }}</a></th>
             <td>{{ activity.duration }}</td>
-            <td *ngIf="activity.prices.length === 0">
-              Coming soon
-            </td>
-            <td *ngIf="activity.prices.length === 1">
-              {{ activity.prices[0].amount | currency }}
-              <span *ngIf="activity.prices[0].options">({{ activity.prices[0].options }})</span>
-            </td>
-            <td *ngIf="activity.prices.length > 1">
-              $$$
-            </td>
+            <td>{{ activity.price.amount | currency }}</td>
             <td>
               <button (click)="modifyCart(activity)" class="btn btn-danger btn-sm">Remove from cart</button>
             </td>
@@ -59,7 +50,7 @@
           <tr class="bg-info">
             <th scope="row">Total</th>
             <th>{{ getTotalDuration() }}</th>
-            <th>{{ getTotalPrice() }}</th>
+            <th>{{ getTotalPrice() | currency }}</th>
             <th></th>
           </tr>
         </tbody>

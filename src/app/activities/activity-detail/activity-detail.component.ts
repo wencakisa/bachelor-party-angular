@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Activity } from '../shared/activity.model';
 import { ActivityService } from '../shared/activity.service';
+import { Price } from '../shared/price.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-activity-detail',
@@ -12,6 +14,7 @@ import { ActivityService } from '../shared/activity.service';
 export class ActivityDetailComponent implements OnInit {
 
   @Input() activity: Activity;
+  selectedPrice: Price;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,6 +29,16 @@ export class ActivityDetailComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
 
     this.activityService.getActivity(id)
-      .subscribe(activity => this.activity = activity);
+      .subscribe(activity => {
+        this.activity = activity;
+
+        if (this.activity.prices.length >= 1) {
+          this.onSelectionChange(this.activity.prices[0])
+        }
+      });
+  }
+
+  onSelectionChange(price: Price): void {
+    this.selectedPrice = Object.assign({}, this.selectedPrice, price);
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { Activity } from '../activities/shared/activity.model';
+import { ActivityInCart } from '../activities/shared/activityInCart.model';
 
 import { ShoppingCartService } from './shared/shopping-cart.service';
 import { QuotationService } from '../quotations/shared/quotation.service';
@@ -14,8 +15,8 @@ import { AppSettings } from '../app.settings';
 })
 export class ShoppingCartComponent implements OnInit {
 
-  shoppingCartActivities$: Observable<Activity[]>;
-  shoppingCartActivities: Activity[];
+  shoppingCartActivities$: Observable<ActivityInCart[]>;
+  shoppingCartActivities: ActivityInCart[];
 
   quotationFormVisible: boolean = false;
 
@@ -58,7 +59,7 @@ export class ShoppingCartComponent implements OnInit {
     return this.cartService.getTotalPrice();
   }
 
-  modifyCart(activity: Activity): void {
+  modifyCart(activity: ActivityInCart): void {
     this.cartService.modifyCart(activity);
   }
 
