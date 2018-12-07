@@ -24,10 +24,8 @@
         <div *ngIf="activity.prices.length > 1">
           <div *ngIf="activityIsInCart(); else activityIsNotInCart">
             Activity added with price category
-            <strong>
-              {{ this.activityFromCart.price.amount | currency }}
-              <span *ngIf="this.activityFromCart.price.options"> ({{ this.activityFromCart.price.options }})</span>
-            </strong>
+            {{ this.activityFromCart.price.amount | currency }}
+            <span *ngIf="this.activityFromCart.price.options"> ({{ this.activityFromCart.price.options }})</span>
           </div>
 
           <ng-template #activityIsNotInCart>
