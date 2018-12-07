@@ -34,6 +34,7 @@
             <th scope="col">Activity</th>
             <th scope="col">Duration (in hours)</th>
             <th scope="col">Price</th>
+            <th scope="col">Options</th>
             <th scope="col" *ngIf="canRequestQuotation()"></th>
           </tr>
         </thead>
@@ -41,9 +42,14 @@
           <tr *ngFor="let activity of shoppingCartActivities">
             <th scope="row"><a routerLink="/activities/{{ activity.id }}">{{ activity.title }}</a></th>
             <td>{{ activity.duration }}</td>
-            <td>{{ activity.price.amount | currency }}</td>
             <td>
-              <button (click)="modifyCart(activity)" class="btn btn-danger btn-sm">Remove from cart</button>
+              {{ activity.price.amount | currency }}
+            </td>
+            <td>
+              {{ activity.price.options }}
+            </td>
+            <td>
+              <button (click)="modifyCart(activity)" class="btn btn-danger btn-sm">Remove</button>
             </td>
           </tr>
 
@@ -51,6 +57,7 @@
             <th scope="row">Total</th>
             <th>{{ getTotalDuration() }}</th>
             <th>{{ getTotalPrice() | currency }}</th>
+            <th></th>
             <th></th>
           </tr>
         </tbody>
