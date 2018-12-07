@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Activity } from '../shared/activity.model';
 import { ActivityService } from '../shared/activity.service';
 import { Price } from '../shared/price.model';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-activity-detail',
@@ -32,7 +31,7 @@ export class ActivityDetailComponent implements OnInit {
       .subscribe(activity => {
         this.activity = activity;
 
-        if (this.activity.prices.length >= 1) {
+        if (this.activity.prices) {
           this.onSelectionChange(this.activity.prices[0])
         }
       });
