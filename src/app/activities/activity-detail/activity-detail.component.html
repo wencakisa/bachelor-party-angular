@@ -19,7 +19,7 @@
       <div *ngIf="activity.prices.length >= 1; else noPrices">
         <div *ngIf="activity.prices.length === 1">
           Price: {{ activity.prices[0].amount | currency }}
-          <span *ngIf="price.options"> ({{ price.options }})</span>
+          <span *ngIf="activity.prices[0].options"> ({{ activity.prices[0].options }})</span>
         </div>
         <div *ngIf="activity.prices.length > 1">
           <!-- <div *ngIf="activityIsInCart(activity); else activityIsNotInCart">
