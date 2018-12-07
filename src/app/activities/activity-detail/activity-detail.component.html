@@ -1,4 +1,4 @@
-<div *ngIf="activity" class="card">
+<div *ngIf="activity; else loading" class="card">
   <div class="card-header text-muted">By {{ activity.by }}</div>
   <div class="card-body">
     <div class="text-center">
@@ -59,3 +59,7 @@
     </div>
   </div>
 </div>
+
+<ng-template #loading>
+  <h2 class="text-center">Loading activity...</h2>
+</ng-template>
