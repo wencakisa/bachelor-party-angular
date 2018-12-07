@@ -1,5 +1,5 @@
 <div class="text-center">
-  <h2>All available activities: </h2>
+  <h2>{{ activities ? 'All available activities:' : 'Loading activities...' }}</h2>
 
   <div class="row">
     <div *ngFor="let activity of activities" class="col-md-4">
