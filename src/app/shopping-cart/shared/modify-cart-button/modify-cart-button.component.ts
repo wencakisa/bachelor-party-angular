@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Activity } from '../../../activities/shared/activity.model';
-import { ActivityInCart } from 'src/app/activities/shared/activityInCart.model';
 import { ShoppingCartService } from '../shopping-cart.service';
-import { Price } from 'src/app/activities/shared/price.model';
+
+import { Activity } from '../../../activities/shared/activity.model';
+import { ActivityInCart } from '../../../activities/shared/activityInCart.model';
+import { Price } from '../../../activities/shared/price.model';
 
 @Component({
   selector: 'app-modify-cart-button',
