@@ -48,7 +48,7 @@
             <td>
               {{ activity.price.options }}
             </td>
-            <td>
+            <td *ngIf="canRequestQuotation()">
               <button (click)="modifyCart(activity)" class="btn btn-danger btn-sm">Remove</button>
             </td>
           </tr>
@@ -58,7 +58,7 @@
             <th>{{ getTotalDuration() }}</th>
             <th>{{ getTotalPrice() | currency }}</th>
             <th></th>
-            <th></th>
+            <th *ngIf="canRequestQuotation()"></th>
           </tr>
         </tbody>
       </table>

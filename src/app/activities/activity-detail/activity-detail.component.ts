@@ -7,6 +7,7 @@ import { ActivityInCart } from '../shared/activityInCart.model';
 import { Price } from '../shared/price.model';
 
 import { ShoppingCartService } from '../../shopping-cart/shared/shopping-cart.service';
+import { QuotationService } from '../../quotations/shared/quotation.service';
 
 @Component({
   selector: 'app-activity-detail',
@@ -22,7 +23,8 @@ export class ActivityDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private activityService: ActivityService,
-    private shoppingCartService: ShoppingCartService
+    private shoppingCartService: ShoppingCartService,
+    private quotationService: QuotationService
   ) { }
 
   ngOnInit() {
@@ -53,5 +55,9 @@ export class ActivityDetailComponent implements OnInit {
 
   activityIsInCart(): boolean {
     return this.shoppingCartService.activityIsInCart(this.activity);
+  }
+
+  canRequestQuotation(): boolean {
+    return this.quotationService.canRequestQuotation();
   }
 }
