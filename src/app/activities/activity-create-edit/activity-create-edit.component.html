@@ -37,8 +37,8 @@
     </div>
 
     <div class="form-group">
-      <label for="by">Type</label>
-      <select class="form-control" id="by" formControlName="by">
+      <label for="time_type">Type</label>
+      <select class="form-control" id="time_type" formControlName="time_type">
         <option value="day">By Day</option>
         <option value="night">By Night</option>
       </select>
@@ -54,9 +54,32 @@
       <input type="checkbox" formControlName="guide_included" name="guide_included" class="form-control" id="guide_included">
     </div>
 
+    <div formArrayName="prices_attributes">
+      <div *ngFor="let price of activityForm.controls.prices_attributes.controls; index as i">
+        <div>
+          <label>Price {{i + 1}}</label>
+          <button class="btn btn-danger float-right" *ngIf="activityForm.controls.prices_attributes.controls.length > 1" (click)="removePriceInput(i)">X</button>
+        </div>
+        
+        <div class="form-group" [formGroupName]="i">
+          <div class="form-group">
+            <label for="amount">Amount:</label>
+            <input type="number" formControlName="amount" placeholder="Amount" name="amount" class="form-control" id="amount">
+          </div>
+
+          <div class="form-group">
+            <label for="options">Options:</label>
+            <input type="text" formControlName="options" placeholder="Options" name="options" class="form-control" id="options">
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-success float-right" (click)="addPriceInput()">+</button>
+    </div>
+
     <button class="btn btn-success" [disabled]='activityForm.invalid' *ngIf="isCreate" (click)="onSubmit()">Create</button>  
     <button class="btn btn-success" [disabled]='activityForm.invalid' *ngIf="!isCreate" (click)="onUpdate()">Update</button>
 
-    <!--<p>{{activityForm.value | json}}</p>-->
+    <p>{{activityForm.value | json}}</p>
   </form>
 </div>
