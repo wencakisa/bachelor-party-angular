@@ -19,6 +19,12 @@ export class Activity implements Deserializable {
   }
 
   getLowestPriceAmount(): number {
-    return this.prices.map(price => price.amount).reduce((a, b) => Math.min(a, b))
+    if (this.prices.length > 1) {
+      return this.prices.map(price => price.amount).reduce((a, b) => Math.min(a, b));
+    } else if (this.prices.length === 1) {
+      return this.prices[0].amount;
+    } else {
+      return -1;
+    }
   }
 }
