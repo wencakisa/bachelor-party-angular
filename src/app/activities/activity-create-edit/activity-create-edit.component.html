@@ -58,7 +58,7 @@
       <div *ngFor="let price of activityForm.controls.prices_attributes.controls; index as i">
         <div>
           <label>Price {{i + 1}}</label>
-          <button class="btn btn-danger float-right" *ngIf="activityForm.controls.prices_attributes.controls.length > 1" (click)="removePriceInput(i)">X</button>
+          <button class="btn btn-danger float-right" (click)="removePriceInput(i)">X</button>
         </div>
         
         <div class="form-group" [formGroupName]="i">
@@ -74,7 +74,7 @@
         </div>
       </div>
 
-      <button class="btn btn-success float-right" (click)="addPriceInput()">+</button>
+      <button class="btn btn-info mb-2" (click)="addPriceInput()">Add Prices</button>
     </div>
 
     <button class="btn btn-success" [disabled]='activityForm.invalid' *ngIf="isCreate" (click)="onSubmit()">Create</button>  

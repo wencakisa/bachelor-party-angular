@@ -38,7 +38,7 @@ export class ActivityCreateEditComponent implements OnInit {
       transfer_included: [false],
       guide_included: [false],
       prices_attributes: this.formBuilder.array([
-        this.initPriceInput(),
+        
       ])
     });
     
@@ -55,14 +55,6 @@ export class ActivityCreateEditComponent implements OnInit {
     }
   }
 
-  initPriceInput() {
-    return this.formBuilder.group({
-      id: [''],
-      amount: ['', [Validators.min(0)]],
-      options: ['']
-    });
-  }
-
   isUpdateMode(): boolean {
     return this.getActivityIdFromUrl() > 0;
   }
@@ -72,14 +64,22 @@ export class ActivityCreateEditComponent implements OnInit {
   }
 
   addAndFillNeededPriceFields(activity: Activity): void {
-    for (let i = 1; i < activity.prices.length; i++) {
+    for (let i = 0; i < activity.prices.length; i++) {
       this.addPriceInput();
     }
     this.activityForm.get("prices_attributes").patchValue(activity.prices);
   }
 
   addPriceInput() {
-    this.pricesAttributesControl.push(this.initPriceInput());
+    this.pricesAttributesControl.push(this.createPriceInput());
+  }
+
+  createPriceInput() {
+    return this.formBuilder.group({
+      id: [''],
+      amount: ['', [Validators.min(0)]],
+      options: ['']
+    });
   }
 
   removePriceInput(i: number) {
