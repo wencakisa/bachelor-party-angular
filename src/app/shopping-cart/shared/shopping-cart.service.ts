@@ -63,7 +63,7 @@ export class ShoppingCartService {
   }
 
   getTotalPrice(): number {
-    return this.reduceToSum(this.activitiesInCart.map(a => a.price.amount));
+    return this.reduceToSum(this.activitiesInCart.map(a => a.selectedPrice.amount));
   }
 
   activityIsInCart(activity: Activity): boolean {

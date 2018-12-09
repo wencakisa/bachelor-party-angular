@@ -45,10 +45,10 @@
             <td>{{ activity.time_type }} </td>
             <td>{{ activity.duration }}</td>
             <td>
-              {{ activity.price.amount | currency }}
+              {{ activity.selectedPrice.amount | currency }}
             </td>
             <td>
-              {{ activity.price.options }}
+              {{ activity.selectedPrice.options }}
             </td>
             <td *ngIf="canRequestQuotation()">
               <button (click)="modifyCart(activity)" class="btn btn-danger btn-sm">Remove</button>

@@ -2,7 +2,7 @@ import { Activity } from './activity.model';
 import { Price } from './price.model';
 
 export class ActivityInCart extends Activity {
-  price: Price;
+  selectedPrice: Price;
 
   constructor(activity: Activity) {
     super();
@@ -10,7 +10,7 @@ export class ActivityInCart extends Activity {
     this.deserialize(activity);
 
     if (this.prices.length === 1) {
-      this.price = this.prices[0];
+      this.selectedPrice = this.prices[0];
     }
   }
 }
