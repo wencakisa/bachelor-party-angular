@@ -1,8 +1,44 @@
 <div class="text-center">
+
   <h2>{{ activities ? 'All available activities:' : 'Loading activities...' }}</h2>
 
+  <br/>
+
   <div class="row">
-    <div *ngFor="let activity of activities" class="col-md-4">
+    <div class="input-group mb-4 col-md-4 offset-md-1">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Activity title</span>
+      </div>
+
+      <input
+        #searchTitle
+        type="text"
+        aria-label="Activity title"
+        class="form-control"
+        placeholder="e.g. Karting"
+        (input)="filterActivitiesByTitle(searchTitle.value)"
+        />
+    </div>
+
+    <div class="form-group col-md-2">
+      <select class="form-control" id="timeTypeSelect" (change)="filterActivitiesByTimeType($event.target.value)">
+        <option value="all">Anytime</option>
+        <option *ngFor="let timeType of ['day', 'night']" [value]="timeType">By {{ timeType }}</option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <select class="form-control" id="priceOrderSelect" (change)="orderActivitiesByPrice($event.target.value)">
+        <option value="asc">Price (ascending)</option>
+        <option value="desc">Price (descending)</option>
+      </select>
+    </div>
+  </div>
+
+  <br/>
+
+  <div class="row">
+    <div *ngFor="let activity of filteredActivities" class="col-md-4">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">
@@ -14,16 +50,17 @@
           </p>
 
           <div>
-            <div *ngIf="activity.prices.length === 0">
+            <div *ngIf="activity.getLowestPriceAmount() === -1; else hasPrice">
               Coming soon
             </div>
-            <div *ngIf="activity.prices.length === 1">
-              {{ activity.prices[0].amount | currency }}
-              <span *ngIf="activity.prices[0].options"> ({{ activity.prices[0].options }})</span>
-            </div>
-            <div *ngIf="activity.prices.length > 1">
-              from {{ activity.getLowestPriceAmount() | currency }}
-            </div>
+
+            <ng-template #hasPrice>
+              <span *ngIf="activity.prices.length > 1">
+                from
+              </span>
+
+              {{ activity.getLowestPriceAmount() | currency }}
+            </ng-template>
           </div>
 
           <div *ifInRole="'admin'">
