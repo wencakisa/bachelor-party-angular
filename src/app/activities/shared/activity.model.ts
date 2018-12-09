@@ -10,7 +10,7 @@ export class Activity implements Deserializable {
   transfer_provided: boolean;
   guide_provided: boolean;
   image_url: string;
-  by: string;
+  time_type: string;
   prices: Price[];
 
   deserialize(params: any): Activity {

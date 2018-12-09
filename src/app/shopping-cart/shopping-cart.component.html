@@ -32,6 +32,7 @@
         <thead class="thead-light">
           <tr>
             <th scope="col">Activity</th>
+            <th scope="col">Time type</th>
             <th scope="col">Duration (in hours)</th>
             <th scope="col">Price</th>
             <th scope="col">Options</th>
@@ -41,6 +42,7 @@
         <tbody>
           <tr *ngFor="let activity of shoppingCartActivities">
             <th scope="row"><a routerLink="/activities/{{ activity.id }}">{{ activity.title }}</a></th>
+            <td>{{ activity.time_type }} </td>
             <td>{{ activity.duration }}</td>
             <td>
               {{ activity.price.amount | currency }}
@@ -55,6 +57,7 @@
 
           <tr class="bg-info">
             <th scope="row">Total</th>
+            <th></th>
             <th>{{ getTotalDuration() }}</th>
             <th>{{ getTotalPrice() | currency }}</th>
             <th></th>
