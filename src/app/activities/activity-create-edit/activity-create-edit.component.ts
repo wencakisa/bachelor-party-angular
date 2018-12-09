@@ -37,9 +37,7 @@ export class ActivityCreateEditComponent implements OnInit {
       duration: ['', [Validators.required, Validators.min(0)]],
       transfer_included: [false],
       guide_included: [false],
-      prices_attributes: this.formBuilder.array([
-        
-      ])
+      prices_attributes: this.formBuilder.array([])
     });
     
     this.pricesAttributesControl = <FormArray> this.activityForm.controls['prices_attributes'];
