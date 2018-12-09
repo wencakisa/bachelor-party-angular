@@ -33,10 +33,14 @@ export class RequestQuotationComponent implements OnInit {
   }
 
   private prepareSave(): Quotation {
+    let groupSize = AppSettings.getGroupSizeFromLocalStorage();
+    let activitiesInCart = AppSettings.getActivitiesFromLocalStorage();
+
     let quotation_params = {
-      group_size: AppSettings.getGroupSizeFromLocalStorage(),
+      group_size: groupSize,
       user_email: this.requestQuotationForm.value.userEmail,
-      activity_ids: AppSettings.getActivitiesFromLocalStorage().map(activity => activity.id)
+      activity_ids: activitiesInCart.map(activity => activity.id),
+      price_ids: activitiesInCart.map(activity => activity.selectedPrice.id)
     }
 
     return new Quotation().deserialize(quotation_params)
