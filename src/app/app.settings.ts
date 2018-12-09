@@ -2,6 +2,7 @@ import { HttpHeaders } from '@angular/common/http';
 
 import { ActivityInCart } from './activities/shared/activityInCart.model';
 import { Role } from './authentication/shared/role';
+import { Price } from './activities/shared/price.model';
 
 export class AppSettings {
   public static API_BASE = 'http://localhost:3000';
@@ -23,6 +24,7 @@ export class AppSettings {
   public static ACTIVITIES_IN_CART_LS_KEY = 'activitiesInCart';
   public static GROUP_SIZE_LS_KEY = 'groupSize';
   public static QUOTATION_SENT_FROM_EMAIL_LS_KEY = 'quotationSentFromEmail';
+  public static PRICES_MARKED_FOR_DESTROYING_LS_KEY = 'pricesMarkedForDestroying';
 
   public static DEFAULT_HTTP_OPTIONS = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -58,5 +60,13 @@ export class AppSettings {
 
   public static setQuotationSentFromEmailInLocalStorage(email: string): void {
     localStorage.setItem(AppSettings.QUOTATION_SENT_FROM_EMAIL_LS_KEY, email);
+  }
+
+  public static getPricesMarkedForDestroyingFromLocalStorage(): Price[] {
+    return JSON.parse(localStorage.getItem(AppSettings.PRICES_MARKED_FOR_DESTROYING_LS_KEY));
+  }
+
+  public static setPricesMarkedForDestroyingFromLocalStorage(prices: Price[]): void {
+    localStorage.setItem(AppSettings.PRICES_MARKED_FOR_DESTROYING_LS_KEY, JSON.stringify(prices));
   }
 }
