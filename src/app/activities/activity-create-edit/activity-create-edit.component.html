@@ -55,7 +55,7 @@
     </div>
 
     <div formArrayName="prices_attributes">
-      <div *ngFor="let price of activityForm.controls.prices_attributes.controls; index as i">
+      <div *ngFor="let price of activityForm.get('prices_attributes').controls; index as i">
         <div>
           <label>Price {{i + 1}}</label>
           <button class="btn btn-danger float-right" (click)="removePriceInput(i)">X</button>
@@ -65,6 +65,14 @@
           <div class="form-group">
             <label for="amount">Amount:</label>
             <input type="number" formControlName="amount" placeholder="Amount" name="amount" class="form-control" id="amount">
+            <div class="alert  alert-danger" *ngIf="activityForm.get('prices_attributes').controls[i].get('amount').hasError('required') 
+                                                    && activityForm.get('prices_attributes').controls[i].get('amount').touched">  
+              Activity Price Amount is required.
+            </div>
+            <div class="alert  alert-danger" *ngIf="activityForm.get('prices_attributes').controls[i].get('amount').hasError('min') 
+                                                    && activityForm.get('prices_attributes').controls[i].get('amount').touched">
+              Activity Price Amount must be a positive number.
+            </div>
           </div>
 
           <div class="form-group">

@@ -75,7 +75,7 @@ export class ActivityCreateEditComponent implements OnInit {
   createPriceInput() {
     return this.formBuilder.group({
       id: [''],
-      amount: ['', [Validators.min(0)]],
+      amount: ['', [Validators.required, Validators.min(0)]],
       options: ['']
     });
   }
