@@ -1,10 +1,12 @@
 import { Deserializable } from '../../shared/deserializable.model';
+import { Activity } from 'src/app/activities/shared/activity.model';
+import { Price } from 'src/app/activities/shared/price.model';
 
 export class Quotation implements Deserializable {
   group_size: number;
   user_email: string;
-  activity_ids: number[];
-  prices_ids: number[];
+  activities: Activity[];
+  prices: Price[];
 
   deserialize(params: any): Quotation {
     Object.assign(this, params);
