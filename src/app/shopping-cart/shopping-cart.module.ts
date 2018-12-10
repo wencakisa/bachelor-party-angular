@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 
 import { ShoppingCartRoutingModule } from './shopping-cart-routing.module';
 
@@ -21,10 +20,7 @@ import { QuotationsModule } from '../quotations/quotations.module';
     CommonModule,
     FormsModule,
     ShoppingCartRoutingModule,
-    QuotationsModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule
+    QuotationsModule
   ],
   exports: [
     ShoppingCartComponent,

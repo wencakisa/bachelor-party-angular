@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -19,7 +18,7 @@ export class ShoppingCartService {
   );
   private activitiesInCart: ActivityInCart[] = [];
 
-  constructor(private matDialog: MatDialog) {
+  constructor() {
     this.activitiesInCartSubject
       .subscribe(activities => this.activitiesInCart = activities);
   }
@@ -73,12 +72,12 @@ export class ShoppingCartService {
   private addActivity(activity: ActivityInCart): void {
     // First product to be added, open modal for entering group size
     if (this.getCartSize() === 0) {
-      this.matDialog.open(GroupSizeModalComponent, {
-        height: '220px', width: '500px'
-      }).afterClosed().subscribe(result => {
-        this.activitiesInCart.push(activity);
-        this.updateLocalStorageActivities();
-      });
+      // this.matDialog.open(GroupSizeModalComponent, {
+      //   height: '220px', width: '500px'
+      // }).afterClosed().subscribe(result => {
+      //   this.activitiesInCart.push(activity);
+      //   this.updateLocalStorageActivities();
+      // });
     } else {
       this.activitiesInCart.push(activity);
     }

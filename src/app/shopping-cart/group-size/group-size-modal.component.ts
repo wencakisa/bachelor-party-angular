@@ -1,6 +1,4 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-
 import { AppSettings } from 'src/app/app.settings';
 
 @Component({
@@ -10,18 +8,13 @@ import { AppSettings } from 'src/app/app.settings';
 })
 export class GroupSizeModalComponent implements OnInit {
 
-  private groupSize: number;
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA) private dialogData: any,
-    private dialogRef: MatDialogRef<GroupSizeModalComponent>
-  ) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
   onSave() {
-    AppSettings.setGroupSizeInLocalStorage(this.groupSize);
-    this.dialogRef.close(this.groupSize);
+    // AppSettings.setGroupSizeInLocalStorage(this.groupSize);
+    // this.dialogRef.close(this.groupSize);
   }
 }
