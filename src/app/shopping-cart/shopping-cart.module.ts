@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { MatDialogModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 
 import { ShoppingCartRoutingModule } from './shopping-cart-routing.module';
 
 import { ShoppingCartComponent } from './shopping-cart.component';
-import { GroupSizeModalComponent } from './group-size/modal/group-size-modal.component';
-import { GroupSizeFormComponent } from './group-size/form/group-size-form.component';
+import { GroupSizeModalComponent } from './group-size/group-size-modal.component';
 import { ModifyCartButtonComponent } from './shared/modify-cart-button/modify-cart-button.component';
 import { RequestQuotationComponent } from '../quotations/request-quotation/request-quotation.component';
 import { QuotationsModule } from '../quotations/quotations.module';
@@ -15,14 +15,16 @@ import { QuotationsModule } from '../quotations/quotations.module';
   declarations: [
     ShoppingCartComponent,
     GroupSizeModalComponent,
-    GroupSizeFormComponent,
     ModifyCartButtonComponent
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
+    FormsModule,
     ShoppingCartRoutingModule,
-    QuotationsModule
+    QuotationsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     ShoppingCartComponent,

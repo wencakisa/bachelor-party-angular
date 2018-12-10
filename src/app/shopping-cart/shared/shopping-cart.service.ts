@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { MatDialog } from '@angular/material';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { AppSettings } from '../../app.settings';
 
 import { ActivityInCart } from '../../activities/shared/activityInCart.model';
 import { Activity } from '../../activities/shared/activity.model';
-import { GroupSizeModalComponent } from '../group-size/modal/group-size-modal.component';
+import { GroupSizeModalComponent } from '../group-size/group-size-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class ShoppingCartService {
   );
   private activitiesInCart: ActivityInCart[] = [];
 
-  constructor(private modalService: NgbModal) {
+  constructor(private matDialog: MatDialog) {
     this.activitiesInCartSubject
       .subscribe(activities => this.activitiesInCart = activities);
   }
@@ -73,10 +73,12 @@ export class ShoppingCartService {
   private addActivity(activity: ActivityInCart): void {
     // First product to be added, open modal for entering group size
     if (this.getCartSize() === 0) {
-      this.modalService.open(GroupSizeModalComponent).result.then(_ => {
+      this.matDialog.open(GroupSizeModalComponent, {
+        height: '220px', width: '500px'
+      }).afterClosed().subscribe(result => {
         this.activitiesInCart.push(activity);
         this.updateLocalStorageActivities();
-      })
+      });
     } else {
       this.activitiesInCart.push(activity);
     }
