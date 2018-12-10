@@ -2,10 +2,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AngularTokenModule } from 'angular-token';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AppSettings } from './app.settings';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -34,7 +32,7 @@ import { IfInRoleModule } from './shared/if-in-role.module';
     QuotationsModule,
     AppRoutingModule,
     HttpClientModule,
-    NgbModule,
+    BrowserAnimationsModule,
     IfInRoleModule
   ],
   providers: [  ],

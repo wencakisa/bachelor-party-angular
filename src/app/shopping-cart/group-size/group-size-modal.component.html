@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Please enter the group size before continuing:</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <input matNativeControl [(ngModel)]="groupSize" type="number" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button (click)="onSave()">Submit</button>
+</mat-dialog-actions>
