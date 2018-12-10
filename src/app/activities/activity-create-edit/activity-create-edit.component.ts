@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { ActivityService } from '../shared/activity.service';
+import { Price } from '../shared/price.model';
+import { Activity } from '../shared/activity.model';
 
 @Component({
   selector: 'app-activity-create-edit',
@@ -11,6 +13,9 @@ import { ActivityService } from '../shared/activity.service';
 })
 export class ActivityCreateEditComponent implements OnInit {
 
+  private pricesMarkedForDestroying: Price[];
+  private pricesAttributesControl: FormArray;
+
   public activityFormLabel: string = "Create Activity";
   public isCreate: boolean = true;
   public activityForm: FormGroup;
@@ -18,7 +23,9 @@ export class ActivityCreateEditComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private activityService: ActivityService) { }
+    private activityService: ActivityService) {
+      this.pricesMarkedForDestroying = [];
+    }
 
   ngOnInit() {
     this.activityForm = this.formBuilder.group({
@@ -26,21 +33,61 @@ export class ActivityCreateEditComponent implements OnInit {
       title: ['', [Validators.required, Validators.maxLength(100)]],
       subtitle: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(250)]],
       details: ['', Validators.required],
-      by: ['day', Validators.required],
+      time_type: ['day', Validators.required],
       duration: ['', [Validators.required, Validators.min(0)]],
       transfer_included: [false],
-      guide_included: [false]
+      guide_included: [false],
+      prices_attributes: this.formBuilder.array([])
     });
+    
+    this.pricesAttributesControl = <FormArray> this.activityForm.controls['prices_attributes'];
 
-    const activityId = +this.route.snapshot.paramMap.get('id');
-    if (+activityId > 0) {
+    if (this.isUpdateMode()) {
       this.isCreate = false;
       this.activityFormLabel = "Edit Activity";
-      this.activityService.getActivity(activityId)
+      this.activityService.getActivity(this.getActivityIdFromUrl())
         .subscribe( activity => {
           this.activityForm.patchValue(activity);
+          this.addAndFillNeededPriceFields(activity);
       });
     }
+  }
+
+  isUpdateMode(): boolean {
+    return this.getActivityIdFromUrl() > 0;
+  }
+
+  getActivityIdFromUrl() {
+    return +this.route.snapshot.paramMap.get('id');
+  }
+
+  addAndFillNeededPriceFields(activity: Activity): void {
+    for (let i = 0; i < activity.prices.length; i++) {
+      this.addPriceInput();
+    }
+    this.activityForm.get("prices_attributes").patchValue(activity.prices);
+  }
+
+  addPriceInput() {
+    this.pricesAttributesControl.push(this.createPriceInput());
+  }
+
+  createPriceInput() {
+    return this.formBuilder.group({
+      id: [''],
+      amount: ['', [Validators.required, Validators.min(0)]],
+      options: ['']
+    });
+  }
+
+  removePriceInput(i: number) {
+      if (this.isUpdateMode()) {
+        let pricesAttributesControlGroup = <FormGroup> this.pricesAttributesControl.at(i);
+        pricesAttributesControlGroup.addControl('_destroy', new FormControl(true));
+        this.pricesMarkedForDestroying.push(<Price> pricesAttributesControlGroup.value);
+      }
+
+      this.pricesAttributesControl.removeAt(i);
   }
 
   onSubmit() {
@@ -54,6 +101,8 @@ export class ActivityCreateEditComponent implements OnInit {
   }
 
   onUpdate() {
+    this.addPricesMarkedForDestroying();
+    
     this.activityService.updateActivity(this.activityForm.value)
       .subscribe(activity => {
         this.router.navigate([`/activities/${activity['id']}`]);
@@ -63,4 +112,7 @@ export class ActivityCreateEditComponent implements OnInit {
       });
   }
 
+  addPricesMarkedForDestroying(): void {
+    this.activityForm.value.prices_attributes = this.activityForm.value.prices_attributes.concat(this.pricesMarkedForDestroying);
+  }
 }

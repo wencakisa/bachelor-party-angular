@@ -37,8 +37,8 @@
     </div>
 
     <div class="form-group">
-      <label for="by">Type</label>
-      <select class="form-control" id="by" formControlName="by">
+      <label for="time_type">Type</label>
+      <select class="form-control" id="time_type" formControlName="time_type">
         <option value="day">By Day</option>
         <option value="night">By Night</option>
       </select>
@@ -54,9 +54,38 @@
       <input type="checkbox" formControlName="guide_included" name="guide_included" class="form-control" id="guide_included">
     </div>
 
+    <div formArrayName="prices_attributes">
+      <div *ngFor="let price of activityForm.get('prices_attributes').controls; index as i">
+        <div>
+          <label>Price {{i + 1}}</label>
+          <button class="btn btn-danger float-right" (click)="removePriceInput(i)">X</button>
+        </div>
+        
+        <div class="form-group" [formGroupName]="i">
+          <div class="form-group">
+            <label for="amount">Amount:</label>
+            <input type="number" formControlName="amount" placeholder="Amount" name="amount" class="form-control" id="amount">
+            <div class="alert  alert-danger" *ngIf="activityForm.get('prices_attributes').controls[i].get('amount').hasError('required') 
+                                                    && activityForm.get('prices_attributes').controls[i].get('amount').touched">  
+              Activity Price Amount is required.
+            </div>
+            <div class="alert  alert-danger" *ngIf="activityForm.get('prices_attributes').controls[i].get('amount').hasError('min') 
+                                                    && activityForm.get('prices_attributes').controls[i].get('amount').touched">
+              Activity Price Amount must be a positive number.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="options">Options:</label>
+            <input type="text" formControlName="options" placeholder="Options" name="options" class="form-control" id="options">
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-info mb-2" (click)="addPriceInput()">Add Prices</button>
+    </div>
+
     <button class="btn btn-success" [disabled]='activityForm.invalid' *ngIf="isCreate" (click)="onSubmit()">Create</button>  
     <button class="btn btn-success" [disabled]='activityForm.invalid' *ngIf="!isCreate" (click)="onUpdate()">Update</button>
-
-    <!--<p>{{activityForm.value | json}}</p>-->
   </form>
 </div>
