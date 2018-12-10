@@ -1,7 +1,16 @@
 <h1>Available quotations:</h1>
 
-<div class="row">
-  <ul *ngFor="let quotation of quotations" class="col-md-4">
-    <li>{{ quotation.user_email }}</li>
-  </ul>
+<div class="row mt-5">
+  <div *ngFor="let quotation of quotations" class="card">
+    <div class="card-body">
+      <h5 class="card-title">Email: {{ quotation.user_email }}</h5>
+      <p class="card-text">Group size: {{ quotation.group_size }}</p>
+      <p class="card-text">Activities chosen:</p>
+      <ul *ngFor="let activity of quotation.activities" class="card-text">
+          <li><a routerLink="/activities/{{ activity.id }}">{{ activity.title }}</a></li>
+      </ul>
+      <button class="btn btn-success" style="margin-right: 10px;">Approve</button>
+      <button class="btn btn-danger">Reject</button>
+    </div>
+  </div>
 </div>
