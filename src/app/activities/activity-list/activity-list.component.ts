@@ -41,6 +41,15 @@ export class ActivityListComponent implements OnInit {
     this.filterActivities('time_type', timeType, true);
   }
 
+  filterActivitiesByPrice(minPrice: number, maxPrice: number): void {
+    this.filteredActivities = Object.assign([], this.activities)
+      .filter((activity: Activity) => {
+        let lowestPrice = activity.getLowestPriceAmount();
+
+        return minPrice >= lowestPrice && lowestPrice <= maxPrice;
+      });
+  }
+
   orderActivitiesByPrice(direction: string = 'asc'): void {
     this.filteredActivities.sort((a: Activity, b: Activity) => {
       let aPrice = a.getLowestPriceAmount();
