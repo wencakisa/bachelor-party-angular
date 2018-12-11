@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { Activity } from '../shared/activity.model';
 import { ActivityService } from '../shared/activity.service';
 
-declare var $: any;
-
 @Component({
   selector: 'app-activity-list',
   templateUrl: './activity-list.component.html',
