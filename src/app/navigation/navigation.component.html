@@ -5,12 +5,12 @@
     <ul class="left hide-on-med-and-down">
       <li><a routerLink="/activities">Activities</a></li>
 
-      <ul *ngIf="(authService.userSignedIn$ | async)">
-        <ul *ifInRole="'admin'">
+      <ng-container *ngIf="(authService.userSignedIn$ | async)">
+        <ng-container *ifInRole="'admin'">
           <li><a routerLink="/admin">Admin</a></li>
           <li><a routerLink="/quotations">Quotations</a></li>
-        </ul>
-      </ul>
+        </ng-container>
+      </ng-container>
     </ul>
 
     <ul class="right hide-on-med-and-down">
@@ -20,9 +20,9 @@
         </a>
       </li>
 
-      <ul *ngIf="(authService.userSignedIn$ | async); else anonymousUserNav">
+      <ng-container *ngIf="(authService.userSignedIn$ | async); else anonymousUserNav">
         <li><a routerLink="/" (click)="logOut()">Logout</a></li>
-      </ul>
+      </ng-container>
 
       <ng-template #anonymousUserNav>
         <li><a routerLink="/login">Login</a></li>
