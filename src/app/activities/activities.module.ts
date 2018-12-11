@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { ActivityListComponent } from './activity-list/activity-list.component';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
@@ -15,10 +15,11 @@ import { IfInRoleModule } from '../shared/if-in-role.module';
   declarations: [
     ActivityListComponent,
     ActivityCreateEditComponent,
-    ActivityDetailComponent  
+    ActivityDetailComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
     ShoppingCartModule,
     ActivitiesRoutingModule,
     ReactiveFormsModule,
