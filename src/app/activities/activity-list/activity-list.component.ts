@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Activity } from '../shared/activity.model';
 import { ActivityService } from '../shared/activity.service';
+
+declare var $: any;
 
 @Component({
   selector: 'app-activity-list',
   templateUrl: './activity-list.component.html',
   styleUrls: ['./activity-list.component.css']
 })
-export class ActivityListComponent implements OnInit {
+export class ActivityListComponent implements OnInit, AfterViewInit {
 
   activities: Activity[];
   filteredActivities: Activity[];
@@ -18,6 +20,11 @@ export class ActivityListComponent implements OnInit {
 
   ngOnInit() {
     this.getActivities();
+  }
+
+  ngAfterViewInit() {
+    $('select').formSelect();
+    $('.fixed-action-btn').floatingActionButton();
   }
 
   getActivities(): void {
