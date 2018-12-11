@@ -1,7 +1,7 @@
-<div class="text-center">
-  <div *ngIf="getCartSize() === 0; else shoppingCartList">
-    <h2>There are no activities in your shopping cart yet.</h2>
-    <h4 class="text-muted">You can add some from <a routerLink="/activities">here</a>.</h4>
+<div class="center">
+  <div *ngIf="isEmpty(); else shoppingCartList">
+    <h3>There are no activities in your shopping cart yet.</h3>
+    <h5 class="grey-text text-darken-2">You can add some from <a routerLink="/activities">here</a>.</h5>
   </div>
 
   <ng-template #shoppingCartList>

@@ -3,17 +3,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { ShoppingCartRoutingModule } from './shopping-cart-routing.module';
+import { QuotationsModule } from '../quotations/quotations.module';
 
 import { ShoppingCartComponent } from './shopping-cart.component';
-import { GroupSizeModalComponent } from './group-size/group-size-modal.component';
 import { ModifyCartButtonComponent } from './shared/modify-cart-button/modify-cart-button.component';
 import { RequestQuotationComponent } from '../quotations/request-quotation/request-quotation.component';
-import { QuotationsModule } from '../quotations/quotations.module';
 
 @NgModule({
   declarations: [
     ShoppingCartComponent,
-    GroupSizeModalComponent,
     ModifyCartButtonComponent
   ],
   imports: [
@@ -27,7 +25,6 @@ import { QuotationsModule } from '../quotations/quotations.module';
     ModifyCartButtonComponent
   ],
   entryComponents: [
-    GroupSizeModalComponent,
     RequestQuotationComponent
   ]
 })

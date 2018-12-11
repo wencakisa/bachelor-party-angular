@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { Activity } from '../activities/shared/activity.model';
-import { ActivityInCart } from '../activities/shared/activityInCart.model';
+import { AppSettings } from '../app.settings';
 
 import { ShoppingCartService } from './shared/shopping-cart.service';
+import { ActivityInCart } from '../activities/shared/activityInCart.model';
 import { QuotationService } from '../quotations/shared/quotation.service';
-import { AppSettings } from '../app.settings';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -45,6 +44,10 @@ export class ShoppingCartComponent implements OnInit {
 
   getCartSize(): number {
     return this.cartService.getCartSize();
+  }
+
+  isEmpty(): boolean {
+    return this.cartService.isEmpty();
   }
 
   getGroupSize(): number {
