@@ -7,8 +7,8 @@ export class Activity implements Deserializable {
   subtitle: string;
   details: string;
   duration: number;
-  transfer_provided: boolean;
-  guide_provided: boolean;
+  transfer_included: boolean;
+  guide_included: boolean;
   image_url: string;
   time_type: string;
   prices: Price[];
