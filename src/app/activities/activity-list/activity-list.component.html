@@ -38,6 +38,9 @@
   <div *ngFor="let activity of filteredActivities" class="col s4">
     <div class="card">
       <div class="card-content">
+        <div class="card-image">
+          <img src="{{ activity.image_url }}" alt="Activity image">
+        </div>
         <span class="card-title">
           <a routerLink="/activities/{{ activity.id }}">{{ activity.title }}</a>
         </span>

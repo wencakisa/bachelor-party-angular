@@ -1,71 +1,77 @@
-<div *ngIf="activity; else loading" class="card">
-  <div class="card-content">
-    <span class="card-title">{{ activity.title }}</span>
-    <blockquote>
-      {{ activity.subtitle }}
-    </blockquote>
-
-    <p *ngIf="activity.details">{{ activity.details }}</p>
-
-    <p>Duration: {{ activity.duration }}h</p>
-    <p>Time: By {{ activity.time_type }}</p>
-
-    <ul class="collection">
-      <li class="collection-item" *ngIf="activity.transfer_included">
-        Transfer is included <i class="material-icons">directions_car</i>
-      </li>
-      <li class="collection-item" *ngIf="activity.guide_included">
-        Guide is included <i class="material-icons">person</i>
-      </li>
-    </ul>
-
-    <div *ngIf="activity.prices.length >= 1; else noPrices">
-      <div *ngIf="activity.prices.length === 1">
-        Price: {{ activity.prices[0].amount | currency }}
-        <span *ngIf="activity.prices[0].options"> ({{ activity.prices[0].options }})</span>
+<div class="row">
+  <div *ngIf="activity; else loading" class="card col s8 offset-s2">
+    <div class="card-content">
+      <div class="card-image">
+        <img src="{{ activity.image_url }}" alt="Activity image">
       </div>
-      <div *ngIf="activity.prices.length > 1">
-        <div *ngIf="activityIsInCart(); else activityIsNotInCart">
-          Activity added with price category
-          {{ this.activityFromCart.selectedPrice.amount | currency }}
-          <span *ngIf="this.activityFromCart.selectedPrice.options"> ({{ this.activityFromCart.selectedPrice.options }})</span>
+
+      <span class="card-title">{{ activity.title }}</span>
+      <blockquote>
+        {{ activity.subtitle }}
+      </blockquote>
+
+      <p *ngIf="activity.details">{{ activity.details }}</p>
+
+      <p>Duration: {{ activity.duration }}h</p>
+      <p>Time: By {{ activity.time_type }}</p>
+
+      <ul class="collection">
+        <li class="collection-item" *ngIf="activity.transfer_included">
+          Transfer is included <i class="material-icons">directions_car</i>
+        </li>
+        <li class="collection-item" *ngIf="activity.guide_included">
+          Guide is included <i class="material-icons">person</i>
+        </li>
+      </ul>
+
+      <div *ngIf="activity.prices.length >= 1; else noPrices">
+        <div *ngIf="activity.prices.length === 1">
+          Price: {{ activity.prices[0].amount | currency }}
+          <span *ngIf="activity.prices[0].options"> ({{ activity.prices[0].options }})</span>
+        </div>
+        <div *ngIf="activity.prices.length > 1">
+          <div *ngIf="activityIsInCart(); else activityIsNotInCart">
+            Activity added with price category
+            {{ this.activityFromCart.selectedPrice.amount | currency }}
+            <span *ngIf="this.activityFromCart.selectedPrice.options"> ({{ this.activityFromCart.selectedPrice.options }})</span>
+          </div>
+
+          <ng-template #activityIsNotInCart>
+            <p>Available prices (please select one):</p>
+
+            <div *ngFor="let price of activity.prices; let idx = index">
+              <label>
+                <input
+                  class="with-gap"
+                  type="radio"
+                  name="priceRadio"
+                  id="{{ price.id }}"
+                  [value]="price.id"
+                  [checked]="idx === 0"
+                  (change)="onSelectionChange(price)">
+                <span>
+                  {{ price.amount | currency }}
+                  <span *ngIf="price.options"> ({{ price.options }})</span>
+                </span>
+              </label>
+            </div>
+          </ng-template>
         </div>
 
-        <ng-template #activityIsNotInCart>
-          <p>Available prices (please select one):</p>
-
-          <div *ngFor="let price of activity.prices; let idx = index">
-            <label>
-              <input
-                class="with-gap"
-                type="radio"
-                name="priceRadio"
-                id="{{ price.id }}"
-                [value]="price.id"
-                [checked]="idx === 0"
-                (change)="onSelectionChange(price)">
-              <span>
-                {{ price.amount | currency }}
-                <span *ngIf="price.options"> ({{ price.options }})</span>
-              </span>
-            </label>
-          </div>
-        </ng-template>
+        <app-modify-cart-button
+          [activity]="activity"
+          [selectedPrice]="selectedPrice"
+          *ngIf="canRequestQuotation()">
+        </app-modify-cart-button>
       </div>
 
-      <app-modify-cart-button
-        [activity]="activity"
-        [selectedPrice]="selectedPrice"
-        *ngIf="canRequestQuotation()">
-      </app-modify-cart-button>
+      <ng-template #noPrices>
+        Coming soon
+      </ng-template>
     </div>
-
-    <ng-template #noPrices>
-      Coming soon
-    </ng-template>
   </div>
-</div>
 
-<ng-template #loading>
-  <h2 class="text-center">Loading activity...</h2>
-</ng-template>
+  <ng-template #loading>
+    <h2 class="text-center">Loading activity...</h2>
+  </ng-template>
+</div>
