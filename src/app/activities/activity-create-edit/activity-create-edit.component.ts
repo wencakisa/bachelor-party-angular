@@ -53,6 +53,10 @@ export class ActivityCreateEditComponent implements OnInit {
     }
   }
 
+  ngAfterViewInit() {
+    $('select').formSelect();
+  }
+
   isUpdateMode(): boolean {
     return this.getActivityIdFromUrl() > 0;
   }
