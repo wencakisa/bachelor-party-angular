@@ -24,12 +24,20 @@ export class ModifyCartButtonComponent implements OnInit {
   }
 
   modifyCart(): void {
-    this.activityInCart.selectedPrice = this.selectedPrice;
-    this.cartService.modifyCart(this.activityInCart);
+    if (this.cartIsEmpty()) {
+      console.log('group size')
+    } else {
+      this.activityInCart.selectedPrice = this.selectedPrice;
+      this.cartService.modifyCart(this.activityInCart);
+    }
+
   }
 
   activityIsInCart(): boolean {
     return this.cartService.activityIsInCart(this.activityInCart);
   }
 
+  cartIsEmpty(): boolean {
+    return this.cartService.isEmpty();
+  }
 }
