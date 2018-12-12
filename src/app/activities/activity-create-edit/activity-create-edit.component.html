@@ -1,82 +1,91 @@
-<div class="row">
-  <h2 class="center">{{activityFormLabel}}</h2>
-  <form [formGroup]="activityForm" class="col s12">
-    <div class="row">
-      <div class="input-field col s12">
-        <input type="text" formControlName="title" name="title" class="validate" id="title">
-        <label for="title">Title:</label>
+<div class="col-md-6">
+  <h2 class="text-center">{{activityFormLabel}}</h2>
+  <form [formGroup]="activityForm" class="form">
+    <div class="form-group">
+      <label for="title">Title:</label>
+      <input type="text" formControlName="title" placeholder="Title" name="title" class="form-control" id="title">
+      <div class="alert  alert-danger" *ngIf="activityForm.get('title').hasError('required') && activityForm.get('title').touched">  
+        Activity Title is required.
       </div>
     </div>
 
-    <div class="row">
-      <div class="input-field col s12">
-        <input type="text" formControlName="subtitle" name="subtitle" class="validate" id="subtitle">
-        <label for="subtitle">Subtitle:</label>
+    <div class="form-group">
+      <label for="subtitle">Subtitle:</label>
+      <input type="text" formControlName="subtitle" placeholder="Subtitle" name="subtitle" class="form-control" id="subtitle">
+      <div class="alert  alert-danger" *ngIf="activityForm.get('subtitle').hasError('required') && activityForm.get('subtitle').touched">  
+        Activity Subtitle is required.
+      </div>
+      <div class="alert  alert-danger" *ngIf="activityForm.get('subtitle').hasError('minlength') && activityForm.get('subtitle').touched">  
+        Activity Subtitle should be between 5 and 250 characters.
       </div>
     </div>
 
-    <div class="row">
-      <div class="input-field col s12">
-        <textarea formControlName="details" name="details" class="materialize-textarea" id="details"></textarea>
-        <label for="details">Details:</label>
-      </div>
-    </div>
-    
-    <div class="row">
-      <div class="input-field col s12">
-        <input type="number" formControlName="duration" name="duration" class="validate" id="duration">
-        <label for="duration">Duration:</label>
-      </div>
+    <div class="form-group">
+      <label for="details">Details:</label>
+      <textarea formControlName="details" placeholder="Details" name="details" class="form-control" id="details"></textarea>
     </div>
 
-    <div class="row">
-      <div class="input-field col s12">
-        <select formControlName="time_type" id="time_type" >
-          <option value="day">By Day</option>
-          <option value="night">By Night</option>
-        </select>
-        <label for="time_type">Type</label>
+    <div class="form-group">
+      <label for="duration">Duration:</label>
+      <input type="number" formControlName="duration" placeholder="Duration" name="duration" class="form-control" id="duration">
+      <div class="alert  alert-danger" *ngIf="activityForm.get('duration').hasError('required') && activityForm.get('duration').touched">  
+        Activity Duration is required.
+      </div>
+      <div class="alert  alert-danger" *ngIf="activityForm.get('duration').hasError('min') && activityForm.get('duration').touched">
+        Activity Duration must be a positive number.
       </div>
     </div>
 
-    <p>
-      <input type="checkbox" formControlName="transfer_included" name="transfer_included" id="transfer_included">
-      <label for="transfer_included">Transfer</label>
-    </p>
+    <div class="form-group">
+      <label for="time_type">Type</label>
+      <select class="form-control" id="time_type" formControlName="time_type">
+        <option value="day">By Day</option>
+        <option value="night">By Night</option>
+      </select>
+    </div>
 
-    <p>
-      <input type="checkbox" formControlName="guide_included" name="guide_included" id="guide_included">
-      <label for="guide_included">Guide</label>
-    </p>
-  
+    <div class="form-group">
+      <label for="transfer_included">Transfer:</label>
+      <input type="checkbox" formControlName="transfer_included" name="transfer_included" class="form-control" id="transfer_included">
+    </div>
+
+    <div class="form-group">
+      <label for="guide_included">Guide:</label>
+      <input type="checkbox" formControlName="guide_included" name="guide_included" class="form-control" id="guide_included">
+    </div>
+
     <div formArrayName="prices_attributes">
-      <ng-container *ngFor="let price of activityForm.get('prices_attributes').controls; index as i">
+      <div *ngFor="let price of activityForm.get('prices_attributes').controls; index as i">
         <div>
           <label>Price {{i + 1}}</label>
-          <a class="btn-floating btn red right" (click)="removePriceInput(i)">X</a>
+          <button class="btn btn-danger float-right" (click)="removePriceInput(i)">X</button>
         </div>
         
-        <div class="row" [formGroupName]="i">
-          <div class="row">
-            <div class="input-field col s12">
-              <input type="number" formControlName="amount" name="amount" class="validate" id="amount">
-              <label for="amount">Amount:</label>
+        <div class="form-group" [formGroupName]="i">
+          <div class="form-group">
+            <label for="amount">Amount:</label>
+            <input type="number" formControlName="amount" placeholder="Amount" name="amount" class="form-control" id="amount">
+            <div class="alert  alert-danger" *ngIf="activityForm.get('prices_attributes').controls[i].get('amount').hasError('required') 
+                                                    && activityForm.get('prices_attributes').controls[i].get('amount').touched">  
+              Activity Price Amount is required.
+            </div>
+            <div class="alert  alert-danger" *ngIf="activityForm.get('prices_attributes').controls[i].get('amount').hasError('min') 
+                                                    && activityForm.get('prices_attributes').controls[i].get('amount').touched">
+              Activity Price Amount must be a positive number.
             </div>
           </div>
 
-          <div class="row">
-            <div class="input-field col s12">
-              <input type="text" formControlName="options" name="options" class="validate" id="options">
-              <label for="options">Options:</label>
-            </div>
+          <div class="form-group">
+            <label for="options">Options:</label>
+            <input type="text" formControlName="options" placeholder="Options" name="options" class="form-control" id="options">
           </div>
         </div>
-      </ng-container>
+      </div>
 
-      <a class="waves-effect waves-light btn" (click)="addPriceInput()"><i class="material-icons left">add</i>Add Prices</a>
+      <button class="btn btn-info mb-2" (click)="addPriceInput()">Add Prices</button>
     </div>
-    
-    <button class="waves-effect waves-light btn" [disabled]='activityForm.invalid' *ngIf="isCreate" (click)="onSubmit()">Create</button>  
-    <button class="waves-effect waves-light btn" [disabled]='activityForm.invalid' *ngIf="!isCreate" (click)="onUpdate()">Update</button>
+
+    <button class="btn btn-success" [disabled]='activityForm.invalid' *ngIf="isCreate" (click)="onSubmit()">Create</button>  
+    <button class="btn btn-success" [disabled]='activityForm.invalid' *ngIf="!isCreate" (click)="onUpdate()">Update</button>
   </form>
 </div>
