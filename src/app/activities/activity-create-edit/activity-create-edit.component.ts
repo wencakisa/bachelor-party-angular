@@ -39,7 +39,7 @@ export class ActivityCreateEditComponent implements OnInit {
       guide_included: [false],
       prices_attributes: this.formBuilder.array([])
     });
-    
+
     this.pricesAttributesControl = <FormArray> this.activityForm.controls['prices_attributes'];
 
     if (this.isUpdateMode()) {
@@ -51,10 +51,6 @@ export class ActivityCreateEditComponent implements OnInit {
           this.addAndFillNeededPriceFields(activity);
       });
     }
-  }
-
-  ngAfterViewInit() {
-    $('select').formSelect();
   }
 
   isUpdateMode(): boolean {
@@ -100,19 +96,19 @@ export class ActivityCreateEditComponent implements OnInit {
         this.router.navigate(['activities']);
       },
       error => {
-        alert(error);  
+        alert(error);
       });
   }
 
   onUpdate() {
     this.addPricesMarkedForDestroying();
-    
+
     this.activityService.updateActivity(this.activityForm.value)
       .subscribe(activity => {
         this.router.navigate([`/activities/${activity['id']}`]);
       },
-      error => {  
-        alert(error);  
+      error => {
+        alert(error);
       });
   }
 

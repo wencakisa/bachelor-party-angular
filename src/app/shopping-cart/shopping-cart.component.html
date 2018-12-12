@@ -1,73 +1,69 @@
-<div class="center">
-  <div *ngIf="isEmpty(); else shoppingCartList">
-    <h3>There are no activities in your shopping cart yet.</h3>
-    <h5 class="grey-text text-darken-2">You can add some from <a routerLink="/activities">here</a>.</h5>
-  </div>
-
-  <ng-template #shoppingCartList>
-    <h3>Activities in your shopping cart: </h3>
-
-    <div *ngIf="!canRequestQuotation(); else quotationNotSent">
-      <h4 class="text-muted">Quotation request sent to <pre>{{ getQuotationSentFromEmail() }}</pre></h4>
+<div class="text-center">
+    <div *ngIf="isEmpty(); else shoppingCartList">
+      <h2>There are no activities in your shopping cart yet.</h2>
+      <h4 class="text-muted">You can add some from <a routerLink="/activities">here</a>.</h4>
     </div>
 
-    <ng-template #quotationNotSent>
-      <button id="requestQuotationButton" type="button" class="btn waves-effect" (click)="toggleQuotationForm()" [disabled]="!canRequestQuotation()">
-        Request a quotation <i class="material-icons inline-icon">mail_outline</i>
-      </button>
+    <ng-template #shoppingCartList>
+      <h2>Activities in your shopping cart: </h2>
 
-      <div *ngIf="quotationFormVisible" class="row">
-        <div class="col-md-6 offset-md-3">
-          <app-request-quotation></app-request-quotation>
+      <div *ngIf="!canRequestQuotation(); else quotationNotSent">
+        <h4 class="text-muted">Quotation request sent to <pre>{{ getQuotationSentFromEmail() }}</pre></h4>
+      </div>
+
+      <ng-template #quotationNotSent>
+        <button type="button" class="btn btn-md btn-info" (click)="toggleQuotationForm()" [disabled]="!canRequestQuotation()">
+          Request a quotation
+        </button>
+        <button type="button" class="btn btn-md btn-warning text-white" (click)="emptyCart()">
+          Empty shopping cart
+        </button>
+
+        <div *ngIf="quotationFormVisible" class="row">
+          <div class="col-md-6 offset-md-3">
+            <app-request-quotation></app-request-quotation>
+          </div>
         </div>
+      </ng-template>
+
+      <div class="row">
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Activity</th>
+              <th scope="col">Time type</th>
+              <th scope="col">Duration (in hours)</th>
+              <th scope="col">Price</th>
+              <th scope="col">Options</th>
+              <th scope="col" *ngIf="canRequestQuotation()"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let activity of shoppingCartActivities">
+              <th scope="row"><a routerLink="/activities/{{ activity.id }}">{{ activity.title }}</a></th>
+              <td>{{ activity.time_type }} </td>
+              <td>{{ activity.duration }}</td>
+              <td>
+                {{ activity.selectedPrice.amount | currency }}
+              </td>
+              <td>
+                {{ activity.selectedPrice.options }}
+              </td>
+              <td *ngIf="canRequestQuotation()">
+                <button (click)="modifyCart(activity)" class="btn btn-danger btn-sm">Remove</button>
+              </td>
+            </tr>
+
+            <tr class="bg-info">
+              <th scope="row">Total</th>
+              <th>{{ getOverallTimeType() }}</th>
+              <th>{{ getTotalDuration() }}</th>
+              <th>{{ getTotalPrice() | currency }}</th>
+              <th>for {{ getGroupSize() }} people</th>
+              <th *ngIf="canRequestQuotation()"></th>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </ng-template>
-
-    <div class="row">
-      <table class="centered highlight">
-        <thead>
-          <tr>
-            <th><i class="material-icons">local_activity</i></th>
-            <th><i class="material-icons">wb_sunny</i></th>
-            <th><i class="material-icons">access_time</i></th>
-            <th><i class="material-icons">attach_money</i></th>
-            <th><i class="material-icons">more_horiz</i></th>
-            <th *ngIf="canRequestQuotation()"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let activity of shoppingCartActivities">
-            <td class="row-title"><a routerLink="/activities/{{ activity.id }}">{{ activity.title }}</a></td>
-            <td>{{ activity.time_type }} </td>
-            <td>{{ activity.duration }} hours</td>
-            <td>
-              {{ activity.selectedPrice.amount | currency }}
-            </td>
-            <td>
-              {{ activity.selectedPrice.options || 'None' }}
-            </td>
-            <td *ngIf="canRequestQuotation()">
-              <button (click)="modifyCart(activity)" class="btn waves-effect waves-light red">
-                <i class="material-icons">clear</i>
-              </button>
-            </td>
-          </tr>
-
-          <tr class="row-title">
-            <td>Total</td>
-            <td>{{ getOverallTimeType() }}
-            </td>
-            <td>{{ getTotalDuration() }} hours</td>
-            <td>{{ getTotalPrice() | currency }}</td>
-            <td>for {{ getGroupSize() }} people</td>
-            <td *ngIf="canRequestQuotation()">
-              <button type="button" class="btn waves-effect waves-light red" (click)="emptyCart()">
-                <i class="material-icons">remove_shopping_cart</i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </ng-template>
-</div>
+  </div>

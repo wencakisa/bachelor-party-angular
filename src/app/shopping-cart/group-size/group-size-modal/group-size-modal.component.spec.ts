@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GroupSizeComponent } from './group-size.component';
+import { GroupSizeModalComponent } from './group-size-modal.component';
 
-describe('GroupSizeComponent', () => {
-  let component: GroupSizeComponent;
-  let fixture: ComponentFixture<GroupSizeComponent>;
+describe('GroupSizeModalComponent', () => {
+  let component: GroupSizeModalComponent;
+  let fixture: ComponentFixture<GroupSizeModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GroupSizeComponent ]
+      declarations: [ GroupSizeModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GroupSizeComponent);
+    fixture = TestBed.createComponent(GroupSizeModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
