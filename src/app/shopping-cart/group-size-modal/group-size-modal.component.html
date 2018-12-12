@@ -7,13 +7,9 @@
 <div class="modal-body">
   <form [formGroup]="groupSizeForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <div class="input-group">
-        <input type="number" class="form-control" placeholder="Group size" formControlName="groupSize" ngbAutoFocus />
+      <input type="number" class="form-control" placeholder="Group size" formControlName="groupSize" ngbAutoFocus />
 
-        <span class="input-group-btn">
-          <button type="submit" class="btn btn-outline-success" [disabled]="!groupSizeForm.valid">Proceed</button>
-        </span>
-      </div>
+      <button type="submit" class="btn btn-success btn-round" [disabled]="!groupSizeForm.valid">Proceed</button>
     </div>
   </form>
 </div>

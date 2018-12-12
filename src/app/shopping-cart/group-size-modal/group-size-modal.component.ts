@@ -15,8 +15,9 @@ export class GroupSizeModalComponent implements OnInit {
 
   static modalOptions: NgbModalOptions = {
     backdrop: 'static',
-    size: 'lg',
-    keyboard: false
+    size: 'sm',
+    keyboard: false,
+    windowClass: 'modal-mini modal-primary text-center'
   };
 
   groupSizeForm = new FormGroup({
