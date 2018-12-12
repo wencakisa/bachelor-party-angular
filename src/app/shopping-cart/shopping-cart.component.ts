@@ -66,6 +66,14 @@ export class ShoppingCartComponent implements OnInit {
     this.cartService.modifyCart(activity);
   }
 
+  hasSingleTimeTypeForAllActivities(): boolean {
+    return this.cartService.hasSingleTimeTypeForAllActivities();
+  }
+
+  getOverallTimeType(): string {
+    return this.cartService.getOverallTimeType();
+  }
+
   getQuotationSentFromEmail(): string {
     return AppSettings.getQuotationSentFromEmailFromLocalStorage();
   }

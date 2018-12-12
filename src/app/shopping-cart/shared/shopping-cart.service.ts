@@ -72,6 +72,17 @@ export class ShoppingCartService {
     return this.getCartSize() === 0;
   }
 
+  hasSingleTimeTypeForAllActivities(): boolean {
+    return this.activitiesInCart
+      .slice(1, this.activitiesInCart.length)
+      .every(activity => activity.time_type === this.firstActivityTimeType());
+  }
+
+  getOverallTimeType(): string {
+    return this.hasSingleTimeTypeForAllActivities() ?
+      this.firstActivityTimeType() : 'day & night';
+  }
+
   private addActivity(activity: ActivityInCart): void {
     this.activitiesInCart.push(activity);
   }
@@ -88,6 +99,10 @@ export class ShoppingCartService {
 
   private updateLocalStorageActivities(): void {
     AppSettings.setActivitiesInLocalStorage(this.activitiesInCart);
+  }
+
+  private firstActivityTimeType(): string {
+    return this.activitiesInCart[0].time_type;
   }
 
   private reduceToSum(arr: number[]): number {
