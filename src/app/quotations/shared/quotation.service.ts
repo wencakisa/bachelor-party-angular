@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -23,6 +23,16 @@ export class QuotationService {
       .pipe(
         // TODO: Error handling, using catchError() method from rxjs
         tap(_ => this.log('Fetched quotations'))
+      )
+  }
+
+  getPendingQuotations(): Observable<Quotation[]> {
+    let params = new HttpParams().set("status", "pending");
+
+    return this.http.get<Quotation[]>(this.quotationsUrl, { params: params })
+      .pipe(
+        // TODO: Error handling, using catchError() method from rxjs
+        tap(_ => this.log('Fetched pending quotations'))
       )
   }
 
