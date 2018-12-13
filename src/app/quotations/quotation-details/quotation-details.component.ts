@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { Quotation } from '../shared/quotation.model';
 import { QuotationService } from '../shared/quotation.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-quotation-details',
@@ -11,9 +12,12 @@ import { QuotationService } from '../shared/quotation.service';
 })
 export class QuotationDetailsComponent implements OnInit {
 
-  quotation: Quotation;
+  public quotation: Quotation;
+  public customEmailMessage: FormControl;
 
-  constructor(private route: ActivatedRoute, private quotationService: QuotationService) { }
+  constructor(private route: ActivatedRoute, private quotationService: QuotationService) {
+    this.customEmailMessage = new FormControl('');
+  }
 
   ngOnInit() {
     this.getQuotation();
