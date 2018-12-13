@@ -1,0 +1,9 @@
+.card-img-overlay {
+  text-shadow: 2px 2px #000000;
+}
+
+.card-img {
+  width: 100%;
+  height: 20vw;
+  object-fit: cover;
+}

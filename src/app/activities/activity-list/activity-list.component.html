@@ -1,8 +1,20 @@
 <div class="text-center">
-  <h2>{{ activities ? 'All available activities:' : 'Loading activities...' }}</h2>
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <h2>{{ activities ? 'Available activities' : 'Loading activities...' }}</h2>
+
+      <blockquote class="blockquote">
+        <p class="mb-0">
+          Discover our Sofia by day activities for your Bachelor Party.
+          <br/>
+          Choose between more than 40 exclusive activities and we will arrange your custom program for the weekend.
+        </p>
+      </blockquote>
+    </div>
+  </div>
 
   <div class="row">
-    <div class="input-group col-md-4 offset-md-1">
+    <div class="input-group col-sm-12 col-md-4 offset-md-2">
       <div class="input-group-prepend">
         <div class="input-group-text"><i class="now-ui-icons ui-1_zoom-bold"></i></div>
       </div>
@@ -23,7 +35,7 @@
       </select>
     </div>
 
-    <div class="col-md-4">
+    <div class="form-group col-md-2">
       <select class="form-control form-control-lg" id="priceOrderSelect" (change)="orderActivitiesByPrice($event.target.value)">
         <option value="asc">Price (ascending)</option>
         <option value="desc">Price (descending)</option>
@@ -36,7 +48,7 @@
 
 <div class="row">
   <div *ngFor="let activity of filteredActivities" class="col-md-4">
-    <div class="card">
+    <div class="card bg-dark text-white text-center">
       <img class="card-img-top" src="{{ activity.image_url }}" alt="Activity image">
       <div class="card-body">
         <h4 class="card-title">
@@ -46,27 +58,29 @@
         </h4>
         <h6 class="card-subtitle mb-2 text-muted">{{ activity.subtitle }}</h6>
 
-        <p *ngIf="activity.details" class="card-text">
-          {{ (activity.details.length > 150) ? (activity.details | slice:0:150) + '...' : (activity.details) }}
-        </p>
-
         <div>
           <div *ngIf="activity.getLowestPriceAmount() === -1; else hasPrice">
-            Coming soon
+            <p class="card-text">Coming soon</p>
           </div>
 
           <ng-template #hasPrice>
-            <span *ngIf="activity.prices.length > 1">
-              from
-            </span>
+            <p class="card-text">
+              <span *ngIf="activity.prices.length > 1">
+                from
+              </span>
 
-            {{ activity.getLowestPriceAmount() | currency }}
+              {{ activity.getLowestPriceAmount() | currency }}
+            </p>
           </ng-template>
         </div>
 
         <div *ifInRole="'admin'">
-          <button class="btn btn-success" (click)="editActivity(activity)" style="margin-right: 10px;">Edit</button>
-          <button class="btn btn-danger" (click)="deleteActivity(activity)">Delete</button>
+          <button class="btn btn-primary btn-circle" (click)="editActivity(activity)">
+            <i class="now-ui-icons ui-1_settings-gear-63"></i> Modify
+          </button>
+          <button class="btn btn-danger btn-circle btn-icon" (click)="deleteActivity(activity)">
+            <i class="now-ui-icons ui-1_simple-remove"></i>
+          </button>
         </div>
       </div>
 

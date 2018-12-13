@@ -1,23 +1,12 @@
 <div *ngIf="activity; else loading" class="card">
-  <div class="card-header text-muted">By {{ activity.time_type }}</div>
+  <!-- <div class="card-header text-muted">By {{ activity.time_type }}</div> -->
+  <img class="card-img" src="{{ activity.image_url }}" alt="Activity image">
+  <div class="card-img-overlay text-white">
+    <h2 class="card-title">{{ activity.title }}</h2>
+    <h6 class="card-subtitle mb-2 text-muted">{{ activity.subtitle }}</h6>
+  </div>
   <div class="card-body">
-    <div class="text-center">
-      <h2 class="card-title">{{ activity.title }}</h2>
-      <h6 class="card-subtitle mb-2 text-muted">{{ activity.subtitle }}</h6>
-    </div>
-<!--
-    <div class="card-image">
-      <img src="{{ activity.image_url }}" alt="Activity image">
-    </div> -->
-
     <p *ngIf="activity.details" class="card-text">{{ activity.details }}</p>
-
-    <p>Duration: {{ activity.duration }}h</p>
-
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item" *ngIf="activity.transfer_provided">Transfer is provided</li>
-      <li class="list-group-item" *ngIf="activity.guide_provided">Guide is provided</li>
-    </ul>
 
     <div>
       <div *ngIf="activity.prices.length >= 1; else noPrices">
@@ -52,18 +41,24 @@
             </div>
           </ng-template>
         </div>
-
-        <app-modify-cart-button
-          [activity]="activity"
-          [selectedPrice]="selectedPrice"
-          *ngIf="canRequestQuotation()">
-        </app-modify-cart-button>
       </div>
       <ng-template #noPrices>
         Coming soon
       </ng-template>
     </div>
   </div>
+
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Duration: {{ activity.duration }}h</li>
+    <li class="list-group-item" *ngIf="activity.transfer_provided">Transfer is provided</li>
+    <li class="list-group-item" *ngIf="activity.guide_provided">Guide is provided</li>
+  </ul>
+
+  <app-modify-cart-button
+    [activity]="activity"
+    [selectedPrice]="selectedPrice"
+    *ngIf="canRequestQuotation()">
+  </app-modify-cart-button>
 </div>
 
 <ng-template #loading>
