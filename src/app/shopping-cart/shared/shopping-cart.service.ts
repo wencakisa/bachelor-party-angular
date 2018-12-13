@@ -1,13 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 import { AppSettings } from '../../app.settings';
 
 import { ActivityInCart } from '../../activities/shared/activityInCart.model';
 import { Activity } from '../../activities/shared/activity.model';
-import { GroupSizeModalComponent } from '../group-size/group-size-modal/group-size-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +16,7 @@ export class ShoppingCartService {
   );
   private activitiesInCart: ActivityInCart[] = [];
 
-  constructor(private modalService: NgbModal) {
+  constructor() {
     this.activitiesInCartSubject
       .subscribe(activities => this.activitiesInCart = activities);
   }
@@ -86,18 +83,6 @@ export class ShoppingCartService {
   }
 
   private addActivity(activity: ActivityInCart): void {
-    if (this.isEmpty()) {
-      this.modalService.open(GroupSizeModalComponent)
-        .result
-        .then(_ => {
-          this.addActivityAndUpdateLocalStorage(activity);
-        });
-    } else {
-      this.addActivityAndUpdateLocalStorage(activity);
-    }
-  }
-
-  private addActivityAndUpdateLocalStorage(activity: ActivityInCart): void {
     this.activitiesInCart.push(activity);
     this.updateLocalStorageActivities();
   }

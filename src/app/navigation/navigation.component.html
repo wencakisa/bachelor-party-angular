@@ -1,44 +1,46 @@
-<nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand" routerLink="">{{ title }}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-expand-lg bg-primary" color-on-scroll="500">
+  <a class="navbar-brand" routerLink="">{{ title }}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item">
-          <a routerLink="/activities" class="nav-link">Activities</a>
-        </li>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item">
+        <a routerLink="/activities" class="nav-link"><i class="now-ui-icons objects_spaceship"></i> Activities</a>
+      </li>
 
-        <ul class="nav navbar-nav" *ngIf="(authService.userSignedIn$ | async)">
-          <ul class="nav navbar-nav" *ifInRole="'admin'">
-            <li class="nav-item">
-              <a routerLink="/admin" class="nav-link">Admin</a>
-            </li>
-
-            <li class="nav-item">
-              <a routerLink="/quotations" class="nav-link">Quotations</a>
-            </li>
-          </ul>
-
-        </ul>
-      </ul>
-      <ul class="navbar-nav my-2 my-lg-1">
-        <li class="nav-item">
-          <a routerLink="/cart" class="nav-link">Shopping cart: {{ getCartSize() }} ({{ getGroupSize() }} people)</a>
-        </li>
-
-        <ul class="nav navbar-nav" *ngIf="(authService.userSignedIn$ | async); else anonymousUserNav">
+      <ul class="nav navbar-nav" *ngIf="(authService.userSignedIn$ | async)">
+        <ul class="nav navbar-nav" *ifInRole="'admin'">
           <li class="nav-item">
-            <a routerLink="/" (click)="logOut()" class="nav-link">Logout</a>
+            <a routerLink="/admin" class="nav-link"><i class="now-ui-icons ui-2_settings-90"></i> Admin</a>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="/quotations" class="nav-link"><i class="now-ui-icons education_paper"></i> Quotations</a>
           </li>
         </ul>
 
-        <ng-template #anonymousUserNav>
-          <li class="nav-item">
-            <a routerLink="/login" class="nav-link">Login</a>
-          </li>
-        </ng-template>
       </ul>
-    </div>
-  </nav>
+    </ul>
+    <ul class="navbar-nav my-2 my-lg-1">
+      <li class="nav-item">
+        <a routerLink="/cart" class="nav-link">
+          <i class="now-ui-icons shopping_bag-16"></i> {{ getCartSize() }} items
+        </a>
+      </li>
+
+      <ul class="nav navbar-nav" *ngIf="(authService.userSignedIn$ | async); else anonymousUserNav">
+        <li class="nav-item">
+          <a routerLink="/" (click)="logOut()" class="nav-link">Logout</a>
+        </li>
+      </ul>
+
+      <ng-template #anonymousUserNav>
+        <li class="nav-item">
+          <a routerLink="/login" class="nav-link"><i class="now-ui-icons users_circle-08"></i> Login</a>
+        </li>
+      </ng-template>
+    </ul>
+  </div>
+</nav>
