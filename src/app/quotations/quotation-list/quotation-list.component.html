@@ -1,15 +1,19 @@
-<h1>Available quotations:</h1>
+<h1>{{ quotations ? 'Available quotations:' : 'Loading quotations...' }}</h1>
 
 <div class="row mt-5">
   <div class="col-md-6 col-sm-3">
-    <div *ngFor="let quotation of quotations" class="card mb-3">
-      <div class="card-body">
-        <p class="card-text">Email: {{ quotation.user_email }}</p>
-        <p class="card-text">Group size: {{ quotation.group_size }}</p>
-        <p class="card-text">Activities chosen: {{quotation.activities.length}} </p>
-        <button class="btn btn-success" style="margin-right: 10px;" (click)="approveQuotation(quotation.id)">Approve</button>
-        <button class="btn btn-danger" (click)="rejectQuotation(quotation.id)">Reject</button>
-      </div>
-    </div>
+    <ng-container *ngFor="let quotation of quotations">
+      <a routerLink="/quotations/{{ quotation.id }}">
+        <div class="card mb-3">
+          <div class="card-body">
+            <p class="card-text">User email: {{ quotation.user_email }}</p>
+            <p class="card-text">Group size: {{ quotation.group_size }}</p>
+            <p class="card-text">Activities chosen: {{quotation.activities.length}} </p>
+            <button class="btn btn-success" style="margin-right: 10px;" (click)="approveQuotation(quotation.id)">Approve</button>
+            <button class="btn btn-danger" (click)="rejectQuotation(quotation.id)">Reject</button>
+          </div>
+        </div>
+      </a>
+    </ng-container>
   </div>
 </div>
