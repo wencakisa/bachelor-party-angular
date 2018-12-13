@@ -7,11 +7,13 @@ import { QuotationListComponent } from './quotation-list/quotation-list.componen
 
 import { QuotationsRoutingModule } from './quotations-routing.module';
 import { RequestQuotationComponent } from './request-quotation/request-quotation.component';
+import { QuotationDetailsComponent } from './quotation-details/quotation-details.component';
 
 @NgModule({
   declarations: [
     QuotationListComponent,
-    RequestQuotationComponent
+    RequestQuotationComponent,
+    QuotationDetailsComponent
   ],
   imports: [
     CommonModule,

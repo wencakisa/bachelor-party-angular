@@ -1,0 +1,18 @@
+<div *ngIf="quotation; else loading" class="row mt-5">
+  <div class="col-md-12 col-sm-8 card">
+    <div class="card-body">
+      <p class="card-text">User email: {{ quotation.user_email }}</p>
+      <p class="card-text">Group size: {{ quotation.group_size }}</p>
+      <p class="card-text">Activities chosen: </p>
+      <ul *ngFor="let activity of quotation.activities" class="card-text">
+        <li><a routerLink="/activities/{{ activity.id }}">{{ activity.title }}</a></li>
+      </ul>
+      <button class="btn btn-success" style="margin-right: 10px;" (click)="approveQuotation(quotation.id)">Approve</button>
+      <button class="btn btn-danger" (click)="rejectQuotation(quotation.id)">Reject</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <h2 class="text-center">Loading quotation...</h2>
+</ng-template>
