@@ -29,7 +29,9 @@
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "./node_modules/now-ui-kit/assets/js/now-ui-kit.js",
+              "./node_modules/now-ui-kit/assets/js/plugins/nouislider.min.js"
             ]
           },
           "configurations": {

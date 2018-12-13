@@ -7,17 +7,17 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item">
-        <a routerLink="/activities" class="nav-link">Activities</a>
+        <a routerLink="/activities" class="nav-link"><i class="now-ui-icons objects_spaceship"></i> Activities</a>
       </li>
 
       <ul class="nav navbar-nav" *ngIf="(authService.userSignedIn$ | async)">
         <ul class="nav navbar-nav" *ifInRole="'admin'">
           <li class="nav-item">
-            <a routerLink="/admin" class="nav-link">Admin</a>
+            <a routerLink="/admin" class="nav-link"><i class="now-ui-icons ui-2_settings-90"></i> Admin</a>
           </li>
 
           <li class="nav-item">
-            <a routerLink="/quotations" class="nav-link">Quotations</a>
+            <a routerLink="/quotations" class="nav-link"><i class="now-ui-icons education_paper"></i> Quotations</a>
           </li>
         </ul>
 
@@ -25,7 +25,9 @@
     </ul>
     <ul class="navbar-nav my-2 my-lg-1">
       <li class="nav-item">
-        <a routerLink="/cart" class="nav-link">Shopping cart: {{ getCartSize() }} ({{ getGroupSize() }} people)</a>
+        <a routerLink="/cart" class="nav-link">
+          <i class="now-ui-icons shopping_bag-16"></i> {{ getCartSize() }} items
+        </a>
       </li>
 
       <ul class="nav navbar-nav" *ngIf="(authService.userSignedIn$ | async); else anonymousUserNav">
@@ -36,7 +38,7 @@
 
       <ng-template #anonymousUserNav>
         <li class="nav-item">
-          <a routerLink="/login" class="nav-link">Login</a>
+          <a routerLink="/login" class="nav-link"><i class="now-ui-icons users_circle-08"></i> Login</a>
         </li>
       </ng-template>
     </ul>

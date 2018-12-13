@@ -1,81 +1,77 @@
 <div class="text-center">
   <h2>{{ activities ? 'All available activities:' : 'Loading activities...' }}</h2>
 
-  <br/>
-
   <div class="row">
-    <div class="input-group mb-4 col-md-4 offset-md-1">
+    <div class="input-group col-md-4 offset-md-1">
       <div class="input-group-prepend">
-        <span class="input-group-text">Activity title</span>
+        <div class="input-group-text"><i class="now-ui-icons ui-1_zoom-bold"></i></div>
       </div>
-
       <input
         #searchTitle
         type="text"
         aria-label="Activity title"
-        class="form-control"
+        class="form-control form-control-lg"
         placeholder="e.g. Karting"
         (input)="filterActivitiesByTitle(searchTitle.value)"
         />
     </div>
 
     <div class="form-group col-md-2">
-      <select class="form-control" id="timeTypeSelect" (change)="filterActivitiesByTimeType($event.target.value)">
+      <select class="form-control form-control-lg" id="timeTypeSelect" (change)="filterActivitiesByTimeType($event.target.value)">
         <option value="all" selected>Anytime</option>
         <option *ngFor="let timeType of ['day', 'night']" [value]="timeType">By {{ timeType }}</option>
       </select>
     </div>
 
     <div class="col-md-4">
-      <select class="form-control" id="priceOrderSelect" (change)="orderActivitiesByPrice($event.target.value)">
+      <select class="form-control form-control-lg" id="priceOrderSelect" (change)="orderActivitiesByPrice($event.target.value)">
         <option value="asc">Price (ascending)</option>
         <option value="desc">Price (descending)</option>
       </select>
     </div>
   </div>
+</div>
 
-  <br/>
+<br/>
 
-  <div class="row">
-    <div *ngFor="let activity of filteredActivities" class="col-md-4">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">
-            <a routerLink="/activities/{{ activity.id }}">{{ activity.title }}</a>
-          </h5>
-<!--
-          <div class="card-image">
-            <img src="{{ activity.image_url }}" alt="Activity image">
-          </div> -->
+<div class="row">
+  <div *ngFor="let activity of filteredActivities" class="col-md-4">
+    <div class="card">
+      <img class="card-img-top" src="{{ activity.image_url }}" alt="Activity image">
+      <div class="card-body">
+        <h4 class="card-title">
+          <a routerLink="/activities/{{ activity.id }}">
+            {{ activity.title }}
+          </a>
+        </h4>
+        <h6 class="card-subtitle mb-2 text-muted">{{ activity.subtitle }}</h6>
 
-          <h6 class="card-subtitle mb-2 text-muted">{{ activity.subtitle }}</h6>
-          <p *ngIf="activity.details" class="card-text">
-            {{ (activity.details.length > 150) ? (activity.details | slice:0:150) + '...' : (activity.details) }}
-          </p>
+        <p *ngIf="activity.details" class="card-text">
+          {{ (activity.details.length > 150) ? (activity.details | slice:0:150) + '...' : (activity.details) }}
+        </p>
 
-          <div>
-            <div *ngIf="activity.getLowestPriceAmount() === -1; else hasPrice">
-              Coming soon
-            </div>
-
-            <ng-template #hasPrice>
-              <span *ngIf="activity.prices.length > 1">
-                from
-              </span>
-
-              {{ activity.getLowestPriceAmount() | currency }}
-            </ng-template>
+        <div>
+          <div *ngIf="activity.getLowestPriceAmount() === -1; else hasPrice">
+            Coming soon
           </div>
 
-          <div *ifInRole="'admin'">
-            <button class="btn btn-success" (click)="editActivity(activity)" style="margin-right: 10px;">Edit</button>
-            <button class="btn btn-danger" (click)="deleteActivity(activity)">Delete</button>
-          </div>
+          <ng-template #hasPrice>
+            <span *ngIf="activity.prices.length > 1">
+              from
+            </span>
+
+            {{ activity.getLowestPriceAmount() | currency }}
+          </ng-template>
         </div>
 
-        <div class="card-footer text-muted">
-          By {{ activity.time_type }}
+        <div *ifInRole="'admin'">
+          <button class="btn btn-success" (click)="editActivity(activity)" style="margin-right: 10px;">Edit</button>
+          <button class="btn btn-danger" (click)="deleteActivity(activity)">Delete</button>
         </div>
+      </div>
+
+      <div class="card-footer text-muted mb-2">
+        By {{ activity.time_type }}
       </div>
     </div>
   </div>
