@@ -19,7 +19,7 @@ export class QuotationListComponent implements OnInit {
   }
 
   getQuotations(): void {
-    this.quotationService.getQuotations()
+    this.quotationService.getPendingQuotations()
       .subscribe(quotations => this.quotations = quotations);
   }
 }
