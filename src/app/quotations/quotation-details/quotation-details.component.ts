@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Quotation } from '../shared/quotation.model';
 import { QuotationService } from '../shared/quotation.service';
@@ -15,7 +15,9 @@ export class QuotationDetailsComponent implements OnInit {
   public quotation: Quotation;
   public customEmailMessage: FormControl;
 
-  constructor(private route: ActivatedRoute, private quotationService: QuotationService) {
+  constructor(private route: ActivatedRoute,
+    private quotationService: QuotationService,
+    private router: Router) {
     this.customEmailMessage = new FormControl('');
   }
 
@@ -29,4 +31,16 @@ export class QuotationDetailsComponent implements OnInit {
     this.quotationService.getQuotation(id).subscribe(quotation => this.quotation = quotation);
   }
 
+  approveRejectQuotation(status: string): void {
+    if (confirm(`Are you sure you want this quotation to be ${status}?`)) {
+      this.quotationService.approveRejectQuotation(this.quotation, status)
+      .subscribe(data => {
+          this.router.navigate(['quotations']);
+        },
+        error => {
+          alert(error);
+        }
+      );
+    }
+  }
 }
