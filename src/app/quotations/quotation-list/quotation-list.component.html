@@ -9,8 +9,6 @@
             <p class="card-text">User email: {{ quotation.user_email }}</p>
             <p class="card-text">Group size: {{ quotation.group_size }}</p>
             <p class="card-text">Activities chosen: {{quotation.activities.length}} </p>
-            <button class="btn btn-success" style="margin-right: 10px;" (click)="approveQuotation(quotation.id)">Approve</button>
-            <button class="btn btn-danger" (click)="rejectQuotation(quotation.id)">Reject</button>
           </div>
         </div>
       </a>
