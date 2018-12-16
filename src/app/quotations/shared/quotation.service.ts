@@ -55,8 +55,8 @@ export class QuotationService {
       });
   }
 
-  approveRejectQuotation(quotation: Quotation, status: string) {
-    const url = `${this.quotationsUrl}/${quotation.id}/update_status`;
+  updateQuotationStatus(quotation: Quotation, status: string) {
+    const url = `${this.quotationsUrl}/${quotation.id}`;
     let params = { status: status };
 
     return this.http.patch<Quotation>(url, params)
