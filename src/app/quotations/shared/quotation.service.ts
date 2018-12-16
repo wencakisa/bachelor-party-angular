@@ -55,11 +55,10 @@ export class QuotationService {
       });
   }
 
-  approveRejectQuotation(quotation: Quotation, status: string) {
-    const url = `${this.quotationsUrl}/${quotation.id}`;
-    let params = { status: status };
+  updateQuotationStatus(quotation: Quotation, status: string): Observable<Quotation> {
+    const url = `${this.quotationsUrl}/${quotation.id}/${status}`;
 
-    return this.http.patch<Quotation>(url, params)
+    return this.http.patch<Quotation>(url, {})
       .pipe(
         // TODO: Error handling, using catchError() method from rxjs
         tap(_ => this.log(`Quotation id=${quotation.id} is ${status}`))

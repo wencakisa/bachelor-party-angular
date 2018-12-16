@@ -31,9 +31,17 @@ export class QuotationDetailsComponent implements OnInit {
     this.quotationService.getQuotation(id).subscribe(quotation => this.quotation = quotation);
   }
 
-  approveRejectQuotation(status: string): void {
-    if (confirm(`Are you sure you want this quotation to be ${status}?`)) {
-      this.quotationService.approveRejectQuotation(this.quotation, status)
+  approveQuotation(): void {
+    this.updateQuotationStatus('approve');
+  }
+
+  rejectQuotation(): void {
+    this.updateQuotationStatus('reject');
+  }
+
+  private updateQuotationStatus(status: string): void {
+    if (confirm(`Are you sure you want to ${status} this quotation?`)) {
+      this.quotationService.updateQuotationStatus(this.quotation, status)
       .subscribe(data => {
           this.router.navigate(['quotations']);
         },
