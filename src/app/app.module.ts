@@ -25,15 +25,15 @@ import { IfInRoleModule } from './shared/if-in-role.module';
   ],
   imports: [
     BrowserModule,
+    NgbModule,
+    HttpClientModule,
+    AppRoutingModule,
+    IfInRoleModule,
     ActivitiesModule,
     AuthenticationModule,
     AdminModule,
     ShoppingCartModule,
     QuotationsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    IfInRoleModule,
-    NgbModule
   ],
   providers: [  ],
   bootstrap: [ AppComponent ]
