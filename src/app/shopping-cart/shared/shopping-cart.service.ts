@@ -88,7 +88,8 @@ export class ShoppingCartService {
   }
 
   private removeActivity(activity: ActivityInCart): void {
-    this.activitiesInCart.splice(this.activitiesInCart.indexOf(activity), 1);
+    let activityIndex = this.activitiesInCart.map(activity => activity.id).indexOf(activity.id);
+    this.activitiesInCart.splice(activityIndex, 1);
 
     // Remove groupSize from localStorage when the cart gets empty
     if (this.isEmpty()) {
