@@ -27,7 +27,7 @@ export class QuotationService {
   }
 
   getPendingQuotations(): Observable<Quotation[]> {
-    let params = new HttpParams().set("status", "pending");
+    let params = new HttpParams().set('status', 'pending');
 
     return this.http.get<Quotation[]>(this.quotationsUrl, { params: params })
       .pipe(
@@ -55,10 +55,11 @@ export class QuotationService {
       });
   }
 
-  updateQuotationStatus(quotation: Quotation, status: string): Observable<Quotation> {
-    const url = `${this.quotationsUrl}/${quotation.id}/${status}`;
+  approveRejectQuotation(quotation: Quotation, status: string) {
+    const url = `${this.quotationsUrl}/${quotation.id}/update_status`;
+    let params = { status: status };
 
-    return this.http.patch<Quotation>(url, {})
+    return this.http.patch<Quotation>(url, params)
       .pipe(
         // TODO: Error handling, using catchError() method from rxjs
         tap(_ => this.log(`Quotation id=${quotation.id} is ${status}`))

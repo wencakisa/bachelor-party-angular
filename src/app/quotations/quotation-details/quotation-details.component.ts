@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormControl } from '@angular/forms';
 
 import { Quotation } from '../shared/quotation.model';
 import { QuotationService } from '../shared/quotation.service';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-quotation-details',
@@ -31,24 +31,16 @@ export class QuotationDetailsComponent implements OnInit {
     this.quotationService.getQuotation(id).subscribe(quotation => this.quotation = quotation);
   }
 
-  approveQuotation(): void {
-    this.updateQuotationStatus('approve');
-  }
-
-  rejectQuotation(): void {
-    this.updateQuotationStatus('reject');
-  }
-
-  private updateQuotationStatus(status: string): void {
-    if (confirm(`Are you sure you want to ${status} this quotation?`)) {
-      this.quotationService.updateQuotationStatus(this.quotation, status)
-      .subscribe(data => {
-          this.router.navigate(['quotations']);
-        },
-        error => {
-          alert(error);
-        }
-      );
+  approveRejectQuotation(status: string): void {
+    if (confirm(`Are you sure you want this quotation to be "${status}" ?`)) {
+      this.quotationService.approveRejectQuotation(this.quotation, status)
+        .subscribe(data => {
+            this.router.navigate(['quotations']);
+          },
+          error => {
+            alert(error);
+          }
+        );
     }
   }
 }
