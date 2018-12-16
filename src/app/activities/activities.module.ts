@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { ActivityListComponent } from './activity-list/activity-list.component';
 import { ActivityDetailComponent } from './activity-detail/activity-detail.component';
 import { ActivityCreateEditComponent } from './activity-create-edit/activity-create-edit.component';
@@ -22,7 +24,8 @@ import { IfInRoleModule } from '../shared/if-in-role.module';
     ReactiveFormsModule,
     ShoppingCartModule,
     ActivitiesRoutingModule,
-    IfInRoleModule
+    IfInRoleModule,
+    NgbTabsetModule
   ],
   providers: [
     ActivityService
