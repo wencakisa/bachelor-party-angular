@@ -57,9 +57,11 @@ export class QuotationService {
 
   updateQuotationStatus(quotationId: number, status: string) {
     const url = `${this.quotationsUrl}/${quotationId}`;
-    let params = { status: status };
+    let requestBody = {
+      'quotation': { status: status } 
+    };
 
-    return this.http.patch<Quotation>(url, params)
+    return this.http.patch<Quotation>(url, requestBody)
       .pipe(
         // TODO: Error handling, using catchError() method from rxjs
         tap(_ => this.log(`Quotation id=${quotationId} is ${status}`))
