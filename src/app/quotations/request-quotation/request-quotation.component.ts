@@ -39,8 +39,8 @@ export class RequestQuotationComponent implements OnInit {
     let quotation_params = {
       group_size: groupSize,
       user_email: this.requestQuotationForm.value.userEmail,
-      activities: activitiesInCart,
-      prices: activitiesInCart.map(activity => activity.selectedPrice)
+      activity_ids: activitiesInCart.map(activity => activity.id),
+      price_ids: activitiesInCart.map(activity => activity.selectedPrice.id)
     }
 
     return new Quotation().deserialize(quotation_params)
