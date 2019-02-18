@@ -25,6 +25,9 @@ import { RegisterComponent } from './register/register.component';
       signOutFailedValidate: true
     })
   ],
-  providers: [ AuthenticationService ]
+  providers: [
+    AngularTokenModule,
+    AuthenticationService
+  ]
 })
 export class AuthenticationModule { }
