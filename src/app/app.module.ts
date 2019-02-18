@@ -17,6 +17,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { QuotationsModule } from './quotations/quotations.module';
 import { PartiesModule } from './parties/parties.module';
 import { IfInRoleModule } from './shared/if-in-role.module';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { IfInRoleModule } from './shared/if-in-role.module';
     AdminModule,
     ShoppingCartModule,
     QuotationsModule,
-    PartiesModule
+    PartiesModule,
+    UsersModule
   ],
   providers: [  ],
   bootstrap: [ AppComponent ]

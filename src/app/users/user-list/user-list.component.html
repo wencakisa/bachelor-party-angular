@@ -1,0 +1,18 @@
+<h1>{{ users ? 'Available users:' : 'Loading users...' }}</h1>
+ 
+<div class="row mt-5">
+  <div class="col-md-6 col-sm-3">
+    <a routerLink="/users/new" class="btn btn-success">Add user</a>
+    <ng-container *ngFor="let user of users">
+      <div class="card">
+        <button class="btn btn-danger btn-circle btn-icon float-right" (click)="deleteUser(user)">
+          <i class="now-ui-icons ui-1_simple-remove"></i>
+        </button>
+        <div class="card-body">
+          <p class="card-text">User email: {{ user.email }}</p>
+          <p class="card-text">User role: {{ user.role }}</p>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
