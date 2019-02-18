@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Bachelor Party Sofia';
+  title: string;
+
+  ngOnInit(): void {
+    this.title = 'Bachelor Party Sofia';
+  }
 }
