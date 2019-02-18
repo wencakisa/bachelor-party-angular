@@ -40,7 +40,9 @@ export class ActivityService {
   }
 
   createActivity(activity: Activity) {
-    return this.http.post<Activity>(this.activitiesUrl, activity)
+    let requestBody = JSON.stringify({ 'activity': activity });
+
+    return this.http.post<Activity>(this.activitiesUrl, requestBody, AppSettings.DEFAULT_HTTP_OPTIONS)
       .pipe(
         tap(_ => this.log(`Created activity ${activity}`))
       );
