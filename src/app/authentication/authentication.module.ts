@@ -9,10 +9,12 @@ import { AuthenticationRoutingModule } from './authentication-routing.module';
 
 import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from './shared/authentication.service';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
-  	LoginComponent
+  	LoginComponent,
+  	RegisterComponent
   ],
   imports: [
     CommonModule,
