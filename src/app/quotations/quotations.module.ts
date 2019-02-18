@@ -8,6 +8,7 @@ import { QuotationListComponent } from './quotation-list/quotation-list.componen
 import { QuotationsRoutingModule } from './quotations-routing.module';
 import { RequestQuotationComponent } from './request-quotation/request-quotation.component';
 import { QuotationDetailsComponent } from './quotation-details/quotation-details.component';
+import { QuotationService } from './shared/quotation.service';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,9 @@ import { QuotationDetailsComponent } from './quotation-details/quotation-details
   ],
   exports: [
     RequestQuotationComponent
+  ],
+  providers: [
+    QuotationService
   ]
 })
 export class QuotationsModule { }

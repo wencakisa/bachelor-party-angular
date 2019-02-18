@@ -33,7 +33,7 @@ export class QuotationDetailsComponent implements OnInit {
 
   updateQuotationStatus(status: string): void {
     if (confirm(`Are you sure you want this quotation to be ${status}?`)) {
-      this.quotationService.updateQuotationStatus(this.quotation.id, status)
+      this.quotationService.updateQuotationStatus(this.quotation.id, status, this.customEmailMessage.value)
       .subscribe(data => {
           this.router.navigate(['quotations']);
         },

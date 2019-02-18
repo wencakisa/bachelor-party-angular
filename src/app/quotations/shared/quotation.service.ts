@@ -55,13 +55,20 @@ export class QuotationService {
       });
   }
 
-  updateQuotationStatus(quotationId: number, status: string) {
+  updateQuotationStatus(quotationId: number, status: string, custom_email_message: string) {
     const url = `${this.quotationsUrl}/${quotationId}`;
     let requestBody = {
-      'quotation': { status: status } 
+      'quotation': {
+        status: status,
+        custom_email_message: null
+      }
     };
 
-    return this.http.patch<Quotation>(url, requestBody)
+    if (custom_email_message) {
+      requestBody.quotation.custom_email_message = custom_email_message[0].toUpperCase() + custom_email_message.substr(1);
+    }
+
+    return this.http.patch<Quotation>(url, requestBody, AppSettings.DEFAULT_HTTP_OPTIONS)
       .pipe(
         // TODO: Error handling, using catchError() method from rxjs
         tap(_ => this.log(`Quotation id=${quotationId} is ${status}`))
