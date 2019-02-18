@@ -8,7 +8,7 @@ import { AdminAuthGuard } from '../admin/guards/admin-auth.guard';
 
 const activityRoutes: Routes = [
   { path: 'activities', component: ActivityListComponent },
-  { path: 'activity/new', component:  ActivityCreateEditComponent, canActivate: [AdminAuthGuard] },
+  { path: 'activities/new', component:  ActivityCreateEditComponent, canActivate: [AdminAuthGuard] },
   { path: 'activities/:id', component:  ActivityDetailComponent },
   { path: 'activities/:id/edit', component:  ActivityCreateEditComponent, canActivate: [AdminAuthGuard] }
 ]
