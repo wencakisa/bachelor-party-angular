@@ -14,23 +14,14 @@ export class AuthenticationService {
   userSignedIn$: Subject<boolean> = new Subject();
 
   constructor(public authTokenService: AngularTokenService) {
-    if (this.authTokenService.userSignedIn()) {
-      this.authTokenService.validateToken().subscribe(res => this.userSignedIn$.next(res));
-    }
+    this.authTokenService.validateToken().subscribe(
+      res => this.userSignedIn$.next(res),
+      err => localStorage.clear()
+    );
   }
 
   public getCurrentUserRole() {
     return AppSettings.getUserRoleFromLocalStorage();
-  }
-
-  logOutUser(): Observable<Response> {
-    return this.authTokenService.signOut().pipe(
-      map(res => {
-        localStorage.removeItem(AppSettings.USER_ROLE_LS_KEY);
-        this.userSignedIn$.next(false);
-        return res;
-      })
-    );
   }
 
   logInUser(signInData: { login: string, password: string }): Observable<Response> {
@@ -47,6 +38,16 @@ export class AuthenticationService {
           return res;
         }
       )
+    );
+  }
+
+  logOutUser(): Observable<Response> {
+    return this.authTokenService.signOut().pipe(
+      map(res => {
+        localStorage.removeItem(AppSettings.USER_ROLE_LS_KEY);
+        this.userSignedIn$.next(false);
+        return res;
+      })
     );
   }
 }
