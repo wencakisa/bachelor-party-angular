@@ -1,0 +1,9 @@
+<h1>Parties</h1>
+
+<ul *ngFor="let party of parties">
+  <li>{{ party.title }}</li>
+
+  <ul *ngFor="let activity of party.activities">
+    <li>{{ activity.title }}</li>
+  </ul>
+</ul>
