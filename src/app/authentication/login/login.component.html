@@ -1,16 +1,19 @@
-<form (ngSubmit)="onSignInSubmit()" #f="ngForm">
+<form [formGroup]="loginForm" class="form">
   <div class="row">
     <div class="col-sm-4 offset-sm-4">
       <div class="form-group row">
         <label for="email" class="col-sm-2 col-form-label">Email</label>
         
         <div class="col-sm-10">
-          <input id="email"
-                  type="email"
-                  required
-                  name='email'
-                  [(ngModel)]="signInUser.login"
-                  class="validate form-control">
+          <input id="login" type="email" placeholder="Email" formControlName="login" name="login" class="validate form-control" required>
+
+          <div class="alert alert-danger" *ngIf="loginForm.get('login').hasError('required') && loginForm.get('login').touched">  
+            Email is required.
+          </div>
+
+          <div class="alert alert-danger" *ngIf="loginForm.get('login').hasError('email') && loginForm.get('login').touched">  
+            Email must be valid!
+          </div>
         </div>
       </div>
     
@@ -18,22 +21,17 @@
         <label for="password" class="col-sm-2 col-form-label">Password</label>
         
         <div class="col-sm-10">
-          <input id="password"
-                  type="password"
-                  required
-                  name='password'
-                  [(ngModel)]="signInUser.password"
-                  class="validate form-control">
+          <input id="password" type="password" placeholder="Password" formControlName="password" name="password" class="validate form-control" required>
+
+          <div class="alert alert-danger" *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">  
+            Password is required.
+          </div>
         </div>
       </div>
     
       <div class="form-group row">
         <div class="col-sm-10">
-          <button type="submit"
-                  [disabled]="!(f.valid)"
-                  [ngClass]="{'disabled': !(f.valid)}"
-                  class="btn btn-primary">
-            Login </button>
+          <button type="submit" class="btn btn-primary" [disabled]='loginForm.invalid' (click)="onSignInSubmit()">Login</button>
         </div>
       </div>
     

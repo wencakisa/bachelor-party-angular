@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { AppSettings } from '../../app.settings';
 import { AuthenticationService } from '../shared/authentication.service';
@@ -11,17 +12,21 @@ import { AuthenticationService } from '../shared/authentication.service';
 })
 export class LoginComponent implements OnInit {
 
-  signInUser = {
-    login: '',
-    password: ''
-  };
+  public loginForm: FormGroup;
 
-  constructor(private authService: AuthenticationService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder,
+    private router: Router,
+    private authService: AuthenticationService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      login: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+    });
+  }
 
   onSignInSubmit() {
-    this.authService.logInUser(this.signInUser).subscribe(
+    this.authService.logInUser(this.loginForm.value).subscribe(
       res => {
         if (res.ok) {
           AppSettings.USER_ROLES

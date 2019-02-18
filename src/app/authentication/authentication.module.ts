@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 
 import { AngularTokenModule } from 'angular-token';
 
@@ -19,6 +19,7 @@ import { RegisterComponent } from './register/register.component';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     AuthenticationRoutingModule,
     AngularTokenModule.forRoot({
       apiBase: AppSettings.API_BASE,
