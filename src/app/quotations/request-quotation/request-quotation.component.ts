@@ -40,7 +40,8 @@ export class RequestQuotationComponent implements OnInit {
       group_size: groupSize,
       user_email: this.requestQuotationForm.value.userEmail,
       activity_ids: activitiesInCart.map(activity => activity.id),
-      price_ids: activitiesInCart.map(activity => activity.selectedPrice.id)
+      price_ids: activitiesInCart.map(activity => activity.selectedPrice.id),
+      date: new Date()
     }
 
     return new Quotation().deserialize(quotation_params)
