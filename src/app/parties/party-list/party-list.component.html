@@ -2,10 +2,89 @@
 <h3 *ifInRole="'guide'">Assigned parties:</h3>
 <h3 *ifInRole="'customer'">Your own parties:</h3>
 
-<ul *ngFor="let party of parties">
-  <li>
-    <a routerLink="/parties/{{ party.id }}">
-      {{ party.title }} ({{ party.date }})
-    </a>
-  </li>
-</ul>
+<div class="row mt-5">
+  <div class="col-md-6 col-sm-3">
+    <ng-container *ngFor="let party of parties">
+      <a routerLink="/parties/{{ party.id }}">
+        <div class="card">
+          <div class="card-body">
+            <p class="card-text">{{ party.title }}</p>
+  
+            <div class="card-text">
+              <ng-container *ngIf="party.host; else hostNotRegistered">
+                <p class="card-text">Host: {{ party.host.email }}</p>
+              </ng-container>
+              <ng-template #hostNotRegistered>
+                <p class="card-text">Host: Not registered</p>
+              </ng-template>
+            </div>
+  
+            <div class="card-text">
+              <ng-container *ngIf="party.customers.length !== 0; else participantNotInvited">
+                <p class="card-text">Participants:</p>
+                <ul *ngFor="let participant of party.customers">
+                  <li class="card-text">{{ participant.email }}</li>
+                </ul>
+              </ng-container>
+              <ng-template #participantNotInvited>
+                <p class="card-text">Participants: Not invited</p>
+              </ng-template>
+            </div>
+  
+            <div class="card-text">
+              <ng-container *ngIf="party.guide; else guideNotAssigned">
+                <p class="card-text">Guide: {{ party.guide.email }}</p>
+              </ng-container>
+              <ng-template #guideNotAssigned>
+                <p class="card-text">Guide: Not assigned</p>
+              </ng-template>
+            </div>
+  
+            <div class="card-text">
+              <p class="card-text">Activities:</p>
+              <ul *ngFor="let activity of party.activities">
+                <li><a routerLink="/activities/{{ activity.id }}">{{ activity.title }}</a></li>
+              </ul>
+            </div>
+  
+            <div *ifInRole="'admin'">
+              <div *ngIf="!party.guide; else displayUnassignButton">
+                <button class="btn btn-info" (click)="setDisplayAssignmentForm()">{{partyAssignmentFormButtonName}}</button>
+  
+                <ng-container *ngIf="displayPartyAssignmentForm">
+                  <form [formGroup]="partyAssignmentForm" class="form">               
+                    <div class="form-group">
+                      <label for="guide" class="col-sm-4 col-form-label">Guides</label>
+                      
+                      <div class="col-sm-5">
+                        <select id="guide" formControlName="guide" name="guide" class="validate form-control" required>
+                          <option *ngFor="let guide of guides" [value]="guide.id">
+                            {{guide.email}}
+                          </option>
+                        </select>
+              
+                        <div class="alert alert-danger" *ngIf="partyAssignmentForm.get('guide').hasError('required') && partyAssignmentForm.get('guide').touched">  
+                          Guide is required.
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <div class="form-group">
+                      <div class="col-sm-4">
+                        <button class="btn btn-success" [disabled]='partyAssignmentForm.invalid' (click)="assignPartyToGuide(party.id)">Assign</button>
+                      </div>
+                    </div>
+                  </form>
+                </ng-container>
+              </div>
+  
+              <ng-template #displayUnassignButton>
+                <button class="btn btn-danger" (click)="unAssignPartyFromGuide(party.id, party.guide.id)">Unassign from guide</button>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </a>
+    </ng-container>
+  </div>
+</div>
