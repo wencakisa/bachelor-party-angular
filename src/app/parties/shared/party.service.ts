@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 import { AppSettings } from '../../app.settings';
 import { Party } from './party.model';
@@ -19,6 +19,7 @@ export class PartyService {
   getParties(): Observable<Party[]> {
     return this.http.get<Party[]>(this.partiesUrl)
       .pipe(
+        // TODO: Error handling, using catchError() method from rxjs
         tap(_ => this.log('Fetched parties'))
       )
   }
@@ -28,6 +29,9 @@ export class PartyService {
 
     return this.http.get<Party>(url)
       .pipe(
+        map(res => {
+          return new Party().deserialize(res)
+        }),
         tap(_ => this.log(`Fetched party id=${id}`))
       );
   }

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { AngularTokenService } from 'angular-token';
+
 import { Party } from '../shared/party.model';
 import { PartyService } from '../shared/party.service';
 
@@ -13,9 +15,12 @@ export class PartyDetailComponent implements OnInit {
 
   @Input() party: Party;
 
+  inviteFormVisible: boolean;
+
   constructor(
     private route: ActivatedRoute,
-    private partyService: PartyService
+    private partyService: PartyService,
+    private authTokenService: AngularTokenService
   ) { }
 
   ngOnInit() {
@@ -29,6 +34,14 @@ export class PartyDetailComponent implements OnInit {
       .subscribe(party => {
         this.party = party;
       })
+  }
+
+  currentUserIsPartyHost(): boolean {
+    return this.authTokenService.currentAuthData.uid === this.party.host.email;
+  }
+
+  toggleInviteForm(): void {
+    this.inviteFormVisible = !this.inviteFormVisible;
   }
 
 }

@@ -49,17 +49,28 @@
           </ul>
         </div>
         <div class="tab-pane" id="participants" role="tabpanel">
-          <div *ngIf="party.participants; else noParticipants">
+          <div *ngIf="party.getParticipants(); else noParticipants">
             <h4>Participants:</h4>
   
-            <ul *ngFor="let participant of party.customers">
-              <li>{{ participant.email }}</li>
+            <ul *ngFor="let participantObj of party.getParticipants()">
+              <li>{{ participantObj.email }} ({{ participantObj.acceptanceStatus }})</li>
             </ul>
           </div>
-
+          
           <ng-template #noParticipants>
             <h4>No participants yet.</h4>
           </ng-template>
+
+          <div *ngIf="currentUserIsPartyHost()">
+            <button type="button" (click)="toggleInviteForm()" class="btn btn-success btn-round">
+              <i class="now-ui-icons ui-1_simple-add"></i>
+              Invite participant
+            </button>
+            
+            <div *ngIf="inviteFormVisible" class="col-md-4 offset-md-4">
+              <app-invite-form [party]="party"></app-invite-form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
