@@ -6,7 +6,7 @@ import { AuthenticationService } from '../authentication/shared/authentication.s
     selector: '[ifInRole]'
 })
 export class IfInRoleDirective implements OnInit {
-    @Input('ifInRole') role: string;
+    @Input('ifInRole') roles: string[];
 
     constructor(private viewContainer: ViewContainerRef,
                 private templateRef: TemplateRef<any>,
@@ -14,7 +14,7 @@ export class IfInRoleDirective implements OnInit {
     }
 
     ngOnInit(): void {
-        if (this.role === this.authService.getCurrentUserRole()) {
+        if (this.roles.indexOf(this.authService.getCurrentUserRole()) !== -1) {
             this.viewContainer.createEmbeddedView(this.templateRef);
         } else {
             this.viewContainer.clear();
