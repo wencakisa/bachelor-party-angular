@@ -1,0 +1,71 @@
+<div class="wrapper" *ngIf="party; else loading">
+  <div class="card">
+    <div class="card-header">
+      <ul class="nav nav-tabs justify-content-center" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#info" role="tab">
+            <i class="now-ui-icons business_badge"></i>
+            Brief info
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#activities" role="tab">
+            <i class="now-ui-icons objects_spaceship"></i>
+            Activities
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#participants" role="tab">
+            <i class="now-ui-icons users_circle-08"></i>
+            Participants
+          </a>
+        </li>
+      </ul>
+    </div>
+  
+    <div class="card-body">
+      <div class="tab-content text-center">
+        <div class="tab-pane active" id="info" role="tabpanel">
+          <h4>{{ party.title }} ({{ party.date }})</h4>
+
+          <ul>
+            <li>Host: {{ party.host.email }}</li>
+            <li>
+              Guide:
+              <span *ngIf="party.guide; else guideNotAssignedYet">
+                {{ party.guide.email }}
+              </span>
+              <ng-template #guideNotAssignedYet>
+                Not assigned yet
+              </ng-template>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-pane" id="activities" role="tabpanel">
+          <h4>Activites for the party:</h4>
+
+          <ul *ngFor="let activity of party.activities">
+            <li>{{ activity.title }}</li>
+          </ul>
+        </div>
+        <div class="tab-pane" id="participants" role="tabpanel">
+          <div *ngIf="party.participants; else noParticipants">
+            <h4>Participants:</h4>
+  
+            <ul *ngFor="let participant of party.customers">
+              <li>{{ participant.email }}</li>
+            </ul>
+          </div>
+
+          <ng-template #noParticipants>
+            <h4>No participants yet.</h4>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <h2 class="text-center">Loading party...</h2>
+</ng-template>

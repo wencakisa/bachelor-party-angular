@@ -23,6 +23,15 @@ export class PartyService {
       )
   }
 
+  getParty(id: number): Observable<Party> {
+    const url = `${this.partiesUrl}/${id}`;
+
+    return this.http.get<Party>(url)
+      .pipe(
+        tap(_ => this.log(`Fetched party id=${id}`))
+      );
+  }
+
   private log(message: string) {
     console.log(`PartyService: ${message}`)
   }

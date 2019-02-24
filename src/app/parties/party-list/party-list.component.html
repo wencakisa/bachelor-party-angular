@@ -1,9 +1,11 @@
-<h1>Parties</h1>
+<h3 *ifInRole="'admin'">All parties:</h3>
+<h3 *ifInRole="'guide'">Assigned parties:</h3>
+<h3 *ifInRole="'customer'">Your own parties:</h3>
 
 <ul *ngFor="let party of parties">
-  <li>{{ party.title }}</li>
-
-  <ul *ngFor="let activity of party.activities">
-    <li>{{ activity.title }}</li>
-  </ul>
+  <li>
+    <a routerLink="/parties/{{ party.id }}">
+      {{ party.title }} ({{ party.date }})
+    </a>
+  </li>
 </ul>
