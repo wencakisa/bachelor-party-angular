@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { IfInRoleModule } from '../shared/if-in-role.module';
 import { PartyListComponent } from './party-list/party-list.component';
@@ -12,6 +13,7 @@ import { InviteFormComponent } from '../invites/shared/invite-form/invite-form.c
   declarations: [PartyListComponent, PartyDetailComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     PartyRoutingModule,
     InvitesModule,
     IfInRoleModule,
