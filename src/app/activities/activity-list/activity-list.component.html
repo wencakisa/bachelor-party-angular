@@ -39,6 +39,7 @@
 
       <div class="form-group col-md-2">
         <select class="form-control form-control-lg" id="priceOrderSelect" (change)="orderActivitiesByPrice($event.target.value)">
+          <option value="all" selected>-</option>
           <option value="asc">Price (ascending)</option>
           <option value="desc">Price (descending)</option>
         </select>
