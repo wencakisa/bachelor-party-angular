@@ -36,6 +36,36 @@ export class PartyService {
       );
   }
 
+  assignPartyToGuide(partyId: number, guideId: number) {
+    const url = `${this.partiesUrl}/${partyId}`;
+    let requestBody = {
+      'party': {
+        guide_id: guideId
+      }
+    };
+
+    return this.http.patch<Party>(url, requestBody, AppSettings.DEFAULT_HTTP_OPTIONS)
+      .pipe(
+        // TODO: Error handling, using catchError() method from rxjs
+        tap(_ => this.log(`Party id=${partyId} is assigned to guide id=${guideId}`))
+      )
+  }
+
+  unAssignPartyFromGuide(partyId: number, guideId: number) {
+    const url = `${this.partiesUrl}/${partyId}`;
+    let requestBody = {
+      'party': {
+        guide_id: null
+      }
+    };
+
+    return this.http.patch<Party>(url, requestBody, AppSettings.DEFAULT_HTTP_OPTIONS)
+      .pipe(
+        // TODO: Error handling, using catchError() method from rxjs
+        tap(_ => this.log(`Party id=${partyId} is unassigned from guide id=${guideId}`))
+      )
+  }
+
   private log(message: string) {
     console.log(`PartyService: ${message}`)
   }
