@@ -17,17 +17,17 @@ export class UserService {
     return this.http.get<User[]>(this.usersUrl)
       .pipe(
         // TODO: Error handling, using catchError() method from rxjs
-        tap(_ => this.log('Fetched users'))
+        tap(_ => this.log('Fetched all users'))
       )
   }
  
-  getAdminAndGuideUsers(): Observable<User[]> {
-    let params = new HttpParams().set('role', 'admin');
+  getGuideUsers(): Observable<User[]> {
+    let params = new HttpParams().set('role', 'guide');
  
     return this.http.get<User[]>(this.usersUrl, { params: params })
       .pipe(
         // TODO: Error handling, using catchError() method from rxjs
-        tap(_ => this.log('Fetched users'))
+        tap(_ => this.log('Fetched guide users'))
       )
   }
  
