@@ -36,8 +36,6 @@ export class PartyListComponent implements OnInit {
       this.partyAssignmentForm = this.formBuilder.group({
         guide: ['', [Validators.required]]
       });
-
-      //this.partyAssignmentForm.controls['guide'].setValue(this.guides[0].email);
     }
   }
 
