@@ -11,11 +11,11 @@
       </li>
 
       <ul class="nav navbar-nav" *ngIf="(authService.userSignedIn$ | async)">
-        <ul class="nav navbar-nav" *ifInRole="'admin'">
+        <ng-container class="nav navbar-nav" *ifInRole="'admin'">
           <li class="nav-item">
             <a routerLink="/admin" class="nav-link"><i class="now-ui-icons ui-2_settings-90"></i> Admin panel</a>
           </li>
-        </ul>
+        </ng-container>
       </ul>
     </ul>
     <ul class="navbar-nav my-2 my-lg-1">
