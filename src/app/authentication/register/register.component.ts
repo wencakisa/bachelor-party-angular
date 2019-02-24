@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AngularTokenService } from 'angular-token';
+import { AuthenticationService } from '../shared/authentication.service';
 
 @Component({
   selector: 'app-register',
@@ -16,9 +17,15 @@ export class RegisterComponent implements OnInit {
     passwordConfirmation: ''
   };
 
-  constructor(private tokenAuthService: AngularTokenService, private router: Router) { }
+  constructor(
+    private tokenAuthService: AngularTokenService,
+    private authService: AuthenticationService,
+    private router: Router) { }
 
   ngOnInit() {
+    if (!!this.tokenAuthService.userSignedIn()) {
+      this.authService.logOutUser().subscribe()
+    }
   }
 
   onSignUpSubmit() {
