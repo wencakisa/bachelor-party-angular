@@ -49,11 +49,11 @@
           </div>
 
           <div *ifInRole="'admin'">
-            <div *ngIf="!party.guide; else displayUnassignButton">
-              <button class="btn btn-info" (click)="setDisplayAssignmentForm()">{{partyAssignmentFormButtonName}}</button>
+            <div *ngIf="!party.guide; else displayWithdrawGuideButton">
+              <button class="btn btn-info" (click)="setDisplayGuideAssignmentForm(party.id)">{{guideAssignmentFormButtons.get(party.id).getName()}}</button>
 
-              <ng-container *ngIf="displayPartyAssignmentForm">
-                <form [formGroup]="partyAssignmentForm" class="form">               
+              <ng-container *ngIf="guideAssignmentFormButtons.get(party.id).getValue()">
+                <form [formGroup]="guideAssignmentForm" class="form">               
                   <div class="form-group">
                     <label for="guide" class="col-sm-4 col-form-label">Guides</label>
                     
@@ -64,7 +64,7 @@
                         </option>
                       </select>
             
-                      <div class="alert alert-danger" *ngIf="partyAssignmentForm.get('guide').hasError('required') && partyAssignmentForm.get('guide').touched">  
+                      <div class="alert alert-danger" *ngIf="guideAssignmentForm.get('guide').hasError('required') && guideAssignmentForm.get('guide').touched">  
                         Guide is required.
                       </div>
                     </div>
@@ -72,15 +72,15 @@
                 
                   <div class="form-group">
                     <div class="col-sm-4">
-                      <button class="btn btn-success" [disabled]='partyAssignmentForm.invalid' (click)="assignPartyToGuide(party.id)">Assign</button>
+                      <button class="btn btn-success" [disabled]='guideAssignmentForm.invalid' (click)="assignGuideToParty(party.id)">Assign</button>
                     </div>
                   </div>
                 </form>
               </ng-container>
             </div>
 
-            <ng-template #displayUnassignButton>
-              <button class="btn btn-danger" (click)="unAssignPartyFromGuide(party.id, party.guide.id)">Unassign from guide</button>
+            <ng-template #displayWithdrawGuideButton>
+              <button class="btn btn-danger" (click)="withdrawGuideFromParty(party.id, party.guide.id)">Withdraw guide</button>
             </ng-template>
           </div>
         </div>

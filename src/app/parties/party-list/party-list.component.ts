@@ -7,6 +7,8 @@ import { User } from 'src/app/users/shared/user.model';
 import { UserService } from 'src/app/users/shared/user.service';
 import { AuthenticationService } from 'src/app/authentication/shared/authentication.service';
 import { AppSettings } from 'src/app/app.settings';
+import { GuideAssignmentButton } from '../shared/party-assignment-button';
+
 
 @Component({
   selector: 'app-party-list',
@@ -16,11 +18,11 @@ import { AppSettings } from 'src/app/app.settings';
 export class PartyListComponent implements OnInit {
 
   public parties: Party[];
-  public partyAssignmentForm: FormGroup;
   public guides: User[];
 
-  public displayPartyAssignmentForm: boolean = false;
-  public partyAssignmentFormButtonName: string = 'Assign to guide';
+  public guideAssignmentForm: FormGroup;
+
+  public guideAssignmentFormButtons = new Map();
 
   constructor(private partyService: PartyService,
     private authenticationService: AuthenticationService,
@@ -33,7 +35,7 @@ export class PartyListComponent implements OnInit {
     if (AppSettings.ROLE_ADMIN === this.authenticationService.getCurrentUserRole()) {
       this.getGuides();
 
-      this.partyAssignmentForm = this.formBuilder.group({
+      this.guideAssignmentForm = this.formBuilder.group({
         guide: ['', [Validators.required]]
       });
     }
@@ -41,28 +43,34 @@ export class PartyListComponent implements OnInit {
 
   getParties(): void {
     this.partyService.getParties()
-      .subscribe(parties => this.parties = parties);
+      .subscribe(parties => {
+        this.parties = parties;
+        parties.forEach(party => {
+          this.guideAssignmentFormButtons.set(party.id, new GuideAssignmentButton());
+        })
+      });
   }
 
   getGuides(): void {
-    this.userService.getGuideUsers()
+    this.userService.getUsersByRole('guide')
       .subscribe(guides => this.guides = guides);
   }
 
-  setDisplayAssignmentForm() {
-    this.displayPartyAssignmentForm = !this.displayPartyAssignmentForm;
+  setDisplayGuideAssignmentForm(partyId: number) {
+    this.setNewValueForCurrentButton(partyId);
+    let currentButton = this.guideAssignmentFormButtons.get(partyId);
 
-    if (this.displayPartyAssignmentForm) {
-      this.partyAssignmentFormButtonName = 'Hide';
+    if (currentButton.getValue()) {
+      currentButton.setName('Hide');
     } else {
-      this.partyAssignmentFormButtonName = 'Assign to guide';
+      currentButton.setName('Assign guide');
     }
   }
 
-  assignPartyToGuide(partyId: number) {
-    let guideId = this.partyAssignmentForm.get('guide').value;
-    if (confirm(`Are you sure you want to assign this party to this guide?`)) {
-      this.partyService.assignPartyToGuide(partyId, guideId)
+  assignGuideToParty(partyId: number) {
+    let guideId = this.guideAssignmentForm.get('guide').value;
+    if (confirm(`Are you sure you want to assign this guide to this party?`)) {
+      this.partyService.assignGuideToParty(partyId, guideId)
       .subscribe(data => {
           this.getParties();
         },
@@ -73,9 +81,9 @@ export class PartyListComponent implements OnInit {
     }
   }
 
-  unAssignPartyFromGuide(partyId: number, guideId: number) {
-    if (confirm(`Are you sure you want to unassign this party from its guide?`)) {
-      this.partyService.unAssignPartyFromGuide(partyId, guideId)
+  withdrawGuideFromParty(partyId: number, guideId: number) {
+    if (confirm(`Are you sure you want to withdraw this guide from this party?`)) {
+      this.partyService.withdrawGuideFromParty(partyId, guideId)
       .subscribe(data => {
           this.getParties();
         },
@@ -84,5 +92,10 @@ export class PartyListComponent implements OnInit {
         }
       );
     }
+  }
+
+  private setNewValueForCurrentButton(partyId: number): void {
+    let currentButton = this.guideAssignmentFormButtons.get(partyId);
+    currentButton.setValue(!currentButton.getValue());
   }
 }

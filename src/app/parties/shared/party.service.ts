@@ -36,7 +36,7 @@ export class PartyService {
       );
   }
 
-  assignPartyToGuide(partyId: number, guideId: number) {
+  assignGuideToParty(partyId: number, guideId: number) {
     const url = `${this.partiesUrl}/${partyId}`;
     let requestBody = {
       'party': {
@@ -47,11 +47,11 @@ export class PartyService {
     return this.http.patch<Party>(url, requestBody, AppSettings.DEFAULT_HTTP_OPTIONS)
       .pipe(
         // TODO: Error handling, using catchError() method from rxjs
-        tap(_ => this.log(`Party id=${partyId} is assigned to guide id=${guideId}`))
+        tap(_ => this.log(`Guide id=${guideId} is assigned to party id=${partyId}`))
       )
   }
 
-  unAssignPartyFromGuide(partyId: number, guideId: number) {
+  withdrawGuideFromParty(partyId: number, guideId: number) {
     const url = `${this.partiesUrl}/${partyId}`;
     let requestBody = {
       'party': {
@@ -62,7 +62,7 @@ export class PartyService {
     return this.http.patch<Party>(url, requestBody, AppSettings.DEFAULT_HTTP_OPTIONS)
       .pipe(
         // TODO: Error handling, using catchError() method from rxjs
-        tap(_ => this.log(`Party id=${partyId} is unassigned from guide id=${guideId}`))
+        tap(_ => this.log(`Guide id=${guideId} is withdrawn from party id=${partyId}`))
       )
   }
 
