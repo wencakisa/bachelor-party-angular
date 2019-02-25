@@ -1,7 +1,7 @@
 import { HttpHeaders } from '@angular/common/http';
 
 import { ActivityInCart } from './activities/shared/activityInCart.model';
-import { Role } from './authentication/shared/role';
+import { RoleFactory } from './authentication/shared/role-factory';
 import { Price } from './activities/shared/price.model';
 
 export class AppSettings {
@@ -18,9 +18,9 @@ export class AppSettings {
   public static GUIDE_AFTER_LOGIN_ROUTE = '/parties';
 
   public static USER_ROLES = new Map()
-  									.set(AppSettings.ROLE_ADMIN, new Role(AppSettings.ROLE_ADMIN, AppSettings.ADMIN_AFTER_LOGIN_ROUTE))
-  									.set(AppSettings.ROLE_GUIDE, new Role(AppSettings.ROLE_GUIDE, AppSettings.GUIDE_AFTER_LOGIN_ROUTE))
-  									.set(AppSettings.ROLE_CUSTOMER, new Role(AppSettings.ROLE_CUSTOMER, AppSettings.HOME_PAGE_ROUTE));
+  									.set(AppSettings.ROLE_ADMIN, RoleFactory.createRole(AppSettings.ROLE_ADMIN, AppSettings.ADMIN_AFTER_LOGIN_ROUTE))
+  									.set(AppSettings.ROLE_GUIDE, RoleFactory.createRole(AppSettings.ROLE_GUIDE, AppSettings.GUIDE_AFTER_LOGIN_ROUTE))
+  									.set(AppSettings.ROLE_CUSTOMER, RoleFactory.createRole(AppSettings.ROLE_CUSTOMER, AppSettings.HOME_PAGE_ROUTE));
 
   public static USER_ROLE_LS_KEY = 'userRole';
   public static ACTIVITIES_IN_CART_LS_KEY = 'activitiesInCart';

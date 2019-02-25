@@ -8,6 +8,7 @@ import { UserService } from 'src/app/users/shared/user.service';
 import { AuthenticationService } from 'src/app/authentication/shared/authentication.service';
 import { AppSettings } from 'src/app/app.settings';
 import { GuideAssignmentButton } from '../shared/party-assignment-button';
+import { ButtonFactory } from '../shared/button-factory';
 
 
 @Component({
@@ -46,7 +47,7 @@ export class PartyListComponent implements OnInit {
       .subscribe(parties => {
         this.parties = parties;
         parties.forEach(party => {
-          this.guideAssignmentFormButtons.set(party.id, new GuideAssignmentButton());
+          this.guideAssignmentFormButtons.set(party.id, ButtonFactory.createGideAssignmentButton());
         })
       });
   }
