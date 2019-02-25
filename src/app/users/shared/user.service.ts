@@ -13,7 +13,7 @@ export class UserService {
  
   constructor(private http: HttpClient) { }
  
-  getUsers(): Observable<User[]> {
+  getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.usersUrl)
       .pipe(
         // TODO: Error handling, using catchError() method from rxjs
@@ -21,8 +21,8 @@ export class UserService {
       )
   }
  
-  getGuideUsers(): Observable<User[]> {
-    let params = new HttpParams().set('role', 'guide');
+  getUsersByRole(role: string): Observable<User[]> {
+    let params = new HttpParams().set('role', role);
  
     return this.http.get<User[]>(this.usersUrl, { params: params })
       .pipe(
