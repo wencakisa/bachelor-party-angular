@@ -1,5 +1,4 @@
 import { Deserializable } from 'src/app/shared/deserializable.model';
-import { Role } from 'src/app/authentication/shared/role';
 
 export class User implements Deserializable {
     id: number;
