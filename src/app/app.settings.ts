@@ -13,11 +13,13 @@ export class AppSettings {
 
   public static HOME_PAGE_ROUTE = '/';
   public static LOGIN_PAGE_ROUTE = '/login';
-  public static ADMIN_PANEL_ROUTE = '/admin';
+
+  public static ADMIN_AFTER_LOGIN_ROUTE = '/admin';
+  public static GUIDE_AFTER_LOGIN_ROUTE = '/parties';
 
   public static USER_ROLES = new Map()
-  									.set(AppSettings.ROLE_ADMIN, new Role(AppSettings.ROLE_ADMIN, AppSettings.ADMIN_PANEL_ROUTE))
-  									.set(AppSettings.ROLE_GUIDE, new Role(AppSettings.ROLE_GUIDE, AppSettings.HOME_PAGE_ROUTE))
+  									.set(AppSettings.ROLE_ADMIN, new Role(AppSettings.ROLE_ADMIN, AppSettings.ADMIN_AFTER_LOGIN_ROUTE))
+  									.set(AppSettings.ROLE_GUIDE, new Role(AppSettings.ROLE_GUIDE, AppSettings.GUIDE_AFTER_LOGIN_ROUTE))
   									.set(AppSettings.ROLE_CUSTOMER, new Role(AppSettings.ROLE_CUSTOMER, AppSettings.HOME_PAGE_ROUTE));
 
   public static USER_ROLE_LS_KEY = 'userRole';
