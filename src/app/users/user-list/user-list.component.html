@@ -1,18 +1,47 @@
-<h1>{{ users ? 'Available users:' : 'Loading users...' }}</h1>
- 
-<div class="row mt-5">
-  <div class="col-md-6 col-sm-3">
-    <a routerLink="/users/new" class="btn btn-info">Add User</a>
-    <ng-container *ngFor="let user of users">
-      <div class="card">
-        <button class="btn btn-danger btn-circle btn-icon float-right" (click)="deleteUser(user)">
-          <i class="now-ui-icons ui-1_simple-remove"></i>
-        </button>
-        <div class="card-body">
-          <p class="card-text">User email: {{ user.email }}</p>
-          <p class="card-text">User role: {{ user.role }}</p>
+<div class="container-fluid">
+  <a routerLink="/users/new" class="btn btn-info">Add User</a>
+  
+  <div class="row mt-5">
+    <div class="col-xs-6 col-md-4">
+      <h2>Admins:</h2>
+      <ng-container *ngFor="let admin of admins">
+        <div class="card">
+          <button class="btn btn-danger btn-circle btn-icon float-right" (click)="deleteUser(admin)">
+            <i class="now-ui-icons ui-1_simple-remove"></i>
+          </button>
+          <div class="card-body">
+            <p class="card-text">Admin email: {{ admin.email }}</p>
+          </div>
         </div>
-      </div>
-    </ng-container>
+      </ng-container>
+    </div>
+
+    <div class="col-xs-6 col-md-4">
+      <h2>Guides:</h2>
+      <ng-container *ngFor="let guide of guides">
+        <div class="card">
+          <button class="btn btn-danger btn-circle btn-icon float-right" (click)="deleteUser(guide)">
+            <i class="now-ui-icons ui-1_simple-remove"></i>
+          </button>
+          <div class="card-body">
+            <p class="card-text">Guide email: {{ guide.email }}</p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="col-xs-6 col-md-4">
+      <h2>Customers:</h2>
+      <ng-container *ngFor="let customer of customers">
+        <div class="card">
+          <button class="btn btn-danger btn-circle btn-icon float-right" (click)="deleteUser(customer)">
+            <i class="now-ui-icons ui-1_simple-remove"></i>
+          </button>
+          <div class="card-body">
+            <p class="card-text">Customer email: {{ customer.email }}</p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
   </div>
 </div>
