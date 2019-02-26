@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ActivityService } from '../shared/activity.service';
 import { Price } from '../shared/price.model';
 import { Activity } from '../shared/activity.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-activity-create-edit',
@@ -20,10 +21,12 @@ export class ActivityCreateEditComponent implements OnInit {
   public isCreate: boolean = true;
   public activityForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private activityService: ActivityService) {
+    private activityService: ActivityService,
+    private toastr: ToastrService) {
       this.pricesMarkedForDestroying = [];
     }
 
@@ -92,24 +95,30 @@ export class ActivityCreateEditComponent implements OnInit {
 
   onSubmit() {
     this.activityService.createActivity(this.activityForm.value)
-      .subscribe(data => {
-        this.router.navigate(['activities']);
-      },
-      error => {
-        alert(error);
-      });
+      .subscribe(
+        res => {
+          this.toastr.success('Activity created successfully!')
+          this.router.navigate(['/activities'])
+        },
+        err => {
+          this.toastr.error(err.error.errors[0])
+        }
+      );
   }
 
   onUpdate() {
     this.addPricesMarkedForDestroying();
 
     this.activityService.updateActivity(this.activityForm.value)
-      .subscribe(activity => {
-        this.router.navigate([`/activities/${activity['id']}`]);
-      },
-      error => {
-        alert(error);
-      });
+      .subscribe(
+        res => {
+          this.toastr.success('Activity updated successfully!')
+          this.router.navigate([`/activities/${res['id']}`]);
+        },
+        err => {
+          this.toastr.error(err.error.errors[0])
+        }
+      );
   }
 
   addPricesMarkedForDestroying(): void {
