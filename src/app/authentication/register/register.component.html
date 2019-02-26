@@ -1,7 +1,7 @@
 <form (ngSubmit)="onSignUpSubmit()" #f="ngForm">
   <div class="row">
     <div class="col-sm-4 offset-sm-4">
-      <div class="form-group row">
+      <div class="form-group row" *ngIf="!getInvitationToken()">
         <label for="email" class="col-sm-2 col-form-label">Email</label>
 
         <div class="col-sm-10">

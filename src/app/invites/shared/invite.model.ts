@@ -4,6 +4,7 @@ export class Invite implements Deserializable {
   email: string;
   invitable_id: number;
   invitable_type: string = 'Party';
+  status: string;
 
   deserialize(params: any): Invite {
     Object.assign(this, params);

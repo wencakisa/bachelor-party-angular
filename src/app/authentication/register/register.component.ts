@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AngularTokenService } from 'angular-token';
 import { AuthenticationService } from '../shared/authentication.service';
@@ -20,11 +20,20 @@ export class RegisterComponent implements OnInit {
   constructor(
     private tokenAuthService: AngularTokenService,
     private authService: AuthenticationService,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     if (!!this.tokenAuthService.userSignedIn()) {
       this.authService.logOutUser().subscribe()
+    }
+
+    if (this.getInvitationToken()) {
+      let invitationTokenObj = {
+        invitation_token: this.getInvitationToken()
+      }
+
+      Object.assign(this.signUpUser, invitationTokenObj)
     }
   }
 
@@ -41,6 +50,10 @@ export class RegisterComponent implements OnInit {
           console.log('Error: ', err)
         }
       )
+  }
+
+  getInvitationToken(): string {
+    return this.route.snapshot.queryParams['invitation_token']
   }
 
 }
