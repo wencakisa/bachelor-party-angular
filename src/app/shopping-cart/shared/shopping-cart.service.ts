@@ -5,6 +5,7 @@ import { AppSettings } from '../../app.settings';
 
 import { ActivityInCart } from '../../activities/shared/activityInCart.model';
 import { Activity } from '../../activities/shared/activity.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class ShoppingCartService {
   );
   private activitiesInCart: ActivityInCart[] = [];
 
-  constructor() {
+  constructor(private toastr: ToastrService) {
     this.activitiesInCartSubject
       .subscribe(activities => this.activitiesInCart = activities);
   }
@@ -24,8 +25,10 @@ export class ShoppingCartService {
   modifyCart(activity: ActivityInCart): void {
     if (this.activityIsInCart(activity)) {
       this.removeActivity(activity);
+      this.toastr.info('Activity successfully removed from shopping cart.')
     } else {
       this.addActivity(activity);
+      this.toastr.info('Activity successfully added from shopping cart.')
     }
 
     this.activitiesInCartSubject.next(this.activitiesInCart);
@@ -36,6 +39,8 @@ export class ShoppingCartService {
     for (let i = this.activitiesInCart.length - 1; i >= 0; --i) {
       this.removeActivity(this.activitiesInCart[i]);
     }
+
+    this.toastr.info('Shopping cart emptied.')
   }
 
   getActivities(): Observable<ActivityInCart[]> {
