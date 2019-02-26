@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AngularTokenService } from 'angular-token';
 import { AuthenticationService } from '../shared/authentication.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -20,6 +21,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private tokenAuthService: AngularTokenService,
     private authService: AuthenticationService,
+    private toast: ToastrService,
     private router: Router,
     private route: ActivatedRoute) { }
 
@@ -42,12 +44,12 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         (res) => {
           if (res.status == 'success') {
-            // TODO: Toast
+            this.toast.success('You have registered successfully. You can login now.')
             this.router.navigate(['/login'])
           }
         },
         (err) => {
-          console.log('Error: ', err)
+          this.toast.error(err.error.errors.full_messages)
         }
       )
   }
@@ -55,5 +57,4 @@ export class RegisterComponent implements OnInit {
   getInvitationToken(): string {
     return this.route.snapshot.queryParams['invitation_token']
   }
-
 }
