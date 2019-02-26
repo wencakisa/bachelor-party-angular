@@ -7,9 +7,7 @@ import { User } from 'src/app/users/shared/user.model';
 import { UserService } from 'src/app/users/shared/user.service';
 import { AuthenticationService } from 'src/app/authentication/shared/authentication.service';
 import { AppSettings } from 'src/app/app.settings';
-import { GuideAssignmentButton } from '../shared/party-assignment-button';
 import { ButtonFactory } from '../shared/button-factory';
-
 
 @Component({
   selector: 'app-party-list',
