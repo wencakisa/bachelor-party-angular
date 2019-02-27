@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
 import { AppSettings } from 'src/app/app.settings';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-list',
@@ -15,7 +16,9 @@ export class UserListComponent implements OnInit {
   guides: User[];
   customers: User[];
  
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private toastr: ToastrService) { }
  
   ngOnInit() {
     this.getUsers();
@@ -34,13 +37,19 @@ export class UserListComponent implements OnInit {
   deleteUser(user: User) {
     if (confirm("Are you sure you want to delete this user?")) {
       this.userService.deleteUser(user.id)
-        .subscribe((users: User[]) => {
-          this.users = this.users.filter(u => u !== user);
-          
-          this.admins = this.users.filter(user => user.role === AppSettings.ROLE_ADMIN);
-          this.guides = this.users.filter(user => user.role === AppSettings.ROLE_GUIDE);
-          this.customers = this.users.filter(user => user.role === AppSettings.ROLE_CUSTOMER);
-        });
+        .subscribe(
+          (users: User[]) => {
+            this.toastr.success('User deleted successfully!')
+            this.users = this.users.filter(u => u !== user);
+            
+            this.admins = this.users.filter(user => user.role === AppSettings.ROLE_ADMIN);
+            this.guides = this.users.filter(user => user.role === AppSettings.ROLE_GUIDE);
+            this.customers = this.users.filter(user => user.role === AppSettings.ROLE_CUSTOMER);
+          },
+          err => {
+            this.toastr.error(err.error.errors[0])
+          }
+        );
     }
   }
 }

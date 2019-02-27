@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { UserService } from '../shared/user.service';
 import { AppSettings } from 'src/app/app.settings';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-create',
@@ -17,7 +18,8 @@ export class UserCreateComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private router: Router,
-    private userService: UserService) { }
+    private userService: UserService,
+    private toastr: ToastrService) { }
 
   ngOnInit() {
     this.userForm = this.formBuilder.group({
@@ -33,11 +35,12 @@ export class UserCreateComponent implements OnInit {
   onSubmit() {
     this.userService.createUser(this.userForm.value)
       .subscribe(
-        data => {
-          this.router.navigate(['users']);
+        res => {
+          this.toastr.success('User account created successfully!')
+          this.router.navigate(['/users']);
         },
-        error => {
-          alert(error);
+        err => {
+          this.toastr.error(err.error.errors[0])
         }
       );
   }
