@@ -23,13 +23,17 @@ export class ShoppingCartService {
   }
 
   modifyCart(activity: ActivityInCart): void {
+    let action = ''
+
     if (this.activityIsInCart(activity)) {
       this.removeActivity(activity);
-      this.toastr.info('Activity successfully removed from shopping cart.')
+      action = 'removed from'
     } else {
       this.addActivity(activity);
-      this.toastr.info('Activity successfully added from shopping cart.')
+      action = 'added to'
     }
+
+    this.toastr.info(`Activity successfully ${action} shopping cart.`)
 
     this.activitiesInCartSubject.next(this.activitiesInCart);
     this.updateLocalStorageActivities();
