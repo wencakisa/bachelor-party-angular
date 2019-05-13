@@ -20,12 +20,14 @@ import { QuotationsModule } from './quotations/quotations.module';
 import { PartiesModule } from './parties/parties.module';
 import { IfInRoleModule } from './shared/if-in-role.module';
 import { UsersModule } from './users/users.module';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    NavigationComponent
+    NavigationComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
