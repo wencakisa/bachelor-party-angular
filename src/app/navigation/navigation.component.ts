@@ -18,8 +18,7 @@ export class NavigationComponent implements OnInit {
     private cartService: ShoppingCartService,
     private router: Router) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   logOut(): void {
   	this.authService.logOutUser().subscribe(() => this.router.navigate(['/']));
