@@ -24,14 +24,22 @@
             ],
             "styles": [
               "src/styles.css",
-              "./node_modules/ngx-toastr/toastr.css",
-              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "./node_modules/now-ui-kit/assets/sass/now-ui-kit.scss"
+              "src/assets/css/socicon.css",
+              "src/assets/css/iconsmind.css",
+              "src/assets/css/bootstrap.css",
+              "src/assets/css/interface-icons.css",
+              "src/assets/css/owl.carousel.css",
+              "src/assets/css/theme-blue.css",
+              "src/assets/css/custom.css",
+              "./node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
-              "./node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "./node_modules/now-ui-kit/assets/js/now-ui-kit.js"
+              "src/assets/js/jquery-2.1.4.min.js",
+              "src/assets/js/owl.carousel.min.js",
+              "src/assets/js/scrollreveal.min.js",
+              "src/assets/js/easypiechart.min.js",
+              "src/assets/js/parallax.js",
+              "src/assets/js/scripts.js"
             ]
           },
           "configurations": {
