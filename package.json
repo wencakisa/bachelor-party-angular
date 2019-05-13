@@ -27,13 +27,13 @@
     "jquery": "^3.4.1",
     "ngx-toastr": "^9.1.2",
     "node-sass": "^4.12.0",
-    "now-ui-kit": "^1.1.0",
+    "owl.carousel": "^2.3.4",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.29"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.13.8",
+    "@angular-devkit/build-angular": "^0.13.9",
     "@angular/cli": "^7.3.8",
     "@angular/compiler-cli": "^7.2.6",
     "@angular/language-service": "^7.2.6",
