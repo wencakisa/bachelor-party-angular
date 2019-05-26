@@ -35,6 +35,7 @@
             ],
             "scripts": [
               "src/assets/js/jquery-2.1.4.min.js",
+              "src/assets/js/isotope.min.js",
               "src/assets/js/owl.carousel.min.js",
               "src/assets/js/scrollreveal.min.js",
               "src/assets/js/easypiechart.min.js",
