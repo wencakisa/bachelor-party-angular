@@ -54,6 +54,11 @@
       <input type="checkbox" formControlName="guide_included" name="guide_included" class="form-control" id="guide_included">
     </div>
 
+    <div class="form-group">
+      <label for="image_url">Upload Image:</label><br/>
+      <input id="image_url" class="form-control" name="image_url" formControlName="image_url" type="hidden" role="uploadcare-uploader"><br/><br/>
+    </div>
+
     <div formArrayName="prices_attributes">
       <div *ngFor="let price of activityForm.get('prices_attributes').controls; index as i">
         <div>

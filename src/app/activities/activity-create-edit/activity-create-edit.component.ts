@@ -40,6 +40,7 @@ export class ActivityCreateEditComponent implements OnInit {
       duration: ['', [Validators.required, Validators.min(0)]],
       transfer_included: [false],
       guide_included: [false],
+      image_url: [''],
       prices_attributes: this.formBuilder.array([])
     });
 
@@ -93,7 +94,15 @@ export class ActivityCreateEditComponent implements OnInit {
       this.pricesAttributesControl.removeAt(i);
   }
 
+  patchImageUrlToForm() {
+    var imageUrl = (<HTMLInputElement>document.getElementById("image_url")).value;
+
+    this.activityForm.get("image_url").patchValue(imageUrl);
+  }
+
   onSubmit() {
+    this.patchImageUrlToForm();
+
     this.activityService.createActivity(this.activityForm.value)
       .subscribe(
         res => {
@@ -107,6 +116,8 @@ export class ActivityCreateEditComponent implements OnInit {
   }
 
   onUpdate() {
+    this.patchImageUrlToForm();
+    
     this.addPricesMarkedForDestroying();
 
     this.activityService.updateActivity(this.activityForm.value)
