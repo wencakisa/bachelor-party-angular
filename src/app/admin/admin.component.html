@@ -1,35 +1,44 @@
 <div class="container">
-  <div class="row">
-    <a routerLink="/activities">
-      <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title"><i class="now-ui-icons objects_spaceship"></i> Activities</h5>
-        </div>
-      </div>
-    </a>
-  
-    <a routerLink="/quotations">
-      <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title"><i class="now-ui-icons education_paper"></i> Quotations</h5>
-        </div>
-      </div>
-    </a>
-  
-    <a routerLink="/users">
-      <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title"><i class="now-ui-icons users_single-02"></i> Users</h5>
-        </div>
-      </div>
-    </a>
+  <div class="row text-center">
+    <div class="col-sm-12">
+      <h1>Admin Panel</h1>
+      <h3>Welcome, master!</h3>
+    </div>
 
-    <a routerLink="/parties">
-      <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title"><i class="now-ui-icons clothes_tie-bow"></i> Parties</h5>
+    <div class="col-sm-6">
+      <a routerLink="/activities" class="mr-3">
+        <div class="card text-white bg-primary w-100">
+          <div class="card-body">
+            <h1 class="card-title"><i class="now-ui-icons objects_spaceship"></i> Activities</h1>
+          </div>
         </div>
-      </div>
-    </a>
+      </a>
+    
+      <a routerLink="/quotations" class="mr-3">
+        <div class="card text-white bg-primary w-100 center-block">
+          <div class="card-body">
+            <h1 class="card-title"><i class="now-ui-icons education_paper"></i> Quotations</h1>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-sm-6">
+      <a routerLink="/users" class="mr-3">
+        <div class="card text-white bg-primary w-100">
+          <div class="card-body">
+            <h1 class="card-title"><i class="now-ui-icons users_single-02"></i> Users</h1>
+          </div>
+        </div>
+      </a>
+  
+      <a routerLink="/parties" class="mr-3">
+        <div class="card text-white bg-primary w-100">
+          <div class="card-body">
+            <h1 class="card-title"><i class="now-ui-icons clothes_tie-bow"></i> Parties</h1>
+          </div>
+        </div>
+      </a>
+    </div>
   </div>
 </div>
