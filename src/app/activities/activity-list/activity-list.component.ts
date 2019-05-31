@@ -11,7 +11,7 @@ import { ActivityService } from '../shared/activity.service';
 })
 export class ActivityListComponent implements OnInit {
 
-  activities: Activity[];
+  activities: Activity[] = [];
   filteredActivities: Activity[];
 
   constructor(private activityService: ActivityService, private router: Router) { }
