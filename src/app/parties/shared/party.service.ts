@@ -51,11 +51,12 @@ export class PartyService {
       )
   }
 
-  withdrawGuideFromParty(partyId: number, guideId: number) {
+  withdrawGuideFromParty(partyId: number, guideId: number, lastGuideEmail: string) {
     const url = `${this.partiesUrl}/${partyId}`;
     let requestBody = {
       'party': {
-        guide_id: null
+        guide_id: null,
+        last_guide_email: lastGuideEmail
       }
     };
 

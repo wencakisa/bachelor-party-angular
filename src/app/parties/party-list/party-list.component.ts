@@ -16,7 +16,7 @@ import { ButtonFactory } from '../shared/button-factory';
 })
 export class PartyListComponent implements OnInit {
 
-  public parties: Party[];
+  public parties: Party[] = [];
   public guides: User[];
 
   public guideAssignmentForm: FormGroup;
@@ -80,9 +80,9 @@ export class PartyListComponent implements OnInit {
     }
   }
 
-  withdrawGuideFromParty(partyId: number, guideId: number) {
+  withdrawGuideFromParty(partyId: number, guideId: number, lastGuideEmail: string) {
     if (confirm(`Are you sure you want to withdraw this guide from this party?`)) {
-      this.partyService.withdrawGuideFromParty(partyId, guideId)
+      this.partyService.withdrawGuideFromParty(partyId, guideId, lastGuideEmail)
       .subscribe(data => {
           this.getParties();
         },
