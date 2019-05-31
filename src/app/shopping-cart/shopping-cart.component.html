@@ -8,7 +8,7 @@
       <h2>Activities in your shopping cart: </h2>
 
       <div *ngIf="!canRequestQuotation(); else quotationNotSent">
-        <h4 class="text-muted">Quotation request sent to <pre>{{ getQuotationSentFromEmail() }}</pre></h4>
+        <h4 class="text-muted">Quotation request sent for <pre>{{ getQuotationSentFromEmail() }}</pre></h4>
       </div>
 
       <ng-template #quotationNotSent>
